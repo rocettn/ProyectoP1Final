@@ -1,27 +1,33 @@
 package logico;
 
-import java.util.ArrayList;
+import java.util.Date;
 
 public class OrdenCompra {
 	
-	private ArrayList <Componente> componentesAPedir;
+	private Componente componenteAPedir;
 	private int cantComponente;
-	private ArrayList <Proveedor> proveedorCompra;
+	private Proveedor proveedorCompra;
+	private float totalOrdenCompra;
+	private Administrador adminOrdenCompra;
+	private Date fechaOrdenCompra;
 	
-	public OrdenCompra(ArrayList<Componente> componentesAPedir, int cantComponente,
-			ArrayList<Proveedor> proveedorCompra) {
+	public OrdenCompra(Componente componenteAPedir, int cantComponente, Proveedor proveedorCompra,
+			float totalOrdenCompra, Administrador adminOrdenCompra, Date fechaOrdenCompra) {
 		super();
-		this.componentesAPedir = componentesAPedir;
+		this.componenteAPedir = componenteAPedir;
 		this.cantComponente = cantComponente;
 		this.proveedorCompra = proveedorCompra;
+		this.totalOrdenCompra = totalOrdenCompra;
+		this.adminOrdenCompra = adminOrdenCompra;
+		this.fechaOrdenCompra = fechaOrdenCompra;
 	}
 
-	public ArrayList<Componente> getComponentesAPedir() {
-		return componentesAPedir;
+	public Componente getComponenteAPedir() {
+		return componenteAPedir;
 	}
 
-	public void setComponentesAPedir(ArrayList<Componente> componentesAPedir) {
-		this.componentesAPedir = componentesAPedir;
+	public void setComponenteAPedir(Componente componenteAPedir) {
+		this.componenteAPedir = componenteAPedir;
 	}
 
 	public int getCantComponente() {
@@ -32,13 +38,38 @@ public class OrdenCompra {
 		this.cantComponente = cantComponente;
 	}
 
-	public ArrayList<Proveedor> getProveedorCompra() {
+	public Proveedor getProveedorCompra() {
 		return proveedorCompra;
 	}
 
-	public void setProveedorCompra(ArrayList<Proveedor> proveedorCompra) {
+	public void setProveedorCompra(Proveedor proveedorCompra) {
 		this.proveedorCompra = proveedorCompra;
+	}
+
+	public float getTotalOrdenCompra() {
+		return totalOrdenCompra;
+	}
+
+	public void setTotalOrdenCompra(float totalOrdenCompra) {
+		this.totalOrdenCompra = totalOrdenCompra;
+	}
+
+	public Administrador getAdminOrdenCompra() {
+		return adminOrdenCompra;
+	}
+
+	public void setAdminOrdenCompra(Administrador adminOrdenCompra) {
+		this.adminOrdenCompra = adminOrdenCompra;
+	}
+
+	public Date getFechaOrdenCompra() {
+		return fechaOrdenCompra;
+	}
+
+	public void setFechaOrdenCompra(Date fechaOrdenCompra) {
+		this.fechaOrdenCompra = fechaOrdenCompra;
 	}
 	
 	
+
 }

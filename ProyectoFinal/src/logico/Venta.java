@@ -2,33 +2,69 @@ package logico;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-
-import sun.util.calendar.LocalGregorianCalendar.Date;
-
-//import sun.util.calendar.BaseCalendar.Date;
+import java.util.Date;
+import java.util.GregorianCalendar;
 
 public class Venta {
-	
-	private Cliente cedulaClienteV;
-	private ArrayList <Componente> especificacionesComp;
+
+	private Persona clienteVenta;
+	private Vendedor vendedorVenta;
+	private ArrayList <Componente> componentesVenta;
+	private ArrayList <Combo> combosVenta;
 	private String idFactura;
-	private float impuesto;
 	private Date fecha;
 	private Calendar hora;
-	
-	public Venta(Cliente cedulaClienteV, ArrayList<Componente> especificacionesComp, String idFactura, float impuesto, Date fecha, Calendar hora) {
+
+	public Venta(Persona clienteVenta, Vendedor vendedorVenta, ArrayList<Componente> componentesVenta,
+			ArrayList<Combo> combosVenta, String idFactura, Date fecha, Calendar hora) {
 		super();
-		this.cedulaClienteV = cedulaClienteV;
-		this.especificacionesComp = especificacionesComp;
+		this.clienteVenta = clienteVenta;
+		this.vendedorVenta = vendedorVenta;
+		this.componentesVenta = componentesVenta;
+		this.combosVenta = combosVenta;
 		this.idFactura = idFactura;
-		this.impuesto = impuesto;
 		this.fecha = fecha;
 		this.hora = hora;
 	}
 
+	public Persona getClienteVenta() {
+		return clienteVenta;
+	}
 
-	public Cliente getCedulaClienteV() {
-		return cedulaClienteV;
+	public void setClienteVenta(Persona clienteVenta) {
+		this.clienteVenta = clienteVenta;
+	}
+
+	public Vendedor getVendedorVenta() {
+		return vendedorVenta;
+	}
+
+	public void setVendedorVenta(Vendedor vendedorVenta) {
+		this.vendedorVenta = vendedorVenta;
+	}
+
+	public ArrayList<Componente> getComponentesVenta() {
+		return componentesVenta;
+	}
+
+	public void setComponentesVenta(ArrayList<Componente> componentesVenta) {
+		this.componentesVenta = componentesVenta;
+	}
+
+	public ArrayList<Combo> getCombosVenta() {
+		return combosVenta;
+	}
+
+	public void setCombosVenta(ArrayList<Combo> combosVenta) {
+		this.combosVenta = combosVenta;
+	}
+
+	public String getIdFactura() {
+		return idFactura;
+	}
+
+	public void setIdFactura(String idFactura) {
+		this.idFactura = idFactura;
 	}
 
 	public Date getFecha() {
@@ -47,52 +83,30 @@ public class Venta {
 		this.hora = hora;
 	}
 
-	public void setCedulaClienteV(Cliente cedulaClienteV) {
-		this.cedulaClienteV = cedulaClienteV;
-	}
-
-	public ArrayList<Componente> getEspecificacionesComp() {
-		return especificacionesComp;
-	}
-
-	public void setEspecificacionesComp(ArrayList<Componente> especificacionesComp) {
-		this.especificacionesComp = especificacionesComp;
-	}
-
-	public String getIdFactura() {
-		return idFactura;
-	}
-
-	public void setIdFactura(String idFactura) {
-		this.idFactura = idFactura;
-	}
-
-	public float getImpuesto() {
-		return impuesto;
-	}
-
-	public void setImpuesto(float impuesto) {
-		this.impuesto = impuesto;
-	}
-	
-	//System.out.println("La fecha es "+fecha.get());
-	//System.out.println(fecha.toString());
+	/*
+	 * public float calcularSubtotalVenta() { float subtotal = 0;
+	 * 
+	 * for (Componente compAux : componentes ) { subtotal += compAux;
+	 * 
+	 * }
+	 * 
+	 * 
+	 * 
+	 * }
+	 */
 
 
-	private Calendar newGregorianCalendar() {
-		// TODO Auto-generated method stub
-		
-		Calendar fecha = newGregorianCalendar();
-		int year = fecha.get(Calendar.YEAR);
-		int mes = 1+fecha.get(Calendar.MONTH);
-		int dia = fecha.get(Calendar.DAY_OF_MONTH);
-		
-		//System.out.println(dia + mes + year);
-		return fecha;
-		
-	}
-	
-	//System.out.println(dia + mes + year);
-	
+	/*
+	 * private Calendar newGregorianCalendar() { // TODO Auto-generated method stub
+	 * 
+	 * Calendar fecha = newGregorianCalendar(); int year = fecha.get(Calendar.YEAR);
+	 * int mes = 1+fecha.get(Calendar.MONTH); int dia =
+	 * fecha.get(Calendar.DAY_OF_MONTH);
+	 * 
+	 * //System.out.println(dia + mes + year); return fecha;
+	 * 
+	 * }
+	 */
+
 }
 

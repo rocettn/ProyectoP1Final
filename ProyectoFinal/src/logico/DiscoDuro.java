@@ -5,10 +5,11 @@ public class DiscoDuro extends Componente {
 	private float capacidadAlmacenamiento;
 	private String tipoConexion;
 	
-	public DiscoDuro(String id, String marca, String modelo, float precioComponente, int cantidadDisponible,
-			String numeroSerie, int cantMinimaComp, int cantMaximaComp, float capacidadAlmacenamiento,
-			String tipoConexion) {
-		super(id, marca, modelo, precioComponente, cantidadDisponible, numeroSerie, cantMinimaComp, cantMaximaComp);
+	public DiscoDuro(String id, String marca, String modelo, float precioVentaComponente, float precioCompraComponente,
+			String numeroSerie, int cantMinimaComp, int cantMaximaComp, int cantActualComp,
+			float capacidadAlmacenamiento, String tipoConexion) {
+		super(id, marca, modelo, precioVentaComponente, precioCompraComponente, numeroSerie, cantMinimaComp,
+				cantMaximaComp, cantActualComp);
 		this.capacidadAlmacenamiento = capacidadAlmacenamiento;
 		this.tipoConexion = tipoConexion;
 	}
@@ -29,5 +30,6 @@ public class DiscoDuro extends Componente {
 		this.tipoConexion = tipoConexion;
 	}
 	
+
 
 }

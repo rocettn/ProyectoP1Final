@@ -6,10 +6,12 @@ public class TarjetaMadre extends Componente {
 	private MemoriaRam tipoMemoriaRamTM;
 	private DiscoDuro listaConexionesDD;
 	
-	public TarjetaMadre(String id, String marca, String modelo, float precioComponente, int cantidadDisponible,
-			String numeroSerie, int cantMinimaComp, int cantMaximaComp, Microprocesador tipoConectorTM,
-			MemoriaRam tipoMemoriaRamTM, DiscoDuro listaConexionesDD) {
-		super(id, marca, modelo, precioComponente, cantidadDisponible, numeroSerie, cantMinimaComp, cantMaximaComp);
+	public TarjetaMadre(String id, String marca, String modelo, float precioVentaComponente,
+			float precioCompraComponente, String numeroSerie, int cantMinimaComp, int cantMaximaComp,
+			int cantActualComp, Microprocesador tipoConectorTM, MemoriaRam tipoMemoriaRamTM,
+			DiscoDuro listaConexionesDD) {
+		super(id, marca, modelo, precioVentaComponente, precioCompraComponente, numeroSerie, cantMinimaComp,
+				cantMaximaComp, cantActualComp);
 		this.tipoConectorTM = tipoConectorTM;
 		this.tipoMemoriaRamTM = tipoMemoriaRamTM;
 		this.listaConexionesDD = listaConexionesDD;
@@ -39,6 +41,7 @@ public class TarjetaMadre extends Componente {
 		this.listaConexionesDD = listaConexionesDD;
 	}
 	
-	
+
+
 	
 }

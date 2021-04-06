@@ -5,9 +5,11 @@ public class MemoriaRam extends Componente {
 	private float cantidadMemoria;
 	private String tipoMemoria;
 	
-	public MemoriaRam(String id, String marca, String modelo, float precioComponente, int cantidadDisponible,
-			String numeroSerie, int cantMinimaComp, int cantMaximaComp, float cantidadMemoria, String tipoMemoria) {
-		super(id, marca, modelo, precioComponente, cantidadDisponible, numeroSerie, cantMinimaComp, cantMaximaComp);
+	public MemoriaRam(String id, String marca, String modelo, float precioVentaComponente, float precioCompraComponente,
+			String numeroSerie, int cantMinimaComp, int cantMaximaComp, int cantActualComp, float cantidadMemoria,
+			String tipoMemoria) {
+		super(id, marca, modelo, precioVentaComponente, precioCompraComponente, numeroSerie, cantMinimaComp,
+				cantMaximaComp, cantActualComp);
 		this.cantidadMemoria = cantidadMemoria;
 		this.tipoMemoria = tipoMemoria;
 	}
@@ -28,6 +30,5 @@ public class MemoriaRam extends Componente {
 		this.tipoMemoria = tipoMemoria;
 	}
 	
-	
-	
+
 }
