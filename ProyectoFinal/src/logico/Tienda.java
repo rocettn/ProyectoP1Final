@@ -81,6 +81,21 @@ public class Tienda {
 	public void setOrdenesComprasTienda(ArrayList<OrdenCompra> ordenesComprasTienda) {
 		OrdenesComprasTienda = ordenesComprasTienda;
 	}
-	
+
+	//chequeoCantMincomp determina si un componente se encuentra en su cantidad
+	//minima. 
+	public Componente chequeoCantMincomp (String id) {
+		Componente aux = null;
+		boolean buscar = false;
+		
+		for(int k=0 ; k < componentesTienda.size() ; k++) {
+			if(componentesTienda.get(k).getId().equalsIgnoreCase(id)) {
+				aux = componentesTienda.get(k);
+				buscar = true;
+			}
+			k++;
+		}
+		return aux;
+	}
 
 }

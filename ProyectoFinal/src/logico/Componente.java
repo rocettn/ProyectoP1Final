@@ -88,6 +88,6 @@ public abstract class Componente {
 		this.cantMaximaComp = cantMaximaComp;
 	}
 	
-	
+
     
 }

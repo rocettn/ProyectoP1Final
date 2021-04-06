@@ -29,5 +29,13 @@ public class Combo {
 		this.porcentajeDescuento = porcentajeDescuento;
 	}
 	
-	
+	 public float obtenerPrecioCombo(){
+	        float total = 0;
+	        float precioCombo = 0;
+	        for (Componente compTemp : this.componenteCombo) {
+	            total += compTemp.getPrecioComponente();
+	        }
+	        precioCombo = total - (total * (this.porcentajeDescuento/100));
+	        return precioCombo;
+	    }
 }
