@@ -1,12 +1,18 @@
 package logico;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
-public class Venta {
+public class Venta implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8035349213109284835L;
 	private Persona clienteVenta;
 	private Vendedor vendedorVenta;
 	private ArrayList <Componente> componentesVenta;
@@ -20,10 +26,10 @@ public class Venta {
 		super();
 		this.clienteVenta = clienteVenta;
 		this.vendedorVenta = vendedorVenta;
-		this.componentesVenta = componentesVenta;
-		this.combosVenta = combosVenta;
+		this.componentesVenta = new ArrayList<Componente>();
+		this.combosVenta = new ArrayList<Combo>();
 		this.idFactura = idFactura;
-		this.fecha = fecha;
+		this.fecha = new Date();//fecha;
 		this.hora = hora;
 	}
 

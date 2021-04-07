@@ -1,12 +1,12 @@
 package logico;
 
 public abstract class Persona {
-	
+
 	protected String nombre;
 	protected String telefono;
 	protected String cedula;
 	protected String direccion;
-	
+
 	public Persona(String nombre, String telefono, String cedula, String direccion) {
 		super();
 		this.nombre = nombre;
@@ -46,7 +46,7 @@ public abstract class Persona {
 	public void setDireccion(String direccion) {
 		this.direccion = direccion;
 	}
-	
-	
+
+
 }
 

@@ -115,5 +115,11 @@ public abstract class Componente {
 
 		return aux;
 	}
+	
+	/*
+	 * public float calcularSubtotalComponente () { 
+	 * return precioVentaComponente *
+	 * can }
+	 */
 
 }

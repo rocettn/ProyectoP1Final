@@ -1,55 +1,40 @@
 package logico;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Tienda {
+public class Tienda implements Serializable{
 
-	private ArrayList <Cliente> clientesTienda;
-	private ArrayList <Vendedor> vendedoresTienda;
-	private ArrayList <Administrador> administradoresTienda;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6967368939345868509L;
+	private ArrayList <Persona> personasTienda; //Clientes, Administradores y Vendedores
 	private ArrayList <Componente> componentesTienda;
 	private ArrayList <Venta> ventasTienda;
 	private ArrayList <Proveedor> proveedoresTienda;
 	private ArrayList <Combo> combosTienda;
 	private ArrayList <OrdenCompra> OrdenesComprasTienda;
+	public static Tienda tienda = null;
+	private Persona usuario = null;
 
-	public Tienda(ArrayList<Cliente> clientesTienda, ArrayList<Vendedor> vendedoresTienda,
-			ArrayList <Administrador> administradoresTienda, ArrayList<Componente> componentesTienda, 
-			ArrayList<Venta> ventasTienda, ArrayList<Proveedor> proveedoresTienda,
-			ArrayList<Combo> combosTienda, ArrayList<OrdenCompra> ordenesComprasTienda) {
+	public Tienda() {
 		super();
-		this.clientesTienda = clientesTienda;
-		this.vendedoresTienda = vendedoresTienda;
-		this.administradoresTienda = administradoresTienda;
-		this.componentesTienda = componentesTienda;
-		this.ventasTienda = ventasTienda;
-		this.proveedoresTienda = proveedoresTienda;
-		this.combosTienda = combosTienda;
-		this.OrdenesComprasTienda = ordenesComprasTienda;
+		this.personasTienda = new ArrayList<Persona>();
+		this.componentesTienda = new ArrayList<Componente>();
+		this.ventasTienda = new ArrayList<Venta>();
+		this.proveedoresTienda = new ArrayList<Proveedor>();
+		this.combosTienda = new ArrayList<Combo>();
+		this.OrdenesComprasTienda = new ArrayList<OrdenCompra>();
 	}
 
-	public ArrayList<Cliente> getClientesTienda() {
-		return clientesTienda;
+
+	public ArrayList<Persona> getPersonasTienda() {
+		return personasTienda;
 	}
 
-	public void setClientesTienda(ArrayList<Cliente> clientesTienda) {
-		this.clientesTienda = clientesTienda;
-	}
-
-	public ArrayList<Vendedor> getVendedoresTienda() {
-		return vendedoresTienda;
-	}
-
-	public void setVendedoresTienda(ArrayList<Vendedor> vendedoresTienda) {
-		this.vendedoresTienda = vendedoresTienda;
-	}
-
-	public ArrayList<Administrador> getAdministradoresTienda() {
-		return administradoresTienda;
-	}
-
-	public void setAdministradoresTienda(ArrayList<Administrador> administradoresTienda) {
-		this.administradoresTienda = administradoresTienda;
+	public void setPersonasTienda(ArrayList<Persona> personasTienda) {
+		this.personasTienda = personasTienda;
 	}
 
 	public ArrayList<Componente> getComponentesTienda() {
@@ -91,6 +76,26 @@ public class Tienda {
 	public void setOrdenesComprasTienda(ArrayList<OrdenCompra> ordenesComprasTienda) {
 		OrdenesComprasTienda = ordenesComprasTienda;
 	}
+	
+	public static Tienda getInstance() {
+		if(tienda == null) {
+			tienda = new Tienda();
+		}
+		return tienda;
+	}
+	
+	public Persona getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Persona usuario) {
+		this.usuario = usuario;
+	}
+	
+	public void insertarPersona(Persona persona) {
+		this.personasTienda.add(persona);
+	}
+
 
 	/*
 	 * //chequeoCantMinComp determina si un componente se encuentra en su cantidad
@@ -113,9 +118,9 @@ public class Tienda {
 		Cliente aux = null;
 		boolean encontrado = false;
 		int i = 0;
-		while(!encontrado && i < clientesTienda.size()) {
-			if(clientesTienda.get(i).getCedula().equalsIgnoreCase(cedula)) {
-				aux = clientesTienda.get(i);
+		while(!encontrado && i < personasTienda.size()) {
+			if(personasTienda.get(i) instanceof Cliente && personasTienda.get(i).getCedula().equalsIgnoreCase(cedula)) {
+				aux = (Cliente) personasTienda.get(i);
 				encontrado = true;
 			}
 			i++;
@@ -124,19 +129,18 @@ public class Tienda {
 		return aux;
 	}
 
-	//buscarVendedorTienda permite buscar un vendedor por su id.
-	public Vendedor buscarVendedorTienda (String idVendedor) {
+	//buscarVendedorTienda permite buscar un vendedor por su cedula.
+	public Vendedor buscarVendedorTienda (String cedula) {
 		Vendedor aux = null;
 		boolean encontrado = false;
 		int i = 0;
-		while(!encontrado && i < vendedoresTienda.size()) {
-			if(vendedoresTienda.get(i).getIdVendedor().equalsIgnoreCase(idVendedor)) {
-				aux = vendedoresTienda.get(i);
+		while(!encontrado && i < personasTienda.size()) {
+			if(personasTienda.get(i) instanceof Vendedor && personasTienda.get(i).getCedula().equalsIgnoreCase(cedula)) {
+				aux = (Vendedor) personasTienda.get(i);
 				encontrado = true;
 			}
 			i++;
 		}
-
 		return aux;
 	}
 	//buscarComponenteTienda permite buscar un componente por su id.
@@ -204,13 +208,13 @@ public class Tienda {
 	}
 
 	//buscarAdministradorTienda permite buscar un proveedor por su id.
-	public Administrador buscarAdiministradorTienda (String idAdmin) {
+	public Administrador buscarAdiministradorTienda (String cedula) {
 		Administrador aux = null;
 		boolean encontrado = false;
 		int i = 0;
-		while(!encontrado && i < administradoresTienda.size()) {
-			if(administradoresTienda.get(i).getIdAdmin().equalsIgnoreCase(idAdmin)) {
-				aux = administradoresTienda.get(i);
+		while(!encontrado && i < personasTienda.size()) {
+			if(personasTienda.get(i) instanceof Administrador && personasTienda.get(i).getCedula().equalsIgnoreCase(cedula)) {
+				aux = (Administrador) personasTienda.get(i);
 				encontrado = true;
 			}
 			i++;
@@ -226,7 +230,7 @@ public class Tienda {
 		int m = 0; 
 		boolean buscar1 = false;
 		boolean buscar2 = false;
-		
+
 		while (k < proveedoresTienda.size() && !buscar2) {
 			m=0;
 			while(m < proveedoresTienda.get(k).getComponentesSuple().size() && !buscar1) {
@@ -255,8 +259,30 @@ public class Tienda {
 		}
 		return aux;
 	}
-	
-	
+
+	//inicioDeSesionEnLogin se encanga del inicio de sesion en el log in de vendedores y administradores. 
+	public boolean inicioDeSesionEnLogin(String username, String password) {
+		boolean res = false;
+		int i = 0;
+		while(i<personasTienda.size() && !res) {
+			if(personasTienda.get(i) instanceof Administrador) {
+				if(((Administrador)personasTienda.get(i)).getUsernameAdmi().equalsIgnoreCase(username)
+						&& ((Administrador)personasTienda.get(i)).getPasswordAdmi().equalsIgnoreCase(password)){
+					res = true;
+					Tienda.getInstance().setUsuario(personasTienda.get(i));
+				}
+			}else if(personasTienda.get(i) instanceof Vendedor) {
+				if(((Vendedor)personasTienda.get(i)).getUsernameVend().equalsIgnoreCase(username)
+						&& ((Vendedor)personasTienda.get(i)).getUsernameVend().equalsIgnoreCase(password)) {
+					res = true;
+					Tienda.getInstance().setUsuario(personasTienda.get(i));
+				}
+			}
+			i++;
+		}
+		return res;
+	}
+
 	
 
 }
