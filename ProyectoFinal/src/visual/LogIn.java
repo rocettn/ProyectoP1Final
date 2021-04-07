@@ -193,7 +193,8 @@ public class LogIn extends JFrame {
 		panel_1.add(lblImagenPassword);
 
 
-		JPanel panel_2 = new JPanel(); panel_2.addMouseListener(new MouseAdapter() {
+		JPanel panel_2 = new JPanel(); 
+		panel_2.addMouseListener(new MouseAdapter() {
 
 			@Override 
 			public void mouseClicked(MouseEvent e) {
