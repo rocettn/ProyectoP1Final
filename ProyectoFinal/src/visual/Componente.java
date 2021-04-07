@@ -82,7 +82,7 @@ public class Componente extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 649, 548);
 		contentPane = new JPanel();
-		contentPane.setBackground(new Color(51, 153, 153));
+		contentPane.setBackground(new Color(0, 153, 153));
 		contentPane.setForeground(new Color(0, 153, 153));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);

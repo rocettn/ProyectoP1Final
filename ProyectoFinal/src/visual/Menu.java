@@ -96,7 +96,7 @@ public class Menu extends JFrame {
 		JMenu mnNewMenu = new JMenu("Registros");
 		menuBar.add(mnNewMenu);
 		
-		JMenuItem mntmNewMenuItem = new JMenuItem("Registro Vendedor");
+		JMenuItem mntmNewMenuItem = new JMenuItem("Registro Empleado");
 		mnNewMenu.add(mntmNewMenuItem);
 		
 		JMenuItem mntmNewMenuItem_1 = new JMenuItem("Registro Cliente");
@@ -110,9 +110,6 @@ public class Menu extends JFrame {
 		
 		JMenuItem mntmNewMenuItem_4 = new JMenuItem("Registro Combo");
 		mnNewMenu.add(mntmNewMenuItem_4);
-		
-		JMenuItem mntmNewMenuItem_10 = new JMenuItem("Registrar Administrador");
-		mnNewMenu.add(mntmNewMenuItem_10);
 		
 		JMenu mnNewMenu_2 = new JMenu("Venta");
 		menuBar.add(mnNewMenu_2);
@@ -137,9 +134,6 @@ public class Menu extends JFrame {
 		
 		JMenuItem mntmNewMenuItem_11 = new JMenuItem("Lista de combos");
 		mnNewMenu_1.add(mntmNewMenuItem_11);
-		
-		JMenuItem mntmNewMenuItem_12 = new JMenuItem("Lista de Administradores");
-		mnNewMenu_1.add(mntmNewMenuItem_12);
 		
 		JPanel panelLogo = new JPanel();
 		panelLogo.setLayout(null);
