@@ -1,9 +1,14 @@
 package logico;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Proveedor {
+public class Proveedor implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1897831608459163347L;
 	private String idProveedor;
 	private String nombreProveedor;
 	private String pais;

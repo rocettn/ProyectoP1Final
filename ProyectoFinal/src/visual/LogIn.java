@@ -54,6 +54,7 @@ public class LogIn extends JFrame {
 	private JPanel contentPane;
 	private JTextField textoUsuario;
 	private JPasswordField textoPassword;
+	private JLabel lblmensajePass;
 
 
 
@@ -94,7 +95,7 @@ public class LogIn extends JFrame {
 				}catch(IOException e) {
 
 				}catch(ClassNotFoundException e) {
-					JOptionPane.showMessageDialog(null, "Ha ocurrido un error de alguna indole, por favor reinicie el programa");
+					JOptionPane.showMessageDialog(null, "Ocurrio un error. Reinicie el programa.");
 				}
 				try {
 					LogIn frame = new LogIn();
@@ -192,42 +193,6 @@ public class LogIn extends JFrame {
 		lblImagenPassword.setBounds(264, 0, 36, 40);
 		panel_1.add(lblImagenPassword);
 
-
-		JPanel panel_2 = new JPanel(); 
-		panel_2.addMouseListener(new MouseAdapter() {
-
-			@Override 
-			public void mouseClicked(MouseEvent e) {
-				/*if(Tienda.getInstance().inicioDeSesionEnLogin(textoUsuario.getText(),textoPassword.getText())) {
-
-					Menu frame = new Menu(); 
-					dispose(); 
-					frame.setVisible(true);
-
-				}else if(textoUsuario.getText().equalsIgnoreCase("Usuario") ||
-						textoUsuario.getText().equalsIgnoreCase("") ||
-						textoPassword.getText().equalsIgnoreCase("") ||
-						textoPassword.getText().equalsIgnoreCase("Contraseña")){
-					//lblMensaje.setText("Por favor rellene toda la informacion necesaria!!");
-					//}else { lblMensaje.
-					//setText("No se han podido validar sus credenciales, por favor intentelo de nuevo"*/
-					//);
-				//} 
-			} 
-		});
-
-		panel_2.setBackground(SystemColor.controlDkShadow);
-		panel_2.setBounds(207, 366, 300, 59);
-		contentPane.add(panel_2);
-		panel_2.setLayout(null);
-
-		JLabel lblIngresar = new JLabel("Ingresar");
-		lblIngresar.setHorizontalAlignment(SwingConstants.TRAILING);
-		lblIngresar.setForeground(new Color(255, 255, 255));
-		lblIngresar.setFont(new Font("Arial", Font.BOLD, 20));
-		lblIngresar.setBounds(105, 13, 88, 33);
-		panel_2.add(lblIngresar);
-
 		JLabel lblCerrarX = new JLabel("X");
 		lblCerrarX.addMouseListener(new MouseAdapter() {
 			@Override
@@ -251,13 +216,19 @@ public class LogIn extends JFrame {
 		contentPane.add(lblCerrarX);
 
 		JLabel lblLogo = new JLabel("");
-		lblLogo.setIcon(new ImageIcon(LogIn.class.getResource("/imagenes/Webp.net-resizeimage1.png")));
+		lblLogo.setIcon(new ImageIcon(LogIn.class.getResource("/imagenes/Webp.net-resizeimage_logoLogIn.png")));
 		lblLogo.setBounds(207, 13, 300, 191);
 		contentPane.add(lblLogo);
 
+		//JLabel lblmensajePass = new JLabel(""); 
+		//lblmensajePass.setBounds(207, 338, 300, 25); 
+		//contentPane.add(lblmensajePass); 
+		//setLocationRelativeTo(null);
+
 		JButton botonIngresar = new JButton("Ingresar");
-		botonIngresar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+		botonIngresar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
 				if(Tienda.getInstance().inicioDeSesionEnLogin(textoUsuario.getText(),textoPassword.getText())) {
 
 					Menu frame = new Menu(); 
@@ -268,17 +239,38 @@ public class LogIn extends JFrame {
 						textoUsuario.getText().equalsIgnoreCase("") ||
 						textoPassword.getText().equalsIgnoreCase("") ||
 						textoPassword.getText().equalsIgnoreCase("Contraseña")){
-					//lblMensaje.setText("Por favor rellene toda la informacion necesaria!!");
-					//}else { lblMensaje.
-					//setText("No se han podido validar sus credenciales, por favor intentelo de nuevo"*/
-					//);
+					lblmensajePass.setText("Falta informacion. Favor de completar.");
+				}else{ 
+					lblmensajePass.setText("Usuario o contrasena incorrecta. Intentar de nuevo.");
 				} 
 			}
 		});
+		/*
+		 * botonIngresar.addActionListener(new ActionListener() { public void
+		 * actionPerformed(ActionEvent e) {
+		 * if(Tienda.getInstance().inicioDeSesionEnLogin(textoUsuario.getText(),
+		 * textoPassword.getText())) {
+		 * 
+		 * Menu frame = new Menu(); dispose(); frame.setVisible(true);
+		 * 
+		 * }else if(textoUsuario.getText().equalsIgnoreCase("Usuario") ||
+		 * textoUsuario.getText().equalsIgnoreCase("") ||
+		 * textoPassword.getText().equalsIgnoreCase("") ||
+		 * textoPassword.getText().equalsIgnoreCase("Contraseña")){
+		 * lblmensajePass.setText("Falta informacion. Favor de completar."); }else{
+		 * lblmensajePass.setText("Usuario o contrasena incorrecta. Intentar de nuevo."
+		 * ); } } });
+		 */
 		botonIngresar.setForeground(SystemColor.controlDkShadow);
 		botonIngresar.setFont(new Font("Tahoma", Font.BOLD, 17));
-		botonIngresar.setBounds(288, 449, 148, 40);
+		botonIngresar.setBounds(288, 429, 148, 40);
 		contentPane.add(botonIngresar);
-		setLocationRelativeTo(null);
+
+
+		/*
+		 * //JLabel lblmensajePass = new JLabel(""); lblmensajePass.setBounds(207, 338,
+		 * 300, 25); contentPane.add(lblmensajePass); setLocationRelativeTo(null);
+		 */
+
 	}
 }

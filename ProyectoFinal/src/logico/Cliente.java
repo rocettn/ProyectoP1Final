@@ -2,6 +2,10 @@ package logico;
 
 public class Cliente extends Persona{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3265925181038712909L;
 	private String componentesComprado;
 	private float creditoCliente;
 	private float valorMaxCredDisp;

@@ -2,6 +2,10 @@ package logico;
 
 public class TarjetaMadre extends Componente {
              
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7451087388867383859L;
 	private Microprocesador tipoConectorTM;
 	private MemoriaRam tipoMemoriaRamTM;
 	private DiscoDuro listaConexionesDD;

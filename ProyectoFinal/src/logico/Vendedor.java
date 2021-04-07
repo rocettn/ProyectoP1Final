@@ -2,6 +2,10 @@ package logico;
 
 public class Vendedor extends Persona {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1072226191846445043L;
 	private String idVendedor;
 	private String usernameVend;
 	private String passwordVend;
