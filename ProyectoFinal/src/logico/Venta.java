@@ -20,9 +20,11 @@ public class Venta implements Serializable{
 	private String idFactura;
 	private Date fecha;
 	private Calendar hora;
+	private float montoTotal;
+	private Object[][]filas;
 
 	public Venta(Persona clienteVenta, Vendedor vendedorVenta, ArrayList<Componente> componentesVenta,
-			ArrayList<Combo> combosVenta, String idFactura, Date fecha, Calendar hora) {
+			ArrayList<Combo> combosVenta, String idFactura, Date fecha, Calendar hora, float montoTotal) {
 		super();
 		this.clienteVenta = clienteVenta;
 		this.vendedorVenta = vendedorVenta;
@@ -31,8 +33,17 @@ public class Venta implements Serializable{
 		this.idFactura = idFactura;
 		this.fecha = new Date();//fecha;
 		this.hora = hora;
+		this.filas=new Object[100][5];
 	}
 
+	
+	public Object[][] getFilas() {
+		return filas;
+	}
+
+	public void setFilas(Object[][] filas) {
+		this.filas = filas;
+	}
 	public Persona getClienteVenta() {
 		return clienteVenta;
 	}
@@ -89,30 +100,82 @@ public class Venta implements Serializable{
 		this.hora = hora;
 	}
 
-	/*
-	 * public float calcularSubtotalVenta() { float subtotal = 0;
-	 * 
-	 * for (Componente compAux : componentes ) { subtotal += compAux;
-	 * 
-	 * }
-	 * 
-	 * 
-	 * 
-	 * }
-	 */
+	public float getMontoTotal() {
+		return montoTotal;
+	}
 
+	public void setMontoTotal(float montoTotal) {
+		this.montoTotal = montoTotal;
+	}
+	
+	public float calcularSumaBeneficio() {
+		float total = 0;
+		
+		for(Combo Comb : combosVenta) {
+			total += (Comb.obtenerPrecioVentaCombo() - Comb.obtenerPrecioCompraCombo());
+			
+		}
+		
+		for(Componente comp : componentesVenta) {
+			total += comp.calculoGananciaComponente();
+		}
+		
+		return total;
+	}
+	
+	public float[] sumaTotalGananciaComponente() {
+		float [] total = new float [4];
+		
+		for(Componente componenteTemporal : componentesVenta) {
+			
+			if(componenteTemporal instanceof TarjetaMadre) {
+				total[0] += componenteTemporal.calculoGananciaComponente();
+			}
+			
+			if(componenteTemporal instanceof MemoriaRam) {
+				total[1] += componenteTemporal.calculoGananciaComponente();
+			}
+			
+			if(componenteTemporal instanceof Microprocesador) {
+				total[2] += componenteTemporal.calculoGananciaComponente();
+			}
+			
+			if(componenteTemporal instanceof DiscoDuro) {
+				total[3] += componenteTemporal.calculoGananciaComponente();
+			}
+			
+		}
+		
+		for(Combo comboTemporal : combosVenta) {
+			for(Componente componenteT : comboTemporal.getComponenteCombo()) {
+				
+				if(componenteT instanceof TarjetaMadre) {
+					total[0] += componenteT.calculoGananciaComponente();
+				}
+				
+				if(componenteT instanceof MemoriaRam) {
+					total[1] += componenteT.calculoGananciaComponente();
+				}
+				
+				if(componenteT instanceof Microprocesador) {
+					total[2] += componenteT.calculoGananciaComponente();
+				}
+				
+				if(componenteT instanceof DiscoDuro) {
+					total[3] += componenteT.calculoGananciaComponente();
+				}
+				
+			}
+		}
+		return total;
+	}
+	
 
-	/*
-	 * private Calendar newGregorianCalendar() { // TODO Auto-generated method stub
-	 * 
-	 * Calendar fecha = newGregorianCalendar(); int year = fecha.get(Calendar.YEAR);
-	 * int mes = 1+fecha.get(Calendar.MONTH); int dia =
-	 * fecha.get(Calendar.DAY_OF_MONTH);
-	 * 
-	 * //System.out.println(dia + mes + year); return fecha;
-	 * 
-	 * }
-	 */
-
+	public void InsertarFilas(int pos,Object[] o) {
+		for(int i = 0; i<5;i++) {
+			filas[pos][i]=o[i];
+		}
+		
+	}
 }
 

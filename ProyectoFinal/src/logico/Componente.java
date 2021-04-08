@@ -122,10 +122,10 @@ public abstract class Componente implements Serializable{
 		return aux;
 	}
 	
-	/*
-	 * public float calcularSubtotalComponente () { 
-	 * return precioVentaComponente *
-	 * can }
-	 */
+	public float calculoGananciaComponente() {
+			float ganancia = 0;
+			ganancia = precioVentaComponente - precioCompraComponente;
+		return ganancia;
+	}
 
 }

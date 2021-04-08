@@ -116,7 +116,7 @@ public class Cliente extends JFrame {
 		JPanel panelCredPregun = new JPanel();
 		panelCredPregun.setLayout(null);
 		panelCredPregun.setForeground(new Color(204, 204, 204));
-		panelCredPregun.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "\u00BFDesea usted cr\u00E9dito?", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		panelCredPregun.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "\u00BFHabilitar cr\u00E9dito?", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		panelCredPregun.setBackground(SystemColor.menu);
 		panelCredPregun.setBounds(10, 172, 580, 100);
 		contentPane.add(panelCredPregun);

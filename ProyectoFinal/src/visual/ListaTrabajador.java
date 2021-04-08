@@ -29,6 +29,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Toolkit;
 public class ListaTrabajador extends JFrame {
 
 	private JPanel contentPane;
@@ -62,6 +63,7 @@ public class ListaTrabajador extends JFrame {
 	 * Create the frame.
 	 */
 	public ListaTrabajador() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(ListaTrabajador.class.getResource("/imagenes/MicrosoftTeams-image.png")));
 		setTitle("R&M");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 650, 391);

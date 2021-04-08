@@ -18,6 +18,11 @@ public class Tienda implements Serializable{
 	public static Tienda tienda = null;
 	private Persona usuario = null;
 	private int codigoCompo = 1;
+	private int tajetaMadreT = 0;
+	private int memoriaRamT = 0;
+	private int microT = 0;
+	private int discoDuroT = 0;
+	private float balanceTotalAc = 0;
 
 	public Tienda() {
 		super();
@@ -29,6 +34,15 @@ public class Tienda implements Serializable{
 		this.OrdenesComprasTienda = new ArrayList<OrdenCompra>();
 	}
 
+
+
+	public float getBalanceTotalAc() {
+		return balanceTotalAc;
+	}
+
+	public void setBalanceTotalAc(float m) {
+		this.balanceTotalAc = m;
+	}
 
 	public ArrayList<Persona> getPersonasTienda() {
 		return personasTienda;
@@ -77,14 +91,14 @@ public class Tienda implements Serializable{
 	public void setOrdenesComprasTienda(ArrayList<OrdenCompra> ordenesComprasTienda) {
 		OrdenesComprasTienda = ordenesComprasTienda;
 	}
-	
+
 	public static Tienda getInstance() {
 		if(tienda == null) {
 			tienda = new Tienda();
 		}
 		return tienda;
 	}
-	
+
 	public Persona getUsuario() {
 		return usuario;
 	}
@@ -92,16 +106,16 @@ public class Tienda implements Serializable{
 	public void setUsuario(Persona usuario) {
 		this.usuario = usuario;
 	}
-	
+
 	public void insertarPersona(Persona persona) {
 		this.personasTienda.add(persona);
 	}
-	
+
 	public void insertarComponente(Componente componente) {
 		this.componentesTienda.add(componente); 
 		setCodigoCompo(getCodigoCompo() + 1);
 	}
-	
+
 	public int getCodigoCompo() {
 		return codigoCompo;
 	}
@@ -110,6 +124,45 @@ public class Tienda implements Serializable{
 		this.codigoCompo = codigoCompo;
 	}
 
+
+	public int getTajetaMadreT() {
+		return tajetaMadreT;
+	}
+
+
+	public void setTajetaMadreT(int tajetaMadreT) {
+		this.tajetaMadreT = tajetaMadreT;
+	}
+
+
+	public int getMemoriaRamT() {
+		return memoriaRamT;
+	}
+
+
+	public void setMemoriaRamT(int memoriaRamT) {
+		this.memoriaRamT = memoriaRamT;
+	}
+
+
+	public int getMicroT() {
+		return microT;
+	}
+
+
+	public void setMicroT(int microT) {
+		this.microT = microT;
+	}
+
+
+	public int getDiscoDuroT() {
+		return discoDuroT;
+	}
+
+
+	public void setDiscoDuroT(int discoDuroT) {
+		this.discoDuroT = discoDuroT;
+	}
 
 	/*
 	 * //chequeoCantMinComp determina si un componente se encuentra en su cantidad
@@ -190,12 +243,12 @@ public class Tienda implements Serializable{
 	}
 
 	//buscarComboTienda permite buscar un combo por su nombre.
-	public Combo buscarComboTienda (String nombreCombo) {
+	public Combo buscarComboTienda (String idCombo) {
 		Combo aux = null;
 		boolean encontrado = false;
 		int i = 0;
 		while(!encontrado && i < combosTienda.size()) {
-			if(combosTienda.get(i).getNombreCombo().equalsIgnoreCase(nombreCombo)) {
+			if(combosTienda.get(i).getCodigoIdentCombo().equalsIgnoreCase(idCombo)) {
 				aux = combosTienda.get(i);
 				encontrado = true;
 			}
@@ -296,6 +349,169 @@ public class Tienda implements Serializable{
 		}
 		return res;
 	}
-	
 
+	public float[] calculoGananciaFinal(){
+
+		float rm[] = new  float [4]; 
+		float total = 0.0f;
+
+		for(Venta aux : ventasTienda) {
+			total += aux.calcularSumaBeneficio();
+			float m[] = aux.sumaTotalGananciaComponente();
+			rm[0] += m[0];
+			rm[1] += m[1];
+			rm[2] += m[2];
+			rm[3] += m[3];
+
+		}
+		rm[0] /= total; //Tarjeta Madre
+		rm[1] /= total; //Memoria Ram
+		rm[2] /= total; //Microprocesador
+		rm[3] /= total; //Disco Duro
+
+		return rm;
+	}
+
+	//Credito del cliente
+	public float CreditoClienteTienda(Cliente client) {
+		float auxCliente = 0;
+		for(Venta venTem : ventasTienda) {
+			if(venTem.getClienteVenta().cedula.equalsIgnoreCase(client.cedula)) {
+				auxCliente += venTem.getMontoTotal();
+			}
+		}
+
+		return client.getCreditoCliente() - auxCliente;
+	}
+
+	public void restarCantidadComponente(Componente compoT, int cantidadCompo) {
+		for(Componente ct : componentesTienda) {
+			if(ct.equals(compoT)) {
+				ct.cantActualComp += cantidadCompo;
+
+				if( ct instanceof TarjetaMadre) {
+					setTajetaMadreT(getTajetaMadreT() - cantidadCompo);
+				}
+
+				if( ct instanceof MemoriaRam) {
+					setMemoriaRamT(getMemoriaRamT() - cantidadCompo);
+				}
+				if( ct instanceof Microprocesador) {
+					setMicroT(getMicroT() - cantidadCompo);
+				}
+
+				if( ct instanceof DiscoDuro) {
+					setDiscoDuroT(getDiscoDuroT() - cantidadCompo);
+				}
+
+			}			
+		}
+
+	}
+
+	public void agregarComponenteTienda(Componente lm) {
+		Componente cm = buscarComponenteTienda(lm.id);
+		cm.setCantActualComp(cm.getCantActualComp() - 1);
+
+		if( lm instanceof TarjetaMadre) {
+			setTajetaMadreT(getTajetaMadreT() + 1);
+		}
+
+		if( lm instanceof MemoriaRam) {
+			setMemoriaRamT(getMemoriaRamT() + 1);
+		}
+		if( lm instanceof Microprocesador) {
+			setMicroT(getMicroT() + 1);
+		}
+
+		if( lm instanceof DiscoDuro) {
+			setDiscoDuroT(getDiscoDuroT() + 1);
+		}
+
+	}		
+
+	public void agregarComboTienda(Combo n) {
+		Combo z = buscarComboTienda(n.getCodigoIdentCombo());
+		for(Componente v : n.getComponenteCombo()) {
+			agregarComponenteTienda(v);
+		}
+
+	}
+
+	public boolean verificarCombo(Combo r) {
+		boolean aux = true;
+		int cantidad = 0;
+		int k = 0;
+		int m = 0;
+		while(k < r.getComponenteCombo().size() && aux) {
+			m = k+1;
+			cantidad = r.getComponenteCombo().get(k).getCantActualComp()-1;
+			if(cantidad > 0) {
+				while(m < r.getComponenteCombo().size() && aux) {
+					if(r.getComponenteCombo().get(k).equals(r.getComponenteCombo().get(m))) {
+						cantidad--;
+						if(cantidad == -1) {
+							aux = false;
+						}
+					}
+					m++;
+				}
+			}else {
+				aux = false;
+			}
+			k++;
+		}
+		return aux;
+	}
+
+	public void restarComponenteCombo(Combo lm) {
+		for(Componente mn : lm.getComponenteCombo() ) {
+			mn.setCantActualComp(mn.getCantActualComp()+1);
+
+			if( mn instanceof TarjetaMadre) {
+				setTajetaMadreT(getTajetaMadreT() - 1);
+			}
+
+			if( mn instanceof MemoriaRam) {
+				setMemoriaRamT(getMemoriaRamT() - 1);
+			}
+			if( mn instanceof Microprocesador) {
+				setMicroT(getMicroT() - 1);
+			}
+
+			if( mn instanceof DiscoDuro) {
+				setDiscoDuroT(getDiscoDuroT() - 1);
+			}
+
+		}
+
+	}
+
+	public boolean realizarOrdenCompra(String id) {
+		boolean aux = false;
+		Componente componenteTe = buscarComponenteTienda(id);
+		if(componenteTe != null) {
+			Proveedor proveedorTe = buscarProveedorDeComponente(id);
+			if(proveedorTe != null) {
+				aux = componenteTe.chequeoCantMinComp();
+			}
+		}
+		return aux;
+	}
+
+
+	public void PagarDeudaCliente(Cliente aux) {
+		float total = 0;
+		ArrayList<String>s=new ArrayList<String>();
+		for(Venta v :  ventasTienda) {
+			if(v.getClienteVenta().equals(aux)) {
+				s.add(v.getIdFactura());
+				total += v.calcularSumaBeneficio();
+			}
+		}
+		setBalanceTotalAc(getBalanceTotalAc()+total);
+
+	}
 }
+
+
