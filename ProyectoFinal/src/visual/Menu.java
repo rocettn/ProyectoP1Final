@@ -34,18 +34,12 @@ public class Menu extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Menu frame = new Menu();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	/*
+	 * public static void main(String[] args) { EventQueue.invokeLater(new
+	 * Runnable() { public void run() { try { Menu frame = new Menu();
+	 * frame.setVisible(true); } catch (Exception e) { e.printStackTrace(); } } });
+	 * }
+	 */
 
 	/**
 	 * Create the frame.
@@ -112,12 +106,24 @@ public class Menu extends JFrame {
 		mnNewMenu.add(mntmNewMenuItem);
 		
 		JMenuItem mntmNewMenuItem_1 = new JMenuItem("Registro Cliente");
+		mntmNewMenuItem_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Cliente c = new Cliente();
+				c.setVisible(true);
+			}
+		});
 		mnNewMenu.add(mntmNewMenuItem_1);
 		
 		JMenuItem mntmNewMenuItem_2 = new JMenuItem("Registro Proveedores");
 		mnNewMenu.add(mntmNewMenuItem_2);
 		
 		JMenuItem mntmNewMenuItem_3 = new JMenuItem("Registro Componentes");
+		mntmNewMenuItem_3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Componente c = new Componente();
+				c.setVisible(true);
+			}
+		});
 		mnNewMenu.add(mntmNewMenuItem_3);
 		
 		JMenuItem mntmNewMenuItem_4 = new JMenuItem("Registro Combo");
@@ -162,7 +168,7 @@ public class Menu extends JFrame {
 		
 		JLabel lblLogo = new JLabel("");
 		lblLogo.setIcon(new ImageIcon(Menu.class.getResource("/imagenes/r&M nuevo color.png")));
-		lblLogo.setBounds(410, 160, 393, 321);
+		lblLogo.setBounds(359, 162, 393, 321);
 		panelLogo.add(lblLogo);
 	}
 }

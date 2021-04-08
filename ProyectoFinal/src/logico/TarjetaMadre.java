@@ -6,14 +6,14 @@ public class TarjetaMadre extends Componente {
 	 * 
 	 */
 	private static final long serialVersionUID = -7451087388867383859L;
-	private Microprocesador tipoConectorTM;
-	private MemoriaRam tipoMemoriaRamTM;
-	private DiscoDuro listaConexionesDD;
+	private String tipoConectorTM;
+	private String tipoMemoriaRamTM;
+	private String listaConexionesDD;
 	
 	public TarjetaMadre(String id, String marca, String modelo, float precioVentaComponente,
 			float precioCompraComponente, String numeroSerie, int cantMinimaComp, int cantMaximaComp,
-			int cantActualComp, Microprocesador tipoConectorTM, MemoriaRam tipoMemoriaRamTM,
-			DiscoDuro listaConexionesDD) {
+			int cantActualComp, String tipoConectorTM, String tipoMemoriaRamTM,
+			String listaConexionesDD) {
 		super(id, marca, modelo, precioVentaComponente, precioCompraComponente, numeroSerie, cantMinimaComp,
 				cantMaximaComp, cantActualComp);
 		this.tipoConectorTM = tipoConectorTM;
@@ -21,27 +21,27 @@ public class TarjetaMadre extends Componente {
 		this.listaConexionesDD = listaConexionesDD;
 	}
 
-	public Microprocesador getTipoConectorTM() {
+	public String getTipoConectorTM() {
 		return tipoConectorTM;
 	}
 
-	public void setTipoConectorTM(Microprocesador tipoConectorTM) {
+	public void setTipoConectorTM(String tipoConectorTM) {
 		this.tipoConectorTM = tipoConectorTM;
 	}
 
-	public MemoriaRam getTipoMemoriaRamTM() {
+	public String getTipoMemoriaRamTM() {
 		return tipoMemoriaRamTM;
 	}
 
-	public void setTipoMemoriaRamTM(MemoriaRam tipoMemoriaRamTM) {
+	public void setTipoMemoriaRamTM(String tipoMemoriaRamTM) {
 		this.tipoMemoriaRamTM = tipoMemoriaRamTM;
 	}
 
-	public DiscoDuro getListaConexionesDD() {
+	public String getListaConexionesDD() {
 		return listaConexionesDD;
 	}
 
-	public void setListaConexionesDD(DiscoDuro listaConexionesDD) {
+	public void setListaConexionesDD(String listaConexionesDD) {
 		this.listaConexionesDD = listaConexionesDD;
 	}
 	

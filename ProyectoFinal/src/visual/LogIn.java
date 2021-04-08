@@ -122,7 +122,7 @@ public class LogIn extends JFrame {
 		contentPane.setBorder(new LineBorder(new Color(0, 0, 128), 2));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-
+		setLocationRelativeTo(null);
 		JPanel panel = new JPanel();
 		panel.setBackground(Color.WHITE);
 		panel.setBounds(207, 217, 300, 40);

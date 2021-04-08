@@ -70,7 +70,7 @@ public class ListaTrabajador extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
+		setLocationRelativeTo(null);
 		JPanel panel = new JPanel();
 		panel.setLayout(null);
 		panel.setForeground(new Color(204, 204, 204));

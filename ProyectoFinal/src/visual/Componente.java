@@ -1,6 +1,7 @@
 package visual;
 
 import java.awt.BorderLayout;
+
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -10,6 +11,7 @@ import java.awt.Color;
 import javax.swing.border.TitledBorder;
 import javax.swing.UIManager;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import java.awt.SystemColor;
 import java.awt.Font;
@@ -19,6 +21,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import logico.*;
 
 public class Componente extends JFrame {
 
@@ -27,9 +30,9 @@ public class Componente extends JFrame {
 	private JTextField textID;
 	private JTextField textMarca;
 	private JTextField textModelo;
-	private JTextField textField_3;
-	private JTextField textField_4;
-	private JTextField textField_5;
+	private JTextField textNoSerie;
+	private JTextField textCanMax;
+	private JTextField textCanMin;
 	private JTextField textCantidadReal;
 	private JTextField textPrecioCompra;
 	private JTextField textPrecioVenta;
@@ -61,18 +64,12 @@ public class Componente extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Componente frame = new Componente();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	/*
+	 * public static void main(String[] args) { EventQueue.invokeLater(new
+	 * Runnable() { public void run() { try { Componente frame = new Componente();
+	 * frame.setVisible(true); } catch (Exception e) { e.printStackTrace(); } } });
+	 * }
+	 */
 
 	/**
 	 * Create the frame.
@@ -87,6 +84,7 @@ public class Componente extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		setLocationRelativeTo(null);
 		panelInfGeneral.setBackground(UIManager.getColor("Button.background"));
 		panelInfGeneral.setForeground(new Color(204, 204, 204));
 		panelInfGeneral.setBounds(10, 11, 612, 181);
@@ -139,20 +137,20 @@ public class Componente extends JFrame {
 		lblCantidadMinima.setBounds(292, 65, 97, 14);
 		panelInfGeneral.add(lblCantidadMinima);
 		
-		textField_3 = new JTextField();
-		textField_3.setColumns(10);
-		textField_3.setBounds(98, 109, 174, 20);
-		panelInfGeneral.add(textField_3);
+		textNoSerie = new JTextField();
+		textNoSerie.setColumns(10);
+		textNoSerie.setBounds(98, 109, 174, 20);
+		panelInfGeneral.add(textNoSerie);
 		
-		textField_4 = new JTextField();
-		textField_4.setColumns(10);
-		textField_4.setBounds(399, 37, 174, 20);
-		panelInfGeneral.add(textField_4);
+		textCanMax = new JTextField();
+		textCanMax.setColumns(10);
+		textCanMax.setBounds(399, 37, 174, 20);
+		panelInfGeneral.add(textCanMax);
 		
-		textField_5 = new JTextField();
-		textField_5.setColumns(10);
-		textField_5.setBounds(399, 62, 174, 20);
-		panelInfGeneral.add(textField_5);
+		textCanMin = new JTextField();
+		textCanMin.setColumns(10);
+		textCanMin.setBounds(399, 62, 174, 20);
+		panelInfGeneral.add(textCanMin);
 		
 		JLabel lblCantidadReal = new JLabel("Cantidad Real:");
 		lblCantidadReal.setFont(new Font("Tahoma", Font.PLAIN, 12));
@@ -308,10 +306,60 @@ public class Componente extends JFrame {
 		lblImagenTarMad.setBounds(475, 11, 127, 127);
 		panelTarjetaMadre.add(lblImagenTarMad);
 		
-		JButton btnAgregar = new JButton("Agregar");
-		btnAgregar.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		btnAgregar.setBounds(366, 473, 123, 23);
-		contentPane.add(btnAgregar);
+		JButton btnRegistrar = new JButton("Registrar");
+		btnRegistrar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				logico.Componente compTem = null;
+				String idComponente = textID.getText();
+				String marcaCompo = textMarca.getText();
+				String modeloCompo= textModelo.getText();
+				String serie = textNoSerie.getText();
+				int cantMaxComp = Integer.parseInt(textCanMax.getText());
+				int cantMinComp = Integer.parseInt(textCanMin.getText());
+				int cantReal = Integer.parseInt(textCantidadReal.getText());	
+				float precioCompraCom = Float.parseFloat(textPrecioCompra.getText());
+				float precioVentaCom = Float.parseFloat(textPrecioVenta.getText());
+
+				//Constructor TarjetaMadre
+				//	public TarjetaMadre(String id, String marca, String modelo, float precioVentaComponente,
+				//float precioCompraComponente, String numeroSerie, int cantMinimaComp, int cantMaximaComp,
+				//int cantActualComp, Microprocesador tipoConectorTM, MemoriaRam tipoMemoriaRamTM,
+				//DiscoDuro listaConexionesDD)
+				if(!textMarca.getText().isEmpty() || !textModelo.getText().isEmpty() ) {
+				if(rdbTarjetaMadre.isSelected()) {
+					compTem = new TarjetaMadre(idComponente, marcaCompo, modeloCompo, precioVentaCom, precioCompraCom, serie, cantMinComp, cantMaxComp, cantReal, textTipodeConector.getText(), textTipodeMemoriaRAM.getText(), textConexionesDD.getText());
+					Tienda.getInstance().insertarComponente(compTem);
+				}
+				
+				if(rdbtnMemoriaRam.isSelected()) {
+					float cantMemoria = Float.parseFloat(textCantidadMemoria.getText());
+					String tipMemoria = textTipoDeMemoria.getText();
+					compTem = new MemoriaRam(idComponente, marcaCompo, modeloCompo, precioVentaCom, precioCompraCom, serie, cantMinComp, cantMaxComp, cantReal, cantMemoria, tipMemoria);
+					Tienda.getInstance().insertarComponente(compTem);
+				}
+				
+				if(rdbtnMicroprocesador.isSelected()) {
+					String tipConector = textTipoConectorMicro.getText();
+					float veloProc = Float.parseFloat(textVelocidadProcesamiento.getText());
+					compTem = new Microprocesador(idComponente, marcaCompo, modeloCompo, precioVentaCom, precioCompraCom, serie, cantMinComp, cantMaxComp, cantReal, tipConector, veloProc);
+					Tienda.getInstance().insertarComponente(compTem);
+				}
+				
+				if(rdbtnDiscoDuro.isSelected()) {
+					float capAlm = Float.parseFloat(textCapacidadAlmace.getText());
+					String tipConexion = textTipoConexionDD.getText();
+					compTem = new DiscoDuro(idComponente, marcaCompo, modeloCompo, precioVentaCom, precioCompraCom, serie, cantMinComp, cantMaxComp, cantReal, capAlm, tipConexion);
+					Tienda.getInstance().insertarComponente(compTem);
+					limpiarCasilla();
+				}else {
+					JOptionPane.showMessageDialog(null,"Has agregado correctamente el componente","Información",JOptionPane.INFORMATION_MESSAGE);
+				}
+			  }
+			}
+		});
+		btnRegistrar.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		btnRegistrar.setBounds(366, 473, 123, 23);
+		contentPane.add(btnRegistrar);
 		
 		JButton btnCancelar = new JButton("Cancelar");
 		btnCancelar.addActionListener(new ActionListener() {
@@ -424,5 +472,26 @@ public class Componente extends JFrame {
 		lblImagDD.setIcon(new ImageIcon(Componente.class.getResource("/imagenes/Webp.net-resizeimage-DiscoDuro.png")));
 		lblImagDD.setBounds(475, 11, 127, 127);
 		panelDiscoDuro.add(lblImagDD);
+	}
+	
+	public void limpiarCasilla() {
+		textNoSerie.setText("");
+		textTipoConexionDD.setText("");
+		textCapacidadAlmace.setText("");
+		textVelocidadProcesamiento.setText("");
+		textTipoConectorMicro.setText("");
+		textTipoDeMemoria.setText("");
+		textCantidadMemoria.setText("");
+		textConexionesDD.setText("");
+		textPrecioVenta.setText("");
+		textPrecioCompra.setText("");
+		textCanMin.setText("");
+		textCanMax.setText("");
+		textID.setText("");
+		textMarca.setText("");
+		textModelo.setText("");
+		textCantidadReal.setText("");
+		textTipodeMemoriaRAM.setText("");
+		
 	}
 }

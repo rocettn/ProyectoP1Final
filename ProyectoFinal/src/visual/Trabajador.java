@@ -68,7 +68,7 @@ public class Trabajador extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
+		setLocationRelativeTo(null);
 		JPanel panelInfoGen = new JPanel();
 		panelInfoGen.setLayout(null);
 		panelInfoGen.setForeground(new Color(204, 204, 204));
@@ -219,7 +219,6 @@ public class Trabajador extends JFrame {
 				String telefono= textTelefono.getText();
 				String direccion = textDireccion.getText();
 				if(textNombre.getText().isEmpty() || textCedula.getText().isEmpty() || textTelefono.getText().isEmpty() || textDireccion.getText().isEmpty()) {
-					//JOptionPane.showMessageDialog(null, "Ha dejado espacios vacios en información General!!\nFAVOR DE LLENARLOS CORRECTAMENTE.", "ERROR", JOptionPane.ERROR_MESSAGE);
 				}else {
 				if(rdbtnVendedor.isSelected()) {
 					String idVend = textIDVend.getText();

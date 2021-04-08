@@ -17,6 +17,7 @@ public class Tienda implements Serializable{
 	private ArrayList <OrdenCompra> OrdenesComprasTienda;
 	public static Tienda tienda = null;
 	private Persona usuario = null;
+	private int codigoCompo = 1;
 
 	public Tienda() {
 		super();
@@ -94,6 +95,19 @@ public class Tienda implements Serializable{
 	
 	public void insertarPersona(Persona persona) {
 		this.personasTienda.add(persona);
+	}
+	
+	public void insertarComponente(Componente componente) {
+		this.componentesTienda.add(componente); 
+		setCodigoCompo(getCodigoCompo() + 1);
+	}
+	
+	public int getCodigoCompo() {
+		return codigoCompo;
+	}
+
+	public void setCodigoCompo(int codigoCompo) {
+		this.codigoCompo = codigoCompo;
 	}
 
 
@@ -282,7 +296,6 @@ public class Tienda implements Serializable{
 		}
 		return res;
 	}
-
 	
 
 }
