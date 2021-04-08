@@ -95,7 +95,7 @@ public class LogIn extends JFrame {
 				}catch(IOException e) {
 
 				}catch(ClassNotFoundException e) {
-					JOptionPane.showMessageDialog(null, "Ocurrio un error. Reinicie el programa.");
+					JOptionPane.showMessageDialog(null, "Ocurrió un error. Reinicie el programa.");
 				}
 				try {
 					LogIn frame = new LogIn();
@@ -241,7 +241,7 @@ public class LogIn extends JFrame {
 						textoPassword.getText().equalsIgnoreCase("Contraseña")){
 					lblmensajePass.setText("Falta informacion. Favor de completar.");
 				}else{ 
-					lblmensajePass.setText("Usuario o contrasena incorrecta. Intentar de nuevo.");
+					lblmensajePass.setText("Usuario o contraseña incorrecta. Intentar de nuevo.");
 				} 
 			}
 		});
@@ -265,6 +265,10 @@ public class LogIn extends JFrame {
 		botonIngresar.setFont(new Font("Tahoma", Font.BOLD, 17));
 		botonIngresar.setBounds(288, 429, 148, 40);
 		contentPane.add(botonIngresar);
+		
+		lblmensajePass = new JLabel("");
+		lblmensajePass.setBounds(193, 336, 328, 14);
+		contentPane.add(lblmensajePass);
 
 
 		/*

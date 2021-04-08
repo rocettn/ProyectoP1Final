@@ -225,18 +225,17 @@ public class Trabajador extends JFrame {
 					String idVend = textIDVend.getText();
 					auxiliar = new Vendedor(nombre, cedula, telefono, direccion, idVend, textUsuarioV.getText(), textContraV.getText());
 					Tienda.getInstance().insertarPersona(auxiliar);
+					//System.out.println("El empleado es: "+Tienda.getInstance().getPersonasTienda().get(0).getNombre()); Prueba
 				}
 				
 				if(rdbtnAdministrador.isSelected()) {
-					//String idAdm = textIdAdminis.getText();
-					//String userAdm = textUsuarioAdm.getText();
-					//String contraAdm = textContraAdmin.getText();
 					auxiliar = new Administrador(nombre, cedula, telefono, direccion, textIdAdminis.getText(), textUsuarioAdm.getText(), textContraAdmin.getText());
 					Tienda.getInstance().insertarPersona(auxiliar);
 				}
 				limpiar();
 				JOptionPane.showMessageDialog(null, "Ingreso Correcto de Empleado a R&M-Arma tu Equipo", "Información", JOptionPane.INFORMATION_MESSAGE);
 				}
+				
 			}
 		});
 		btnAgregar.setFont(new Font("Tahoma", Font.PLAIN, 12));

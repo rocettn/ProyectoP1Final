@@ -9,6 +9,8 @@ import javax.swing.border.EmptyBorder;
 import java.awt.SystemColor;
 import javax.swing.border.TitledBorder;
 import java.awt.Color;
+import java.awt.Dimension;
+
 import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.GridLayout;
@@ -27,6 +29,7 @@ import java.awt.event.ActionEvent;
 public class Menu extends JFrame {
 
 	private JPanel contentPane;
+	private Dimension din;
 
 	/**
 	 * Launch the application.
@@ -50,17 +53,20 @@ public class Menu extends JFrame {
 	public Menu() {
 		setTitle("R&M");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 646, 499);
+		setBounds(100, 100, 564, 411);
+		din = getToolkit().getScreenSize();  
+		super.setSize(din.width,din.height-45);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		setLocationRelativeTo(null);
 		
 		JPanel panelBotonSalir = new JPanel();
 		panelBotonSalir.setLayout(null);
 		panelBotonSalir.setForeground(new Color(204, 204, 204));
 		panelBotonSalir.setBackground(SystemColor.menu);
-		panelBotonSalir.setBounds(0, 46, 148, 414);
+		panelBotonSalir.setBounds(0, 46, 148, 638);
 		contentPane.add(panelBotonSalir);
 		
 		JButton btnClose = new JButton("Close");
@@ -71,7 +77,7 @@ public class Menu extends JFrame {
 		});
 		btnClose.setBackground(new Color(192, 192, 192));
 		btnClose.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		btnClose.setBounds(22, 380, 89, 23);
+		btnClose.setBounds(29, 604, 89, 23);
 		panelBotonSalir.add(btnClose);
 		
 		
@@ -79,7 +85,7 @@ public class Menu extends JFrame {
 		panelIconoMenu.setLayout(null);
 		panelIconoMenu.setForeground(new Color(204, 204, 204));
 		panelIconoMenu.setBackground(Color.WHITE);
-		panelIconoMenu.setBounds(0, 0, 630, 44);
+		panelIconoMenu.setBounds(0, 0, 1350, 44);
 		contentPane.add(panelIconoMenu);
 		
 		JLabel lblMenuIcono = new JLabel("");
@@ -97,6 +103,12 @@ public class Menu extends JFrame {
 		menuBar.add(mnNewMenu);
 		
 		JMenuItem mntmNewMenuItem = new JMenuItem("Registro Empleado");
+		mntmNewMenuItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Trabajador tb = new Trabajador();
+				tb.setVisible(true);
+			}
+		});
 		mnNewMenu.add(mntmNewMenuItem);
 		
 		JMenuItem mntmNewMenuItem_1 = new JMenuItem("Registro Cliente");
@@ -123,7 +135,13 @@ public class Menu extends JFrame {
 		JMenu mnNewMenu_1 = new JMenu("Reporte");
 		menuBar.add(mnNewMenu_1);
 		
-		JMenuItem mntmNewMenuItem_7 = new JMenuItem("Lista de Vendedor");
+		JMenuItem mntmNewMenuItem_7 = new JMenuItem("Lista de Empleados");
+		mntmNewMenuItem_7.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ListaTrabajador lt = new ListaTrabajador();
+				lt.setVisible(true);
+			}
+		});
 		mnNewMenu_1.add(mntmNewMenuItem_7);
 		
 		JMenuItem mntmNewMenuItem_8 = new JMenuItem("Lista de Cliente");
@@ -139,12 +157,12 @@ public class Menu extends JFrame {
 		panelLogo.setLayout(null);
 		panelLogo.setForeground(new Color(204, 204, 204));
 		panelLogo.setBackground(new Color(0, 153, 153));
-		panelLogo.setBounds(148, 40, 482, 420);
+		panelLogo.setBounds(148, 40, 1202, 644);
 		contentPane.add(panelLogo);
 		
 		JLabel lblLogo = new JLabel("");
 		lblLogo.setIcon(new ImageIcon(Menu.class.getResource("/imagenes/r&M nuevo color.png")));
-		lblLogo.setBounds(10, 37, 393, 321);
+		lblLogo.setBounds(410, 160, 393, 321);
 		panelLogo.add(lblLogo);
 	}
 }

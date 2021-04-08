@@ -40,6 +40,7 @@ public class ListaTrabajador extends JFrame {
 	private Administrador adm = null;
 	private JButton btnVenta;
 	public static Object[] row;
+	private JTable table;
 
 	/**
 	 * Launch the application.
@@ -91,7 +92,10 @@ public class ListaTrabajador extends JFrame {
 		textBuscarEmpleado.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
-				
+				DefaultTableModel mode = (DefaultTableModel)table.getModel();
+				TableRowSorter<DefaultTableModel> m = new TableRowSorter<DefaultTableModel>(mode);
+				table.setRowSorter(m);
+				m.setRowFilter(RowFilter.regexFilter(textBuscarEmpleado.getText().trim()));
 			}
 		});
 		textBuscarEmpleado.setBounds(157, 23, 184, 20);
@@ -102,11 +106,38 @@ public class ListaTrabajador extends JFrame {
 		scrollPaneTablaEmpleado.setBounds(10, 63, 594, 193);
 		panel.add(scrollPaneTablaEmpleado);
 		
-		tableEmpleado = new JTable();
-		tableEmpleado.addMouseListener(new MouseAdapter() {
-	
-			
+		
+		model = new DefaultTableModel();
+		String[] columns = {"Cedula","Tipo","Nombre","Telefono","Direccion"}; 
+		model.setColumnIdentifiers(columns);
+		table = new JTable();
+		table.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				int sel = tableEmpleado.getSelectedRow();
+				 modelfila = tableEmpleado.convertRowIndexToModel(sel);
+				if(sel!=-1 ){
+					
+					if(model.getValueAt(modelfila, 1).toString().equalsIgnoreCase("Vendedor")) {
+						btnVenta.setEnabled(true);
+						
+						vend = Tienda.getInstance().buscarVendedorTienda((String)model.getValueAt(modelfila, 0));
+					}else {
+						btnVenta.setEnabled(false);
+						adm = Tienda.getInstance().buscarAdiministradorTienda((String)model.getValueAt(modelfila, 0));
+					}
+					
+				}else{	
+					btnVenta.setEnabled(false);
+					}
+				
+			}
 		});
+		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		table.setModel(model);
+		scrollPaneTablaEmpleado.setViewportView(table);
+		
+
 
 		
 		JButton btnCancelar = new JButton("Cancelar");
@@ -129,9 +160,32 @@ public class ListaTrabajador extends JFrame {
 		});
 		btnVenta.setBounds(436, 316, 89, 23);
 		contentPane.add(btnVenta);
-		
+		loadTabla();
 
 	}
 	
-
+	private void loadTabla() {
+		//Persona m = new Vendedor("a", "a", "b", "c", "c","c", "c");
+		//Tienda.getInstance().insertarPersona(m);
+		model.setRowCount(0);
+		//System.out.println("klk");
+		row = new Object [model.getColumnCount()];
+		for(Persona t : Tienda.getInstance().getPersonasTienda()) {
+			if((t instanceof Vendedor) || (t instanceof Administrador)) {
+				row[0]=t.getCedula();
+				if(t instanceof Vendedor) {
+					row[1]="Vendedor";
+    
+					
+				}else {
+					row[1]="Administrador";
+				}
+				row[2]=t.getNombre();
+				row[3]=t.getTelefono();
+				row[4]=t.getDireccion();
+				model.addRow(row);
+			}
+		}
+		
+	}
 }
