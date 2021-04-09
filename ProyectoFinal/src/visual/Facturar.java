@@ -16,16 +16,15 @@ import javax.swing.border.TitledBorder;
 import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 
 public class Facturar extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField textIdFactura;
 	private JTextField textCantidadF;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
+	private JTable tablaEspComp;
 
 	/**
 	 * Launch the application.
@@ -47,6 +46,7 @@ public class Facturar extends JFrame {
 	 * Create the frame.
 	 */
 	public Facturar() {
+		setTitle("R&M");
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Facturar.class.getResource("/imagenes/MicrosoftTeams-image.png")));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 801, 641);
@@ -60,12 +60,12 @@ public class Facturar extends JFrame {
 		panelLogo.setLayout(null);
 		panelLogo.setForeground(new Color(204, 204, 204));
 		panelLogo.setBackground(new Color(0, 153, 153));
-		panelLogo.setBounds(10, 11, 177, 580);
+		panelLogo.setBounds(10, 11, 183, 580);
 		contentPane.add(panelLogo);
 		
 		JLabel lblIconLogo = new JLabel("");
 		lblIconLogo.setIcon(new ImageIcon(Facturar.class.getResource("/imagenes/MicrosoftTeams-image.png")));
-		lblIconLogo.setBounds(10, 11, 157, 159);
+		lblIconLogo.setBounds(12, 13, 157, 159);
 		panelLogo.add(lblIconLogo);
 		
 		JPanel panelInfoGeneral = new JPanel();
@@ -73,7 +73,7 @@ public class Facturar extends JFrame {
 		panelInfoGeneral.setForeground(new Color(204, 204, 204));
 		panelInfoGeneral.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Informaci\u00F3n General ", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		panelInfoGeneral.setBackground(SystemColor.menu);
-		panelInfoGeneral.setBounds(195, 11, 580, 150);
+		panelInfoGeneral.setBounds(199, 11, 576, 150);
 		contentPane.add(panelInfoGeneral);
 		
 		JLabel labelFecha = new JLabel("Fecha:");
@@ -141,7 +141,7 @@ public class Facturar extends JFrame {
 		panelSeleccionarComponente.setForeground(new Color(204, 204, 204));
 		panelSeleccionarComponente.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Seleccionar Componente", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		panelSeleccionarComponente.setBackground(SystemColor.menu);
-		panelSeleccionarComponente.setBounds(197, 172, 580, 115);
+		panelSeleccionarComponente.setBounds(199, 162, 576, 116);
 		contentPane.add(panelSeleccionarComponente);
 		
 		JLabel lblCantidad = new JLabel("Cantidad:");
@@ -172,49 +172,69 @@ public class Facturar extends JFrame {
 		JPanel panel = new JPanel();
 		panel.setLayout(null);
 		panel.setForeground(new Color(204, 204, 204));
-		panel.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Informaci\u00F3n General ", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		panel.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Especificaciones de componentes a comprar:", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		panel.setBackground(SystemColor.menu);
-		panel.setBounds(195, 298, 580, 150);
+		panel.setBounds(199, 281, 576, 150);
 		contentPane.add(panel);
 		
-		JLabel label = new JLabel("Nombre:");
-		label.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		label.setBounds(42, 37, 87, 14);
-		panel.add(label);
+		JScrollPane scrollPaneEspComp = new JScrollPane();
+		scrollPaneEspComp.setBounds(12, 23, 556, 114);
+		panel.add(scrollPaneEspComp);
 		
-		JLabel label_1 = new JLabel("C\u00E9dula:");
-		label_1.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		label_1.setBounds(42, 62, 87, 14);
-		panel.add(label_1);
+		tablaEspComp = new JTable();
+		scrollPaneEspComp.setViewportView(tablaEspComp);
 		
-		JLabel label_2 = new JLabel("Tel\u00E9fono:");
-		label_2.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		label_2.setBounds(42, 87, 87, 14);
-		panel.add(label_2);
+		JPanel panelCalculoVenta = new JPanel();
+		panelCalculoVenta.setLayout(null);
+		panelCalculoVenta.setForeground(new Color(204, 204, 204));
+		panelCalculoVenta.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "C\u00E1lculo de venta:", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		panelCalculoVenta.setBackground(SystemColor.menu);
+		panelCalculoVenta.setBounds(199, 432, 576, 116);
+		contentPane.add(panelCalculoVenta);
 		
-		textField = new JTextField();
-		textField.setColumns(10);
-		textField.setBounds(131, 34, 290, 20);
-		panel.add(textField);
+		JLabel lblMontoTotal = new JLabel("Monto Total:");
+		lblMontoTotal.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblMontoTotal.setBounds(35, 26, 87, 14);
+		panelCalculoVenta.add(lblMontoTotal);
 		
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		textField_1.setBounds(131, 59, 290, 20);
-		panel.add(textField_1);
+		JLabel lblImpuesto = new JLabel("Impuesto:");
+		lblImpuesto.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblImpuesto.setBounds(35, 51, 87, 14);
+		panelCalculoVenta.add(lblImpuesto);
 		
-		textField_2 = new JTextField();
-		textField_2.setColumns(10);
-		textField_2.setBounds(131, 84, 290, 20);
-		panel.add(textField_2);
+		JLabel lblTotalVenta = new JLabel("Total Venta:");
+		lblTotalVenta.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblTotalVenta.setBounds(35, 76, 87, 14);
+		panelCalculoVenta.add(lblTotalVenta);
 		
-		JLabel label_3 = new JLabel("Direcci\u00F3n:");
-		label_3.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		label_3.setBounds(42, 112, 87, 14);
-		panel.add(label_3);
+		JLabel labelEscMontoTotal = new JLabel("");
+		labelEscMontoTotal.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		labelEscMontoTotal.setBounds(134, 26, 152, 14);
+		panelCalculoVenta.add(labelEscMontoTotal);
 		
-		textField_3 = new JTextField();
-		textField_3.setColumns(10);
-		textField_3.setBounds(131, 109, 290, 20);
-		panel.add(textField_3);
+		JLabel labelEscImpuesto = new JLabel("");
+		labelEscImpuesto.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		labelEscImpuesto.setBounds(134, 51, 152, 14);
+		panelCalculoVenta.add(labelEscImpuesto);
+		
+		JLabel labelEscTotalVenta = new JLabel("");
+		labelEscTotalVenta.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		labelEscTotalVenta.setBounds(134, 76, 152, 14);
+		panelCalculoVenta.add(labelEscTotalVenta);
+		
+		JLabel lblNewLabel = new JLabel("");
+		lblNewLabel.setIcon(new ImageIcon(Facturar.class.getResource("/imagenes/Webp.net-resizeimage_ToltalVenta1.png")));
+		lblNewLabel.setBounds(476, 13, 100, 103);
+		panelCalculoVenta.add(lblNewLabel);
+		
+		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		btnCancelar.setBounds(674, 561, 97, 25);
+		contentPane.add(btnCancelar);
+		
+		JButton btnFacturar = new JButton("Facturar");
+		btnFacturar.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		btnFacturar.setBounds(565, 561, 97, 25);
+		contentPane.add(btnFacturar);
 	}
 }
