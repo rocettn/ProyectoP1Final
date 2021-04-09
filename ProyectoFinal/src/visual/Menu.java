@@ -108,7 +108,7 @@ public class Menu extends JFrame {
 		JMenuItem mntmNewMenuItem_1 = new JMenuItem("Registro Cliente");
 		mntmNewMenuItem_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Cliente c = new Cliente();
+				ClienteRegistrar c = new ClienteRegistrar();
 				c.setVisible(true);
 			}
 		});
@@ -133,6 +133,12 @@ public class Menu extends JFrame {
 		menuBar.add(mnNewMenu_2);
 		
 		JMenuItem mntmNewMenuItem_5 = new JMenuItem("Facturaci\u00F3n");
+		mntmNewMenuItem_5.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Facturar f = new Facturar();
+				f.setVisible(true);
+			}
+		});
 		mnNewMenu_2.add(mntmNewMenuItem_5);
 		
 		JMenuItem mntmNewMenuItem_6 = new JMenuItem("Lista de Facturas");
@@ -151,6 +157,12 @@ public class Menu extends JFrame {
 		mnNewMenu_1.add(mntmNewMenuItem_7);
 		
 		JMenuItem mntmNewMenuItem_8 = new JMenuItem("Lista de Cliente");
+		mntmNewMenuItem_8.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ListarCliente m = new ListarCliente();
+				m.setVisible(true);
+			}
+		});
 		mnNewMenu_1.add(mntmNewMenuItem_8);
 		
 		JMenuItem mntmNewMenuItem_9 = new JMenuItem("Lista de componentes");

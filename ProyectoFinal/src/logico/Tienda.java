@@ -24,7 +24,7 @@ public class Tienda implements Serializable{
 	private int discoDuroT = 0;
 	private float balanceTotalAc = 0;
 
-	public Tienda() {
+	private Tienda() { //Por el patron Singleton se coloca privado.
 		super();
 		this.personasTienda = new ArrayList<Persona>();
 		this.componentesTienda = new ArrayList<Componente>();
@@ -376,12 +376,13 @@ public class Tienda implements Serializable{
 	public float CreditoClienteTienda(Cliente client) {
 		float auxCliente = 0;
 		for(Venta venTem : ventasTienda) {
-			if(venTem.getClienteVenta().cedula.equalsIgnoreCase(client.cedula)) {
+			if(venTem.getClienteVenta().cedula.equalsIgnoreCase(client.getCedula())) {
 				auxCliente += venTem.getMontoTotal();
 			}
 		}
 
-		return client.getCreditoCliente() - auxCliente;
+		//return client.getCreditoCliente() - auxCliente;
+		return auxCliente;
 	}
 
 	public void restarCantidadComponente(Componente compoT, int cantidadCompo) {

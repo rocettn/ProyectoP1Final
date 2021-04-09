@@ -1,6 +1,7 @@
 package visual;
 
 import java.awt.BorderLayout;
+
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -12,6 +13,9 @@ import javax.swing.border.TitledBorder;
 import javax.swing.UIManager;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import logico.Cliente;
+import logico.Persona;
+import logico.Tienda;
 
 import java.awt.Font;
 import javax.swing.JTextField;
@@ -20,9 +24,9 @@ import javax.swing.JRadioButton;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import logico.*;
+import java.awt.Toolkit;
 
-public class Cliente extends JFrame {
+public class ClienteRegistrar extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField textNombreCliente;
@@ -50,7 +54,8 @@ public class Cliente extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Cliente() {
+	public ClienteRegistrar() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(ClienteRegistrar.class.getResource("/imagenes/MicrosoftTeams-image.png")));
 		setTitle("R&M");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 620, 481);
@@ -109,7 +114,7 @@ public class Cliente extends JFrame {
 		panelInfoGeneral.add(textDirecCliente);
 		
 		JLabel lblImagInfCliente = new JLabel("");
-		lblImagInfCliente.setIcon(new ImageIcon(Cliente.class.getResource("/imagenes/Webp.net-resizeimage-ICliente.png")));
+		lblImagInfCliente.setIcon(new ImageIcon(ClienteRegistrar.class.getResource("/imagenes/Webp.net-resizeimage-ICliente.png")));
 		lblImagInfCliente.setBounds(427, 11, 143, 128);
 		panelInfoGeneral.add(lblImagInfCliente);
 		
@@ -122,7 +127,7 @@ public class Cliente extends JFrame {
 		contentPane.add(panelCredPregun);
 		
 		JLabel lblImagenSigno = new JLabel("");
-		lblImagenSigno.setIcon(new ImageIcon(Cliente.class.getResource("/imagenes/Webp.net-resizeimagePregunta.png")));
+		lblImagenSigno.setIcon(new ImageIcon(ClienteRegistrar.class.getResource("/imagenes/Webp.net-resizeimagePregunta.png")));
 		lblImagenSigno.setBounds(485, 11, 85, 78);
 		panelCredPregun.add(lblImagenSigno);
 		
@@ -174,7 +179,7 @@ public class Cliente extends JFrame {
 		panelDetalleCred.add(textCredito);
 		
 		JLabel lblImagCredito = new JLabel("");
-		lblImagCredito.setIcon(new ImageIcon(Cliente.class.getResource("/imagenes/Webp.net-resizeimage cred.png")));
+		lblImagCredito.setIcon(new ImageIcon(ClienteRegistrar.class.getResource("/imagenes/Webp.net-resizeimage cred.png")));
 		lblImagCredito.setBounds(454, 11, 116, 100);
 		panelDetalleCred.add(lblImagCredito);
 		
@@ -196,16 +201,17 @@ public class Cliente extends JFrame {
 				String telefono = textTelCliente.getText();
 				String cedula = textCedulaCliente.getText();
 				String direccion = textDirecCliente.getText();
-				float credito = Float.parseFloat(textCredito.getText());
 				//public Cliente(String nombre, String telefono, String cedula, String direccion, 
 						//float creditoCliente)
 				if(rdbtnSi.isSelected()) {
-					persTem = new logico.Cliente(nombreCliente, telefono, cedula, direccion, credito);
+					float credito = Float.parseFloat(textCredito.getText());
+					persTem = new Cliente(nombreCliente, telefono, cedula, direccion, credito);
+					Tienda.getInstance().insertarPersona(persTem);
 				}else {
-					persTem = new logico.Cliente(nombreCliente, telefono, cedula, direccion, 0);
+					persTem = new Cliente(nombreCliente, telefono, cedula, direccion, 0);
+					Tienda.getInstance().insertarPersona(persTem);
 					
 				}
-				Tienda.getInstance().insertarPersona(persTem);
 				JOptionPane.showMessageDialog(null, "Se ha registrado satisfactoriamente el cliente");
 				dispose();
 			}
@@ -217,9 +223,9 @@ public class Cliente extends JFrame {
 		JButton btnClienteExis = new JButton("Elegir Cliente Existente");
 		btnClienteExis.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//ListarCliente lc = new ListarCliente(0);
+				ListarCliente lc = new ListarCliente();
 				dispose();
-				//lc.setVisible(true);
+				lc.setVisible(true);
 			}
 		});
 		btnClienteExis.setFont(new Font("Tahoma", Font.PLAIN, 12));
@@ -235,7 +241,7 @@ public class Cliente extends JFrame {
 		contentPane.add(panelLogo);
 		
 		JLabel labelLogoCliente = new JLabel("");
-		labelLogoCliente.setIcon(new ImageIcon(Cliente.class.getResource("/imagenes/Webp.net-resizeimage_logoLogIn.png")));
+		labelLogoCliente.setIcon(new ImageIcon(ClienteRegistrar.class.getResource("/imagenes/Webp.net-resizeimage_logoLogIn.png")));
 		labelLogoCliente.setBounds(160, 11, 235, 100);
 		panelLogo.add(labelLogoCliente);
 	}

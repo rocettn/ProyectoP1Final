@@ -9,9 +9,9 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
-
+import logico.*;
 import logico.Tienda;
-
+import logico.Cliente;
 import java.awt.SystemColor;
 import java.awt.Color;
 import javax.swing.JLabel;
@@ -29,7 +29,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import logico.*;
+
 
 import javax.swing.JTable;
 import java.awt.event.ActionListener;
@@ -49,18 +49,6 @@ public class ListarCliente extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					ListarCliente frame = new ListarCliente();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	/**
 	 * Create the frame.
@@ -112,7 +100,7 @@ public class ListarCliente extends JFrame {
 		panel.add(scrollPane);
 		
 		modelCliente = new DefaultTableModel();
-		String[] columns = {"Cedula","Tipo","Nombre","Telefono","Direccion", "Crédito Pendiente"}; 
+		String[] columns = {"Cedula","Nombre","Telefono","Direccion", "Crédito Pendiente"}; 
 		modelCliente.setColumnIdentifiers(columns);
 		table = new JTable();
 		table.addMouseListener(new MouseAdapter() {
@@ -171,32 +159,34 @@ public class ListarCliente extends JFrame {
 				if(opcion==JOptionPane.OK_OPTION) {
 					Tienda.getInstance().PagarDeudaCliente(auxiliar);
 					JOptionPane.showMessageDialog(null, "Pago realizado satisfactoriamente");
-					//CargarTabla();
+					loadTabla();
 				}else {
-					//CargarTabla();
+					loadTabla();
 				}
 			}
 		});
 		btnPagarDeuda.setBounds(436, 316, 89, 23);
 		contentPane.add(btnPagarDeuda);
+		loadTabla();
 	}
 	
 
-	private void CargarTabla() {
-/*		modelCliente.setRowCount(0);
+	private void loadTabla() {
+		modelCliente.setRowCount(0);
 		filaCliente = new Object[modelCliente.getColumnCount()];
 		for(Persona p : Tienda.getInstance().getPersonasTienda()){
-			if(p instanceof logico.Cliente) {
+			if(p instanceof Cliente) {
 			Cliente c = (Cliente) p;	
 			filaCliente[0] = c.getCedula();
 			filaCliente[1] = c.getNombre();
 			filaCliente[2] = c.getTelefono();
 			filaCliente[3] = c.getDireccion();
-			filaCliente[4] = c.getCreditoCliente() - Tienda.getInstance().CreditoClienteTienda(c);
+			filaCliente[4] = Tienda.getInstance().CreditoClienteTienda(c);
 			modelCliente.addRow(filaCliente);
 		}
 		
 	}
-	}*/
 	}
+	
+	
 }
