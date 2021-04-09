@@ -57,6 +57,8 @@ public class Facturar extends JFrame {
 	private static ArrayList<Componente>mComponente = new ArrayList<Componente>();
 	private static Componente compon = null;
 	private static int cant = 0;
+	private JTextField textIdVendedor;
+	private JLabel labelVendedorGe;
 
 	
 	public Facturar(Venta rm) {
@@ -98,10 +100,10 @@ public class Facturar extends JFrame {
 		labelFecha.setBounds(41, 22, 87, 14);
 		panelInfoGeneral.add(labelFecha);
 		
-		JLabel lblVendedor = new JLabel("Vendedor:");
-		lblVendedor.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblVendedor.setBounds(41, 47, 87, 14);
-		panelInfoGeneral.add(lblVendedor);
+		JLabel lblIDVendedor = new JLabel("ID Vendedor:");
+		lblIDVendedor.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblIDVendedor.setBounds(41, 47, 87, 14);
+		panelInfoGeneral.add(lblIDVendedor);
 		
 		JLabel lblId = new JLabel("ID:");
 		lblId.setFont(new Font("Tahoma", Font.PLAIN, 12));
@@ -137,25 +139,38 @@ public class Facturar extends JFrame {
 		JButton btnBuscarVendedor = new JButton("Buscar Vendedor");
 		btnBuscarVendedor.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				/*
-				 * Vendedor mVendedor; mVendedor=
-				 * Tienda.getInstance().buscarVendedorTienda(textField.getText()); if(mVendedor
-				 * != null) { btnBuscarVendedor.setVisible(false); textField.setEditable(false);
-				 * textField.setText(mVendedor.getNombre()); //
-				 * labelVendedorGe.setText(mVendedor.getNombre());
-				 * 
-				 * }
-				 * 
-				 * else { textField.setEditable(true); }
-				 */
+				
+				  Vendedor mVendedor; 
+				  mVendedor = Tienda.getInstance().buscarVendedorTienda(textIdVendedor.getText());
+				  if(mVendedor != null) { 
+					  btnBuscarVendedor.setVisible(false); 
+					  textIdVendedor.setEditable(false);
+					  labelVendedorGe.setText(mVendedor.getNombre());
+				  
+				  }
+				  
+				  else { 
+					  labelVendedorGe.setFocusable(true); 
+					  }
+				 
 			}
 		});
 		btnBuscarVendedor.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		btnBuscarVendedor.setBounds(424, 47, 128, 23);
+		btnBuscarVendedor.setBounds(428, 43, 131, 23);
 		panelInfoGeneral.add(btnBuscarVendedor);
 		
-		JLabel labelVendedorGe = new JLabel("");
-		labelVendedorGe.setBounds(130, 47, 263, 14);
+		textIdVendedor = new JTextField();
+		textIdVendedor.setColumns(10);
+		textIdVendedor.setBounds(130, 47, 49, 20);
+		panelInfoGeneral.add(textIdVendedor);
+		
+		JLabel lblVendedor = new JLabel("Vendedor:");
+		lblVendedor.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblVendedor.setBounds(189, 48, 87, 14);
+		panelInfoGeneral.add(lblVendedor);
+		
+	    labelVendedorGe = new JLabel("");
+		labelVendedorGe.setBounds(252, 47, 166, 14);
 		panelInfoGeneral.add(labelVendedorGe);
 		labelVendedorGe.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		
