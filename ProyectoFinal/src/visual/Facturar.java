@@ -1,6 +1,7 @@
 package visual;
 
 import java.awt.BorderLayout;
+
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -13,11 +14,17 @@ import javax.swing.ImageIcon;
 import javax.swing.UIManager;
 import java.awt.SystemColor;
 import javax.swing.border.TitledBorder;
+
+import logico.Cliente;
+import logico.Tienda;
+
 import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class Facturar extends JFrame {
 
@@ -25,23 +32,13 @@ public class Facturar extends JFrame {
 	private JTextField textIdFactura;
 	private JTextField textCantidadF;
 	private JTable tablaEspComp;
+	private JTextField textIDCliente;
+	private static Cliente clienteTienda = null;
+	private JButton buttonBuscarCliente;
 
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Facturar frame = new Facturar();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
 	/**
 	 * Create the frame.
 	 */
@@ -49,18 +46,18 @@ public class Facturar extends JFrame {
 		setTitle("R&M");
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Facturar.class.getResource("/imagenes/MicrosoftTeams-image.png")));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 801, 641);
+		setBounds(100, 100, 801, 732);
 		contentPane = new JPanel();
 		contentPane.setBackground(UIManager.getColor("CheckBox.background"));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
+		setLocationRelativeTo(null);
 		JPanel panelLogo = new JPanel();
 		panelLogo.setLayout(null);
 		panelLogo.setForeground(new Color(204, 204, 204));
 		panelLogo.setBackground(new Color(0, 153, 153));
-		panelLogo.setBounds(10, 11, 183, 580);
+		panelLogo.setBounds(10, 11, 183, 671);
 		contentPane.add(panelLogo);
 		
 		JLabel lblIconLogo = new JLabel("");
@@ -71,77 +68,62 @@ public class Facturar extends JFrame {
 		JPanel panelInfoGeneral = new JPanel();
 		panelInfoGeneral.setLayout(null);
 		panelInfoGeneral.setForeground(new Color(204, 204, 204));
-		panelInfoGeneral.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Informaci\u00F3n General ", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		panelInfoGeneral.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Informaci\u00F3n General Factura", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		panelInfoGeneral.setBackground(SystemColor.menu);
-		panelInfoGeneral.setBounds(199, 11, 576, 150);
+		panelInfoGeneral.setBounds(203, 11, 572, 109);
 		contentPane.add(panelInfoGeneral);
 		
 		JLabel labelFecha = new JLabel("Fecha:");
 		labelFecha.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		labelFecha.setBounds(42, 37, 87, 14);
+		labelFecha.setBounds(41, 22, 87, 14);
 		panelInfoGeneral.add(labelFecha);
 		
 		JLabel lblVendedor = new JLabel("Vendedor:");
 		lblVendedor.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblVendedor.setBounds(42, 62, 87, 14);
+		lblVendedor.setBounds(41, 47, 87, 14);
 		panelInfoGeneral.add(lblVendedor);
-		
-		JLabel lblCliente = new JLabel("Cliente");
-		lblCliente.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblCliente.setBounds(42, 87, 87, 14);
-		panelInfoGeneral.add(lblCliente);
 		
 		JLabel lblId = new JLabel("ID:");
 		lblId.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblId.setBounds(42, 112, 87, 14);
+		lblId.setBounds(41, 72, 87, 14);
 		panelInfoGeneral.add(lblId);
 		
 		textIdFactura = new JTextField();
 		textIdFactura.setColumns(10);
-		textIdFactura.setBounds(131, 109, 121, 20);
+		textIdFactura.setBounds(130, 72, 121, 20);
 		panelInfoGeneral.add(textIdFactura);
 		
 		JLabel lblFechaGenerada = new JLabel("");
 		lblFechaGenerada.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblFechaGenerada.setBounds(131, 38, 149, 14);
+		lblFechaGenerada.setBounds(130, 23, 149, 14);
 		panelInfoGeneral.add(lblFechaGenerada);
 		
 		JLabel lblHora = new JLabel("Hora:");
 		lblHora.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblHora.setBounds(301, 37, 87, 14);
+		lblHora.setBounds(300, 22, 87, 14);
 		panelInfoGeneral.add(lblHora);
 		
 		JLabel lblHoraGenerada = new JLabel("");
 		lblHoraGenerada.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblHoraGenerada.setBounds(398, 37, 155, 14);
+		lblHoraGenerada.setBounds(397, 22, 155, 14);
 		panelInfoGeneral.add(lblHoraGenerada);
 		
 		JLabel labelVendedorGe = new JLabel("");
 		labelVendedorGe.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		labelVendedorGe.setBounds(131, 63, 263, 14);
+		labelVendedorGe.setBounds(130, 48, 263, 14);
 		panelInfoGeneral.add(labelVendedorGe);
-		
-		JLabel labelClienteGen = new JLabel("");
-		labelClienteGen.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		labelClienteGen.setBounds(131, 87, 263, 14);
-		panelInfoGeneral.add(labelClienteGen);
 		
 		JButton btnBuscarVendedor = new JButton("Buscar Vendedor");
 		btnBuscarVendedor.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		btnBuscarVendedor.setBounds(425, 62, 128, 23);
+		btnBuscarVendedor.setBounds(424, 47, 128, 23);
 		panelInfoGeneral.add(btnBuscarVendedor);
-		
-		JButton btnBuscarCliente = new JButton("Buscar Cliente");
-		btnBuscarCliente.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		btnBuscarCliente.setBounds(425, 87, 128, 23);
-		panelInfoGeneral.add(btnBuscarCliente);
 		
 		JPanel panelSeleccionarComponente = new JPanel();
 		panelSeleccionarComponente.setLayout(null);
 		panelSeleccionarComponente.setForeground(new Color(204, 204, 204));
 		panelSeleccionarComponente.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Seleccionar Componente", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		panelSeleccionarComponente.setBackground(SystemColor.menu);
-		panelSeleccionarComponente.setBounds(199, 162, 576, 116);
+		panelSeleccionarComponente.setBounds(199, 250, 576, 122);
 		contentPane.add(panelSeleccionarComponente);
 		
 		JLabel lblCantidad = new JLabel("Cantidad:");
@@ -174,7 +156,7 @@ public class Facturar extends JFrame {
 		panel.setForeground(new Color(204, 204, 204));
 		panel.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Especificaciones de componentes a comprar:", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		panel.setBackground(SystemColor.menu);
-		panel.setBounds(199, 281, 576, 150);
+		panel.setBounds(199, 377, 576, 155);
 		contentPane.add(panel);
 		
 		JScrollPane scrollPaneEspComp = new JScrollPane();
@@ -189,7 +171,7 @@ public class Facturar extends JFrame {
 		panelCalculoVenta.setForeground(new Color(204, 204, 204));
 		panelCalculoVenta.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "C\u00E1lculo de venta:", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		panelCalculoVenta.setBackground(SystemColor.menu);
-		panelCalculoVenta.setBounds(199, 432, 576, 116);
+		panelCalculoVenta.setBounds(199, 538, 576, 116);
 		contentPane.add(panelCalculoVenta);
 		
 		JLabel lblMontoTotal = new JLabel("Monto Total:");
@@ -228,13 +210,109 @@ public class Facturar extends JFrame {
 		panelCalculoVenta.add(lblNewLabel);
 		
 		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+			}
+		});
 		btnCancelar.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		btnCancelar.setBounds(674, 561, 97, 25);
+		btnCancelar.setBounds(678, 657, 97, 25);
 		contentPane.add(btnCancelar);
 		
 		JButton btnFacturar = new JButton("Facturar");
 		btnFacturar.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		btnFacturar.setBounds(565, 561, 97, 25);
+		btnFacturar.setBounds(569, 657, 97, 25);
 		contentPane.add(btnFacturar);
+		
+		JPanel panelInfoCliente = new JPanel();
+		panelInfoCliente.setLayout(null);
+		panelInfoCliente.setForeground(new Color(204, 204, 204));
+		panelInfoCliente.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Informaci\u00F3n General Cliente", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		panelInfoCliente.setBackground(SystemColor.menu);
+		panelInfoCliente.setBounds(203, 123, 576, 122);
+		contentPane.add(panelInfoCliente);
+		
+		JLabel labelIDCliente = new JLabel("ID Cliente:");
+		labelIDCliente.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		labelIDCliente.setBounds(39, 23, 87, 14);
+		panelInfoCliente.add(labelIDCliente);
+		
+		JLabel lblNombre = new JLabel("Cliente:");
+		lblNombre.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblNombre.setBounds(39, 48, 87, 14);
+		panelInfoCliente.add(lblNombre);
+		
+		JLabel lblTelCliente = new JLabel("Tel\u00E9fono:");
+		lblTelCliente.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblTelCliente.setBounds(39, 73, 87, 14);
+		panelInfoCliente.add(lblTelCliente);
+		
+		JLabel labelNombreCliente = new JLabel("");
+		labelNombreCliente.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		labelNombreCliente.setBounds(128, 49, 263, 14);
+		panelInfoCliente.add(labelNombreCliente);
+		
+		JLabel labelTelefonoCliente = new JLabel("");
+		labelTelefonoCliente.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		labelTelefonoCliente.setBounds(128, 73, 263, 14);
+		panelInfoCliente.add(labelTelefonoCliente);
+		
+		buttonBuscarCliente = new JButton("Buscar Cliente");
+		buttonBuscarCliente.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ClienteRegistrar cr = new ClienteRegistrar();
+				cr.setVisible(true);
+				/*
+				 * Cliente mClientes; mClientes =
+				 * Tienda.getInstance().buscarClienteTienda(textIDCliente.getText());
+				 * if(mClientes != null) { buttonBuscarCliente.setVisible(false);
+				 * textIDCliente.setEditable(false);
+				 * labelNombreCliente.setText(mClientes.getNombre());
+				 * labelTelefonoCliente.setText(mClientes.getTelefono());
+				 * labelDireccionCliente.setText(mClientes.getDireccion());
+				 * 
+				 * }
+				 * 
+				 * else { labelNombreCliente.setEditable(true);
+				 * labelTelefonoCliente.setEditable(true);
+				 * labelDireccionCliente.setEditable(true);
+				 * 
+				 * }
+				 */
+			}
+		});
+		buttonBuscarCliente.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		buttonBuscarCliente.setBounds(422, 73, 128, 23);
+		panelInfoCliente.add(buttonBuscarCliente);
+		
+		textIDCliente = new JTextField();
+		textIDCliente.setColumns(10);
+		textIDCliente.setBounds(128, 21, 121, 20);
+		panelInfoCliente.add(textIDCliente);
+		
+		JLabel labelDireCl = new JLabel("Direcci\u00F3n:");
+		labelDireCl.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		labelDireCl.setBounds(39, 98, 87, 14);
+		panelInfoCliente.add(labelDireCl);
+		
+		JLabel labelDireccionCliente = new JLabel("");
+		labelDireccionCliente.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		labelDireccionCliente.setBounds(128, 98, 263, 14);
+		panelInfoCliente.add(labelDireccionCliente);
+	}
+	
+	public static void loadCliente(Cliente c) {
+		
+		
+		/*
+		 * clienteTienda = c; textIDCliente.(c.getText());
+		 * labelNombreCliente.setText(c.getNombre());
+		 * labelTelefonoCliente.setText(c.getTelefono());
+		 * labelDireccionCliente.setText(c.getDireccion()); CreditoClienteTienda(c));
+		 * buttonBuscarCliente.setVisible(false);
+		 */
+		 
+		 
+		
 	}
 }

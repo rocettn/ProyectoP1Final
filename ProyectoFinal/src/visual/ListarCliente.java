@@ -2,6 +2,7 @@ package visual;
 
 import java.awt.BorderLayout;
 
+
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -9,9 +10,10 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
-import logico.*;
 import logico.Tienda;
 import logico.Cliente;
+import logico.Venta;
+import logico.Persona;
 import java.awt.SystemColor;
 import java.awt.Color;
 import javax.swing.JLabel;
@@ -34,6 +36,7 @@ import java.awt.event.MouseEvent;
 import javax.swing.JTable;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+
 
 public class ListarCliente extends JFrame {
 
@@ -167,6 +170,16 @@ public class ListarCliente extends JFrame {
 		});
 		btnPagarDeuda.setBounds(436, 316, 89, 23);
 		contentPane.add(btnPagarDeuda);
+		
+		JButton btnElegir = new JButton("Elegir");
+		btnElegir.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Facturar.loadCliente(auxiliar);
+				dispose();
+			}
+		});
+		btnElegir.setBounds(337, 316, 89, 23);
+		contentPane.add(btnElegir);
 		loadTabla();
 	}
 	
@@ -187,6 +200,4 @@ public class ListarCliente extends JFrame {
 		
 	}
 	}
-	
-	
 }
