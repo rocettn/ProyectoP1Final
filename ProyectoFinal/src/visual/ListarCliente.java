@@ -3,6 +3,7 @@ package visual;
 import java.awt.BorderLayout;
 
 
+
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -45,9 +46,10 @@ public class ListarCliente extends JFrame {
 	private JTable table;
 	public static DefaultTableModel modelCliente;
 	private int modelf = -1;
-	private static logico.Cliente auxiliar = null;
+	private static Cliente auxiliar = null;
 	private JButton btnPagarDeuda;
 	public static Object[] filaCliente;
+	private JButton btnElegir;
 
 	/**
 	 * Launch the application.
@@ -113,20 +115,17 @@ public class ListarCliente extends JFrame {
 				int modelrow = table.convertRowIndexToModel(seleccionado);
 				if(modelf==0) {
 				if(seleccionado!=-1){
-					//btnSeleccionar.setEnabled(true);
-					//btnCrear.setEnabled(false);
+					btnElegir.setEnabled(true);
 					btnPagarDeuda.setEnabled(true);
 					auxiliar = Tienda.getInstance().buscarClienteTienda((String)modelCliente.getValueAt(modelrow, 0));
 					
 					
 				}else{	
-					//btnSeleccionar.setEnabled(false);
+					btnElegir.setEnabled(false);
 					btnPagarDeuda.setEnabled(false);
-					//btnCrear.setEnabled(true);
 					}
 				}else {
-					//btnSeleccionar.setEnabled(false);
-					//btnCrear.setEnabled(false);
+					btnElegir.setEnabled(false);
 					btnPagarDeuda.setEnabled(true);
 				}
 				
@@ -171,7 +170,7 @@ public class ListarCliente extends JFrame {
 		btnPagarDeuda.setBounds(436, 316, 89, 23);
 		contentPane.add(btnPagarDeuda);
 		
-		JButton btnElegir = new JButton("Elegir");
+		btnElegir = new JButton("Elegir");
 		btnElegir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Facturar.loadCliente(auxiliar);

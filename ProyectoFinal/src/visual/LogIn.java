@@ -220,11 +220,6 @@ public class LogIn extends JFrame {
 		lblLogo.setBounds(207, 13, 300, 191);
 		contentPane.add(lblLogo);
 
-		//JLabel lblmensajePass = new JLabel(""); 
-		//lblmensajePass.setBounds(207, 338, 300, 25); 
-		//contentPane.add(lblmensajePass); 
-		//setLocationRelativeTo(null);
-
 		JButton botonIngresar = new JButton("Ingresar");
 		botonIngresar.addMouseListener(new MouseAdapter() {
 			@Override
@@ -245,22 +240,7 @@ public class LogIn extends JFrame {
 				} 
 			}
 		});
-		/*
-		 * botonIngresar.addActionListener(new ActionListener() { public void
-		 * actionPerformed(ActionEvent e) {
-		 * if(Tienda.getInstance().inicioDeSesionEnLogin(textoUsuario.getText(),
-		 * textoPassword.getText())) {
-		 * 
-		 * Menu frame = new Menu(); dispose(); frame.setVisible(true);
-		 * 
-		 * }else if(textoUsuario.getText().equalsIgnoreCase("Usuario") ||
-		 * textoUsuario.getText().equalsIgnoreCase("") ||
-		 * textoPassword.getText().equalsIgnoreCase("") ||
-		 * textoPassword.getText().equalsIgnoreCase("Contraseña")){
-		 * lblmensajePass.setText("Falta informacion. Favor de completar."); }else{
-		 * lblmensajePass.setText("Usuario o contrasena incorrecta. Intentar de nuevo."
-		 * ); } } });
-		 */
+
 		botonIngresar.setForeground(SystemColor.controlDkShadow);
 		botonIngresar.setFont(new Font("Tahoma", Font.BOLD, 17));
 		botonIngresar.setBounds(288, 429, 148, 40);
@@ -271,10 +251,6 @@ public class LogIn extends JFrame {
 		contentPane.add(lblmensajePass);
 
 
-		/*
-		 * //JLabel lblmensajePass = new JLabel(""); lblmensajePass.setBounds(207, 338,
-		 * 300, 25); contentPane.add(lblmensajePass); setLocationRelativeTo(null);
-		 */
 
 	}
 }

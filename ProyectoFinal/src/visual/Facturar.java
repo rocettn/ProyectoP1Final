@@ -2,6 +2,7 @@ package visual;
 
 import java.awt.BorderLayout;
 
+
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -16,7 +17,11 @@ import java.awt.SystemColor;
 import javax.swing.border.TitledBorder;
 
 import logico.Cliente;
+import logico.Combo;
+import logico.Componente;
+import logico.Venta;
 import logico.Tienda;
+import logico.Vendedor;
 
 import java.awt.Font;
 import javax.swing.JTextField;
@@ -24,6 +29,10 @@ import javax.swing.JButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.awt.event.ActionEvent;
 
 public class Facturar extends JFrame {
@@ -32,16 +41,27 @@ public class Facturar extends JFrame {
 	private JTextField textIdFactura;
 	private JTextField textCantidadF;
 	private JTable tablaEspComp;
-	private JTextField textIDCliente;
+	private static JTextField textCedulaCliente;
+	private static JLabel labelDireccionCliente;
+	private static JLabel labelNombreCliente;
+	private static JLabel labelTelefonoCliente;
 	private static Cliente clienteTienda = null;
-	private JButton buttonBuscarCliente;
+	private static JButton buttonBuscarCliente;
+	private static Venta auxili = null;
+	private int seleccionado = -1;
+	private static JLabel lblFechaGenerada;
+	public static JLabel lblHora;
+	private static JLabel lblHoraGenerada;
+	private static Combo comb = null;
+	private static ArrayList<Combo> combo = new ArrayList<Combo>(); 
+	private static ArrayList<Componente>mComponente = new ArrayList<Componente>();
+	private static Componente compon = null;
+	private static int cant = 0;
 
-	/**
-	 * Launch the application.
-	 */
-	/**
-	 * Create the frame.
-	 */
+	
+	public Facturar(Venta rm) {
+		this.auxili = rm;
+	}
 	public Facturar() {
 		setTitle("R&M");
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Facturar.class.getResource("/imagenes/MicrosoftTeams-image.png")));
@@ -93,30 +113,51 @@ public class Facturar extends JFrame {
 		textIdFactura.setBounds(130, 72, 121, 20);
 		panelInfoGeneral.add(textIdFactura);
 		
-		JLabel lblFechaGenerada = new JLabel("");
+		lblFechaGenerada = new JLabel("");
+		Calendar inicio = new GregorianCalendar();
+		inicio.setTime(new Date());
+		lblFechaGenerada.setText(""+inicio.get(Calendar.DAY_OF_MONTH)+ "-" +(1+(inicio.get(Calendar.MONTH)))+ "-" +inicio.get(Calendar.YEAR));
 		lblFechaGenerada.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblFechaGenerada.setBounds(130, 23, 149, 14);
 		panelInfoGeneral.add(lblFechaGenerada);
 		
-		JLabel lblHora = new JLabel("Hora:");
+		lblHora = new JLabel("Hora:");
 		lblHora.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblHora.setBounds(300, 22, 87, 14);
 		panelInfoGeneral.add(lblHora);
 		
-		JLabel lblHoraGenerada = new JLabel("");
+		lblHoraGenerada = new JLabel("");
+		Calendar time = new GregorianCalendar();
+		inicio.setTime(new Date());
+		lblHoraGenerada.setText(""+time.get(Calendar.HOUR_OF_DAY)+ ":" +(1+(inicio.get(Calendar.MINUTE)))+ ":" +inicio.get(Calendar.SECOND));
 		lblHoraGenerada.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblHoraGenerada.setBounds(397, 22, 155, 14);
 		panelInfoGeneral.add(lblHoraGenerada);
 		
-		JLabel labelVendedorGe = new JLabel("");
-		labelVendedorGe.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		labelVendedorGe.setBounds(130, 48, 263, 14);
-		panelInfoGeneral.add(labelVendedorGe);
-		
 		JButton btnBuscarVendedor = new JButton("Buscar Vendedor");
+		btnBuscarVendedor.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				/*
+				 * Vendedor mVendedor; mVendedor=
+				 * Tienda.getInstance().buscarVendedorTienda(textField.getText()); if(mVendedor
+				 * != null) { btnBuscarVendedor.setVisible(false); textField.setEditable(false);
+				 * textField.setText(mVendedor.getNombre()); //
+				 * labelVendedorGe.setText(mVendedor.getNombre());
+				 * 
+				 * }
+				 * 
+				 * else { textField.setEditable(true); }
+				 */
+			}
+		});
 		btnBuscarVendedor.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		btnBuscarVendedor.setBounds(424, 47, 128, 23);
 		panelInfoGeneral.add(btnBuscarVendedor);
+		
+		JLabel labelVendedorGe = new JLabel("");
+		labelVendedorGe.setBounds(130, 47, 263, 14);
+		panelInfoGeneral.add(labelVendedorGe);
+		labelVendedorGe.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		
 		JPanel panelSeleccionarComponente = new JPanel();
 		panelSeleccionarComponente.setLayout(null);
@@ -137,12 +178,34 @@ public class Facturar extends JFrame {
 		panelSeleccionarComponente.add(textCantidadF);
 		
 		JButton btnEliminar = new JButton("Eliminar");
+		btnEliminar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(comb!=null) {
+					combo.remove(comb);
+					comb = null;
+				}else {
+					mComponente.remove(compon);
+					Tienda.getInstance().restarCantidadComponente(compon, cant);
+					compon = null;
+				}
+				//modelo.removeRow(seleccionado);
+				btnEliminar.setEnabled(false);
+				//loadTotal();
+				seleccionado = -1;
+			}
+		});
 		btnEliminar.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		btnEliminar.setBounds(323, 81, 128, 23);
+		btnEliminar.setBounds(361, 81, 112, 23);
 		panelSeleccionarComponente.add(btnEliminar);
 		
 		JButton buttonAgregarCompo = new JButton("Agregar Componente");
-		buttonAgregarCompo.setBounds(123, 81, 176, 23);
+		buttonAgregarCompo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//ListarComponente lc = new ListarComponente(null,5);
+				//lc.setVisible(true);
+			}
+		});
+		buttonAgregarCompo.setBounds(39, 81, 176, 23);
 		panelSeleccionarComponente.add(buttonAgregarCompo);
 		buttonAgregarCompo.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		
@@ -150,6 +213,11 @@ public class Facturar extends JFrame {
 		lblImagFac.setIcon(new ImageIcon(Facturar.class.getResource("/imagenes/Webp.net-resizeimage_factura1.png")));
 		lblImagFac.setBounds(483, 11, 87, 93);
 		panelSeleccionarComponente.add(lblImagFac);
+		
+		JButton btnAgregarCombo = new JButton("Agregar Combo");
+		btnAgregarCombo.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		btnAgregarCombo.setBounds(225, 82, 128, 23);
+		panelSeleccionarComponente.add(btnAgregarCombo);
 		
 		JPanel panel = new JPanel();
 		panel.setLayout(null);
@@ -220,6 +288,11 @@ public class Facturar extends JFrame {
 		contentPane.add(btnCancelar);
 		
 		JButton btnFacturar = new JButton("Facturar");
+		btnFacturar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				 
+			}
+		});
 		btnFacturar.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		btnFacturar.setBounds(569, 657, 97, 25);
 		contentPane.add(btnFacturar);
@@ -232,10 +305,10 @@ public class Facturar extends JFrame {
 		panelInfoCliente.setBounds(203, 123, 576, 122);
 		contentPane.add(panelInfoCliente);
 		
-		JLabel labelIDCliente = new JLabel("ID Cliente:");
-		labelIDCliente.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		labelIDCliente.setBounds(39, 23, 87, 14);
-		panelInfoCliente.add(labelIDCliente);
+		JLabel labelCedulaCl = new JLabel("C\u00E9dula Cliente:");
+		labelCedulaCl.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		labelCedulaCl.setBounds(39, 23, 87, 14);
+		panelInfoCliente.add(labelCedulaCl);
 		
 		JLabel lblNombre = new JLabel("Cliente:");
 		lblNombre.setFont(new Font("Tahoma", Font.PLAIN, 12));
@@ -285,10 +358,10 @@ public class Facturar extends JFrame {
 		buttonBuscarCliente.setBounds(422, 73, 128, 23);
 		panelInfoCliente.add(buttonBuscarCliente);
 		
-		textIDCliente = new JTextField();
-		textIDCliente.setColumns(10);
-		textIDCliente.setBounds(128, 21, 121, 20);
-		panelInfoCliente.add(textIDCliente);
+		textCedulaCliente = new JTextField();
+		textCedulaCliente.setColumns(10);
+		textCedulaCliente.setBounds(128, 21, 121, 20);
+		panelInfoCliente.add(textCedulaCliente);
 		
 		JLabel labelDireCl = new JLabel("Direcci\u00F3n:");
 		labelDireCl.setFont(new Font("Tahoma", Font.PLAIN, 12));
@@ -299,20 +372,21 @@ public class Facturar extends JFrame {
 		labelDireccionCliente.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		labelDireccionCliente.setBounds(128, 98, 263, 14);
 		panelInfoCliente.add(labelDireccionCliente);
+		
+		JButton buttonFacturarACredito = new JButton("Facturar a Cr\u00E9dito");
+		buttonFacturarACredito.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		buttonFacturarACredito.setBounds(420, 657, 139, 25);
+		contentPane.add(buttonFacturarACredito);
 	}
 	
 	public static void loadCliente(Cliente c) {
 		
-		
-		/*
-		 * clienteTienda = c; textIDCliente.(c.getText());
-		 * labelNombreCliente.setText(c.getNombre());
-		 * labelTelefonoCliente.setText(c.getTelefono());
-		 * labelDireccionCliente.setText(c.getDireccion()); CreditoClienteTienda(c));
-		 * buttonBuscarCliente.setVisible(false);
-		 */
+		  clienteTienda = c;
+		  textCedulaCliente.getText();
+		  labelNombreCliente.setText(c.getNombre());
+		  labelTelefonoCliente.setText(c.getTelefono());
+		  labelDireccionCliente.setText(c.getDireccion());
+		  buttonBuscarCliente.setVisible(false);
 		 
-		 
-		
 	}
 }

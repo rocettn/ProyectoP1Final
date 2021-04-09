@@ -22,6 +22,7 @@ public class Venta implements Serializable{
 	private Calendar hora;
 	private float montoTotal;
 	private Object[][]filas;
+	public static Venta venta = null;
 
 	public Venta(Persona clienteVenta, Vendedor vendedorVenta, ArrayList<Componente> componentesVenta,
 			ArrayList<Combo> combosVenta, String idFactura, Date fecha, Calendar hora, float montoTotal) {
@@ -107,6 +108,7 @@ public class Venta implements Serializable{
 	public void setMontoTotal(float montoTotal) {
 		this.montoTotal = montoTotal;
 	}
+	
 	
 	public float calcularSumaBeneficio() {
 		float total = 0;
