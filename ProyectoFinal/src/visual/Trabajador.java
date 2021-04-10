@@ -22,6 +22,7 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import logico.*;
+import java.awt.Toolkit;
 
 public class Trabajador extends JFrame {
 
@@ -60,6 +61,7 @@ public class Trabajador extends JFrame {
 	 * Create the frame.
 	 */
 	public Trabajador() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(Trabajador.class.getResource("/imagenes/MicrosoftTeams-image.png")));
 		setTitle("R&M");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 616, 505);

@@ -44,6 +44,7 @@ import java.awt.SystemColor;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Toolkit;
 
 
 
@@ -80,7 +81,7 @@ public class LogIn extends JFrame {
 					try {
 						fileOut = new FileOutputStream(f);
 						objectOut = new ObjectOutputStream(fileOut);
-						Persona a = new Administrador("Admin", "0", "1", "2", "Admin", "1234", "3");
+						Persona a = new Administrador("Admin", "0", "1", "2", "Admin", "3010", "3");
 						Tienda.getInstance().insertarPersona(a);
 						objectOut.writeObject(Tienda.getInstance());
 						fileOut.close();
@@ -113,6 +114,7 @@ public class LogIn extends JFrame {
 	 * Create the frame.
 	 */
 	public LogIn() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(LogIn.class.getResource("/imagenes/MicrosoftTeams-image.png")));
 		setResizable(false);
 		setUndecorated(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
