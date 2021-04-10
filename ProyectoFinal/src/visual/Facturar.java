@@ -59,11 +59,14 @@ public class Facturar extends JFrame {
 	private static int cant = 0;
 	private JTextField textIdVendedor;
 	private JLabel labelVendedorGe;
+	private static JLabel labelNombreCliente_1;
+	private static JLabel labelTelefonoCliente_1;
+	private static JLabel labelDireccionCliente_1;
 
 	
-	public Facturar(Venta rm) {
+	/*public Facturar(Venta rm) {
 		this.auxili = rm;
-	}
+	}*/
 	public Facturar() {
 		setTitle("R&M");
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Facturar.class.getResource("/imagenes/MicrosoftTeams-image.png")));
@@ -146,11 +149,13 @@ public class Facturar extends JFrame {
 					  btnBuscarVendedor.setVisible(false); 
 					  textIdVendedor.setEditable(false);
 					  labelVendedorGe.setText(mVendedor.getNombre());
-				  
+					  labelVendedorGe.setVisible(true);
+					  System.out.println("toyaqui");
 				  }
 				  
 				  else { 
-					  labelVendedorGe.setFocusable(true); 
+					  
+					 textIdVendedor.setEditable(true);
 					  }
 				 
 			}
@@ -335,15 +340,15 @@ public class Facturar extends JFrame {
 		lblTelCliente.setBounds(39, 73, 87, 14);
 		panelInfoCliente.add(lblTelCliente);
 		
-		JLabel labelNombreCliente = new JLabel("");
-		labelNombreCliente.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		labelNombreCliente.setBounds(128, 49, 263, 14);
-		panelInfoCliente.add(labelNombreCliente);
+		labelNombreCliente_1 = new JLabel("");
+		labelNombreCliente_1.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		labelNombreCliente_1.setBounds(128, 49, 263, 14);
+		panelInfoCliente.add(labelNombreCliente_1);
 		
-		JLabel labelTelefonoCliente = new JLabel("");
-		labelTelefonoCliente.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		labelTelefonoCliente.setBounds(128, 73, 263, 14);
-		panelInfoCliente.add(labelTelefonoCliente);
+		labelTelefonoCliente_1 = new JLabel("");
+		labelTelefonoCliente_1.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		labelTelefonoCliente_1.setBounds(128, 73, 263, 14);
+		panelInfoCliente.add(labelTelefonoCliente_1);
 		
 		buttonBuscarCliente = new JButton("Buscar Cliente");
 		buttonBuscarCliente.addActionListener(new ActionListener() {
@@ -383,10 +388,10 @@ public class Facturar extends JFrame {
 		labelDireCl.setBounds(39, 98, 87, 14);
 		panelInfoCliente.add(labelDireCl);
 		
-		JLabel labelDireccionCliente = new JLabel("");
-		labelDireccionCliente.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		labelDireccionCliente.setBounds(128, 98, 263, 14);
-		panelInfoCliente.add(labelDireccionCliente);
+		labelDireccionCliente_1 = new JLabel("");
+		labelDireccionCliente_1.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		labelDireccionCliente_1.setBounds(128, 98, 263, 14);
+		panelInfoCliente.add(labelDireccionCliente_1);
 		
 		JButton buttonFacturarACredito = new JButton("Facturar a Cr\u00E9dito");
 		buttonFacturarACredito.setFont(new Font("Tahoma", Font.PLAIN, 12));
@@ -395,12 +400,13 @@ public class Facturar extends JFrame {
 	}
 	
 	public static void loadCliente(Cliente c) {
-		
-		  clienteTienda = c;
-		  textCedulaCliente.getText();
-		  labelNombreCliente.setText(c.getNombre());
-		  labelTelefonoCliente.setText(c.getTelefono());
-		  labelDireccionCliente.setText(c.getDireccion());
+		System.out.println(""+c.getCedula());
+		 // clienteTienda = c;
+		 textCedulaCliente.setText(c.getCedula());
+		 textCedulaCliente.setEditable(false);
+		  labelNombreCliente_1.setText(c.getNombre());
+		  labelTelefonoCliente_1.setText(c.getTelefono());
+		  labelDireccionCliente_1.setText(c.getDireccion());
 		  buttonBuscarCliente.setVisible(false);
 		 
 	}

@@ -113,10 +113,11 @@ public class ListarCliente extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				int seleccionado = table.getSelectedRow();
 				int modelrow = table.convertRowIndexToModel(seleccionado);
-				if(modelf==0) {
-				if(seleccionado!=-1){
+				//if(modelf==0) {
+				if(modelrow!=-1){
 					btnElegir.setEnabled(true);
 					btnPagarDeuda.setEnabled(true);
+					System.out.println(modelrow);
 					auxiliar = Tienda.getInstance().buscarClienteTienda((String)modelCliente.getValueAt(modelrow, 0));
 					
 					
@@ -124,12 +125,12 @@ public class ListarCliente extends JFrame {
 					btnElegir.setEnabled(false);
 					btnPagarDeuda.setEnabled(false);
 					}
-				}else {
+				}/*else 
 					btnElegir.setEnabled(false);
 					btnPagarDeuda.setEnabled(true);
-				}
+				}*/
 				
-			}
+			//}
 		});
 				
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);

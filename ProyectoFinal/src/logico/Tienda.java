@@ -109,6 +109,7 @@ public class Tienda implements Serializable{
 
 	public void insertarPersona(Persona persona) {
 		this.personasTienda.add(persona);
+		System.out.println("Toy aqui linea 112");
 	}
 
 	public void insertarComponente(Componente componente) {
@@ -205,6 +206,7 @@ public class Tienda implements Serializable{
 			if(personasTienda.get(i) instanceof Vendedor && personasTienda.get(i).getCedula().equalsIgnoreCase(cedula)) {
 				aux = (Vendedor) personasTienda.get(i);
 				encontrado = true;
+				System.out.println("toyaqui");
 			}
 			i++;
 		}

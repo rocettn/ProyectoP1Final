@@ -44,18 +44,6 @@ public class Trabajador extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Trabajador frame = new Trabajador();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	/**
 	 * Create the frame.
@@ -224,9 +212,9 @@ public class Trabajador extends JFrame {
 				}else {
 				if(rdbtnVendedor.isSelected()) {
 					String idVend = textIDVend.getText();
-					auxiliar = new Vendedor(nombre, cedula, telefono, direccion, idVend, textUsuarioV.getText(), textContraV.getText());
+					auxiliar = new Vendedor(nombre, telefono,cedula, direccion, idVend, textUsuarioV.getText(), textContraV.getText());
 					Tienda.getInstance().insertarPersona(auxiliar);
-					//System.out.println("El empleado es: "+Tienda.getInstance().getPersonasTienda().get(0).getNombre()); Prueba
+					System.out.println("El empleado es: "+Tienda.getInstance().getPersonasTienda().get(1).getNombre() + "LA clase es " + auxiliar.getClass().toString());
 				}
 				
 				if(rdbtnAdministrador.isSelected()) {
