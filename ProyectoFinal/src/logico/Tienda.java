@@ -20,6 +20,7 @@ public class Tienda implements Serializable{
 	public static Tienda tienda = null;
 	private Persona usuario = null;
 	private int codigoCompo = 1;
+	private int codigoCombo = 1;
 	private int tajetaMadreT = 0;
 	private int memoriaRamT = 0;
 	private int microT = 0;
@@ -130,6 +131,14 @@ public class Tienda implements Serializable{
 	}
 
 
+	public int getCodigoCombo() {
+		return codigoCompo;
+	}
+
+	public void setCodigoCombo(int codigoCombo) {
+		this.codigoCombo = codigoCombo;
+	}
+
 	public int getTajetaMadreT() {
 		return tajetaMadreT;
 	}
@@ -195,6 +204,11 @@ public class Tienda implements Serializable{
 		this.ventasTienda.add(venta); 
 		setCodigoFactura(getCodigoFactura()+1);
 		
+	}
+	
+	public void insertarCombo(Combo combo) {
+		combosTienda.add(combo);
+		setCodigoCombo (getCodigoCombo ()+1);
 	}
 
 	/*
