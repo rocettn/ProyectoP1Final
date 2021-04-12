@@ -54,7 +54,6 @@ public class Facturar extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField textIdFactura;
-	private JTextField textCantidadF;
 	private static JTable tablaEspComp;
 	private static JTextField textCedulaCliente;
 	private static JLabel labelDireccionCliente;
@@ -169,19 +168,19 @@ public class Facturar extends JFrame {
 		labelFecha.setBounds(41, 22, 87, 14);
 		panelInfoGeneral.add(labelFecha);
 
-		JLabel lblIDVendedor = new JLabel("ID Vendedor:");
+		JLabel lblIDVendedor = new JLabel("C\u00E9dula Vendedor:");
 		lblIDVendedor.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblIDVendedor.setBounds(41, 47, 87, 14);
+		lblIDVendedor.setBounds(41, 47, 110, 14);
 		panelInfoGeneral.add(lblIDVendedor);
 
-		JLabel lblId = new JLabel("ID:");
+		JLabel lblId = new JLabel("ID Factura:");
 		lblId.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblId.setBounds(41, 72, 87, 14);
 		panelInfoGeneral.add(lblId);
 
 		textIdFactura = new JTextField();
 		textIdFactura.setColumns(10);
-		textIdFactura.setBounds(130, 72, 121, 20);
+		textIdFactura.setBounds(151, 69, 128, 20);
 		panelInfoGeneral.add(textIdFactura);
 
 		lblFechaGenerada = new JLabel("");
@@ -227,21 +226,21 @@ public class Facturar extends JFrame {
 			}
 		});
 		btnBuscarVendedor.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		btnBuscarVendedor.setBounds(428, 43, 131, 23);
+		btnBuscarVendedor.setBounds(421, 72, 131, 23);
 		panelInfoGeneral.add(btnBuscarVendedor);
 
 		textIdVendedor = new JTextField();
 		textIdVendedor.setColumns(10);
-		textIdVendedor.setBounds(130, 47, 49, 20);
+		textIdVendedor.setBounds(151, 44, 128, 20);
 		panelInfoGeneral.add(textIdVendedor);
 
 		JLabel lblVendedor = new JLabel("Vendedor:");
 		lblVendedor.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblVendedor.setBounds(189, 48, 87, 14);
+		lblVendedor.setBounds(300, 47, 67, 14);
 		panelInfoGeneral.add(lblVendedor);
 
 		labelVendedorGe = new JLabel("");
-		labelVendedorGe.setBounds(252, 47, 166, 14);
+		labelVendedorGe.setBounds(381, 47, 171, 14);
 		panelInfoGeneral.add(labelVendedorGe);
 		labelVendedorGe.setFont(new Font("Tahoma", Font.PLAIN, 12));
 
@@ -252,16 +251,6 @@ public class Facturar extends JFrame {
 		panelSeleccionarComponente.setBackground(SystemColor.menu);
 		panelSeleccionarComponente.setBounds(199, 250, 576, 122);
 		contentPane.add(panelSeleccionarComponente);
-
-		JLabel lblCantidad = new JLabel("Cantidad:");
-		lblCantidad.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblCantidad.setBounds(39, 41, 87, 14);
-		panelSeleccionarComponente.add(lblCantidad);
-
-		textCantidadF = new JTextField();
-		textCantidadF.setColumns(10);
-		textCantidadF.setBounds(128, 39, 290, 20);
-		panelSeleccionarComponente.add(textCantidadF);
 
 		JButton btnEliminar = new JButton("Eliminar");
 		btnEliminar.addActionListener(new ActionListener() {
@@ -281,7 +270,7 @@ public class Facturar extends JFrame {
 			}
 		});
 		btnEliminar.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		btnEliminar.setBounds(361, 81, 112, 23);
+		btnEliminar.setBounds(322, 49, 112, 23);
 		panelSeleccionarComponente.add(btnEliminar);
 
 		JButton buttonAgregarCompo = new JButton("Agregar Componente");
@@ -291,7 +280,7 @@ public class Facturar extends JFrame {
 				lc.setVisible(true);
 			}
 		});
-		buttonAgregarCompo.setBounds(150, 81, 176, 23);
+		buttonAgregarCompo.setBounds(65, 49, 176, 23);
 		panelSeleccionarComponente.add(buttonAgregarCompo);
 		buttonAgregarCompo.setFont(new Font("Tahoma", Font.PLAIN, 12));
 
@@ -499,12 +488,12 @@ public class Facturar extends JFrame {
 
 		labelNombreCliente_1 = new JLabel("");
 		labelNombreCliente_1.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		labelNombreCliente_1.setBounds(128, 49, 263, 14);
+		labelNombreCliente_1.setBounds(151, 49, 240, 14);
 		panelInfoCliente.add(labelNombreCliente_1);
 
 		labelTelefonoCliente_1 = new JLabel("");
 		labelTelefonoCliente_1.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		labelTelefonoCliente_1.setBounds(128, 73, 263, 14);
+		labelTelefonoCliente_1.setBounds(151, 73, 240, 14);
 		panelInfoCliente.add(labelTelefonoCliente_1);
 
 		buttonBuscarCliente = new JButton("Buscar Cliente");
@@ -520,7 +509,7 @@ public class Facturar extends JFrame {
 
 		textCedulaCliente = new JTextField();
 		textCedulaCliente.setColumns(10);
-		textCedulaCliente.setBounds(128, 21, 121, 20);
+		textCedulaCliente.setBounds(152, 20, 128, 20);
 		panelInfoCliente.add(textCedulaCliente);
 
 		JLabel labelDireCl = new JLabel("Direcci\u00F3n:");
@@ -530,7 +519,7 @@ public class Facturar extends JFrame {
 
 		labelDireccionCliente_1 = new JLabel("");
 		labelDireccionCliente_1.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		labelDireccionCliente_1.setBounds(128, 98, 263, 14);
+		labelDireccionCliente_1.setBounds(151, 98, 240, 14);
 		panelInfoCliente.add(labelDireccionCliente_1);
 
 		buttonFacturarACredito = new JButton("Facturar a Cr\u00E9dito");
