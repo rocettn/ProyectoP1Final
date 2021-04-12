@@ -110,6 +110,8 @@ public class Componente extends JFrame {
 		panelInfGeneral.add(lblModelo);
 		
 		textID = new JTextField();
+		textID.setEditable(false);
+		textID.setText("CP - " + Tienda.getInstance().getCodigoCompo());
 		textID.setBounds(98, 34, 174, 20);
 		panelInfGeneral.add(textID);
 		textID.setColumns(10);
@@ -322,11 +324,6 @@ public class Componente extends JFrame {
 				float precioCompraCom = Float.parseFloat(textPrecioCompra.getText());
 				float precioVentaCom = Float.parseFloat(textPrecioVenta.getText());
 
-				//Constructor TarjetaMadre
-				//	public TarjetaMadre(String id, String marca, String modelo, float precioVentaComponente,
-				//float precioCompraComponente, String numeroSerie, int cantMinimaComp, int cantMaximaComp,
-				//int cantActualComp, Microprocesador tipoConectorTM, MemoriaRam tipoMemoriaRamTM,
-				//DiscoDuro listaConexionesDD)
 				if(!textMarca.getText().isEmpty() || !textModelo.getText().isEmpty() ) {
 				if(rdbTarjetaMadre.isSelected()) {
 					compTem = new TarjetaMadre(idComponente, marcaCompo, modeloCompo, precioVentaCom, precioCompraCom, serie, cantMinComp, cantMaxComp, cantReal, textTipodeConector.getText(), textTipodeMemoriaRAM.getText(), textConexionesDD.getText());
@@ -352,13 +349,14 @@ public class Componente extends JFrame {
 					String tipConexion = textTipoConexionDD.getText();
 					compTem = new DiscoDuro(idComponente, marcaCompo, modeloCompo, precioVentaCom, precioCompraCom, serie, cantMinComp, cantMaxComp, cantReal, Float.parseFloat(textCapacidadAlmace.getText()), tipConexion);
 					Tienda.getInstance().insertarComponente(compTem);
-				}else {
-					limpiarCasilla();
-					JOptionPane.showMessageDialog(null,"Has agregado correctamente el componente","Información",JOptionPane.INFORMATION_MESSAGE);
-				    dispose();
 				}
+				limpiarCasilla();
+				JOptionPane.showMessageDialog(null,"Has agregado correctamente el componente","Información",JOptionPane.INFORMATION_MESSAGE);
+			    dispose();
 			  }
+				
 			}
+			
 		});
 		btnRegistrar.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		btnRegistrar.setBounds(366, 473, 123, 23);

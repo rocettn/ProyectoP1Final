@@ -136,7 +136,7 @@ public class ListarProveedor extends JFrame {
 				for(Componente a : proveedor.getComponentesSuple()) {
 					c.insertarComponenteCombo(a);
 				}
-				ListarComponente lc = new ListarComponente();
+				ListarComponente lc = new ListarComponente(c, 0);
 				lc.setVisible(true);
 			}
 		});

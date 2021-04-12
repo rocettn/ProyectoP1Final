@@ -3,6 +3,7 @@ package visual;
 import java.awt.BorderLayout;
 
 
+
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -50,12 +51,14 @@ public class ListarComponente extends JFrame {
 	private static Combo load = null;
 	private Combo comb = null;
 	private JButton btnInformacinComponente;
+	private JButton btnAgregar;
+	
 
-	public ListarComponente() {
+	public ListarComponente(Combo a,int b) {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(ListarComponente.class.getResource("/imagenes/MicrosoftTeams-image.png")));
 		setTitle("R&M");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 652, 386);
+		setBounds(100, 100, 652, 397);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(0, 153, 153));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -98,7 +101,7 @@ public class ListarComponente extends JFrame {
 		panel.add(scrollPane);
 
 		model = new DefaultTableModel();
-		String columns[] = {"Código","Tipo","Almacen","Precio","Modelo","Marca"};
+		String columns[] = {"ID","Tipo","Almacen","Precio","Modelo","Marca", "No. Serie"};
 		model.setColumnIdentifiers(columns);
 		table = new JTable();
 		table.addMouseListener(new MouseAdapter() {
@@ -108,7 +111,7 @@ public class ListarComponente extends JFrame {
 				modelFil = table.convertRowIndexToModel(sel);
 				if(load == null) {
 					if(sel!=-1 && (int)model.getValueAt(modelFil, 2)>0) {
-						//btnSeleccionar.setEnabled(true);
+						btnAgregar.setEnabled(true);
 						if('C'==((String)model.getValueAt(modelFil, 0)).charAt(0)) {
 							btnInformacinComponente.setEnabled(true);
 							comb = Tienda.getInstance().buscarComboTienda((String)model.getValueAt(modelFil, 0));
@@ -117,9 +120,12 @@ public class ListarComponente extends JFrame {
 						}
 					}else {
 						btnInformacinComponente.setEnabled(false);
+						btnAgregar.setEnabled(false);
 					}
 				}else {
+					btnAgregar.setEnabled(false);
 					btnInformacinComponente.setEnabled(false);
+					
 				}
 			}
 		});
@@ -132,7 +138,7 @@ public class ListarComponente extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
 				cargarTablaCompo();
-				loadTable(5);
+				//loadTable(5);
 			}
 
 		});
@@ -144,98 +150,84 @@ public class ListarComponente extends JFrame {
 		btnInformacinComponente = new JButton("Informaci\u00F3n Componente");
 		btnInformacinComponente.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ListarComponente lc = new ListarComponente();
+				ListarComponente lc = new ListarComponente(a, 0);
 				lc.setVisible(true);
 			}
 		});
 		btnInformacinComponente.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		btnInformacinComponente.setBounds(341, 317, 184, 23);
 		contentPane.add(btnInformacinComponente);
+		
+		btnAgregar = new JButton("Agregar");
+		btnAgregar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if('O'==((String)model.getValueAt(modelFil, 0)).charAt(0)) {
+					comb = Tienda.getInstance().buscarComboTienda((String)model.getValueAt(modelFil, 0));
+					SelecCantidad seleccionCantidad = new SelecCantidad(comb.getCodigoIdentCombo(),comb.getNombreCombo(),comb.obtenerPrecioVentaCombo(), 1);
+					dispose();
+					seleccionCantidad.setVisible(true);
+				}else {
+					Componente c = Tienda.getInstance().buscarComponenteTienda((String)model.getValueAt(modelFil, 0));
+					SelecCantidad seleccionCantidadComp = new SelecCantidad(c.getNumeroSerie(),c.getMarca()+" "+c.getModelo(),c.getPrecioVentaComponente(),c.getCantActualComp());
+					dispose();
+					seleccionCantidadComp.setVisible(true);
+				}
+			}
+		});
+		btnAgregar.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		btnAgregar.setBounds(232, 315, 97, 25);
+		contentPane.add(btnAgregar);
+		cargarTablaCompo();
 	}
 
-	private void loadTable(int seleccionado) {
-
-		model.setRowCount(0);
-
-		fil = new Object[model.getColumnCount()];
-
-		if(seleccionado == 0) {
-			cargarTablaCompo();
-		}
-
-		if(seleccionado == 1) {
-			for (Componente comp : Tienda.getInstance().getComponentesTienda()) {
-
-				if(comp instanceof TarjetaMadre) {
-
-					fil[0] = comp.getNumeroSerie();
-					fil[1] = "Tarjeta Madre";
-					fil[2] = comp.getCantActualComp();
-					fil[3] = comp.getPrecioVentaComponente();
-					fil[4] = comp.getModelo();
-					fil[5] = comp.getMarca();
-
-					model.addRow(fil);
-				}
-			}
-		}else if(seleccionado == 2) {
-			for (Componente comp : Tienda.getInstance().getComponentesTienda()) {
-				if(comp instanceof MemoriaRam) {
-
-					fil[0] = comp.getNumeroSerie();
-					fil[1] = "Memoria RAM";	
-					fil[2] = comp.getCantActualComp();
-					fil[3] = comp.getPrecioVentaComponente();
-					fil[4] = comp.getModelo();
-					fil[5] = comp.getMarca();
-
-					model.addRow(fil);
-
-				}
-			}
-		}
-		else if(seleccionado == 3) {
-			for (Componente comp : Tienda.getInstance().getComponentesTienda()) {
-				if(comp instanceof Microprocesador){
-					fil[0] = comp.getNumeroSerie();							
-					fil[1] = "Microprocesador";							
-					fil[2] = comp.getCantActualComp();
-					fil[3] = comp.getPrecioVentaComponente();
-					fil[4] = comp.getModelo();
-					fil[5] = comp.getMarca();
-
-					model.addRow(fil);
-				}
-			}
-		}
-		else if(seleccionado == 4) {
-			for (Componente comp : Tienda.getInstance().getComponentesTienda()) {
-				if(comp instanceof DiscoDuro) {
-					fil[0] = comp.getNumeroSerie();
-
-					fil[1] = "Disco Duro";
-
-					fil[2] = comp.getCantActualComp();
-					fil[3] = comp.getPrecioVentaComponente();
-					fil[4] = comp.getModelo();
-					fil[5] = comp.getMarca();
-
-					model.addRow(fil);
-				}
-			}
-		}
-		else if(seleccionado == 5 ) {
-			for(Combo c : Tienda.getInstance().getCombosTienda()) {
-				fil[0] = c.getCodigoIdentCombo();
-				fil[1] = "Combo";
-				fil[2] = 1;
-				fil[3] = c.obtenerPrecioVentaCombo();
-				fil[4] = c.getNombreCombo();
-				fil[5] = "Unbranded";
-				model.addRow(fil);
-			}
-		}
-	}
+	/*
+	 * private void loadTable(int seleccionado) {
+	 * 
+	 * model.setRowCount(0);
+	 * 
+	 * fil = new Object[model.getColumnCount()];
+	 * 
+	 * if(seleccionado == 0) { cargarTablaCompo(); }
+	 * 
+	 * if(seleccionado == 1) { for (Componente comp :
+	 * Tienda.getInstance().getComponentesTienda()) {
+	 * 
+	 * if(comp instanceof TarjetaMadre) {
+	 * 
+	 * fil[0] = comp.getNumeroSerie(); fil[1] = "Tarjeta Madre"; fil[2] =
+	 * comp.getCantActualComp(); fil[3] = comp.getPrecioVentaComponente(); fil[4] =
+	 * comp.getModelo(); fil[5] = comp.getMarca();
+	 * 
+	 * model.addRow(fil); } } }else if(seleccionado == 2) { for (Componente comp :
+	 * Tienda.getInstance().getComponentesTienda()) { if(comp instanceof MemoriaRam)
+	 * {
+	 * 
+	 * fil[0] = comp.getNumeroSerie(); fil[1] = "Memoria RAM"; fil[2] =
+	 * comp.getCantActualComp(); fil[3] = comp.getPrecioVentaComponente(); fil[4] =
+	 * comp.getModelo(); fil[5] = comp.getMarca();
+	 * 
+	 * model.addRow(fil);
+	 * 
+	 * } } } else if(seleccionado == 3) { for (Componente comp :
+	 * Tienda.getInstance().getComponentesTienda()) { if(comp instanceof
+	 * Microprocesador){ fil[0] = comp.getNumeroSerie(); fil[1] = "Microprocesador";
+	 * fil[2] = comp.getCantActualComp(); fil[3] = comp.getPrecioVentaComponente();
+	 * fil[4] = comp.getModelo(); fil[5] = comp.getMarca();
+	 * 
+	 * model.addRow(fil); } } } else if(seleccionado == 4) { for (Componente comp :
+	 * Tienda.getInstance().getComponentesTienda()) { if(comp instanceof DiscoDuro)
+	 * { fil[0] = comp.getNumeroSerie();
+	 * 
+	 * fil[1] = "Disco Duro";
+	 * 
+	 * fil[2] = comp.getCantActualComp(); fil[3] = comp.getPrecioVentaComponente();
+	 * fil[4] = comp.getModelo(); fil[5] = comp.getMarca();
+	 * 
+	 * model.addRow(fil); } } } else if(seleccionado == 5 ) { for(Combo c :
+	 * Tienda.getInstance().getCombosTienda()) { fil[0] = c.getCodigoIdentCombo();
+	 * fil[1] = "Combo"; fil[2] = 1; fil[3] = c.obtenerPrecioVentaCombo(); fil[4] =
+	 * c.getNombreCombo(); fil[5] = "Unbranded"; model.addRow(fil); } } }
+	 */
 
 
 	private void cargarTablaCompo() {
@@ -245,7 +237,7 @@ public class ListarComponente extends JFrame {
 
 		if(load == null) {
 			for(Componente componenteTemp : Tienda.getInstance().getComponentesTienda()){
-				fil[0] = componenteTemp.getNumeroSerie();
+				fil[0] = componenteTemp.getId();
 				if(componenteTemp instanceof TarjetaMadre) {
 					fil[1] = "Tarjeta Madre";
 				}
@@ -263,6 +255,7 @@ public class ListarComponente extends JFrame {
 				fil[3] = componenteTemp.getPrecioVentaComponente();
 				fil[4] = componenteTemp.getModelo();
 				fil[5] = componenteTemp.getMarca();
+				fil[6] = componenteTemp.getNumeroSerie();
 				model.addRow(fil);
 			}
 			for(Combo c : Tienda.getInstance().getCombosTienda()) {
@@ -298,5 +291,4 @@ public class ListarComponente extends JFrame {
 			}
 		}
 	}
-
 }

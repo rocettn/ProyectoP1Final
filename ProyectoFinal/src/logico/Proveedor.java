@@ -19,7 +19,7 @@ public class Proveedor implements Serializable{
 		this.idProveedor = idProveedor;
 		this.nombreProveedor = nombreProveedor;
 		this.pais = pais;
-		this.componentesSuple = componentesSuple;
+		this.componentesSuple = new ArrayList<Componente>();
 
 	}
 

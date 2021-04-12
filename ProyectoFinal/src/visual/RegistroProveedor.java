@@ -70,6 +70,11 @@ public class RegistroProveedor extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		setLocationRelativeTo(null);
+		if(Tienda.getInstance().getComponentesTienda().size()>0) {
+			for(Componente c : Tienda.getInstance().getComponentesTienda()) {
+				disp.add(c);
+			}
+		}
 
 		JPanel panelInformacionGeneral = new JPanel();
 		panelInformacionGeneral.setLayout(null);
@@ -95,6 +100,8 @@ public class RegistroProveedor extends JFrame {
 		panelInformacionGeneral.add(lblPas);
 
 		textIdProveedor = new JTextField();
+		textIdProveedor.setEditable(false);
+		textIdProveedor.setText("PV - " + Tienda.getInstance().getCodigoProveedores());
 		textIdProveedor.setColumns(10);
 		textIdProveedor.setBounds(131, 34, 290, 20);
 		panelInformacionGeneral.add(textIdProveedor);
@@ -254,6 +261,7 @@ public class RegistroProveedor extends JFrame {
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				disp.removeAll(disp);
+				agr.removeAll(agr);
 				dispose();
 				loadTablaDisp();
 				loadTablaAgr();
@@ -269,6 +277,7 @@ public class RegistroProveedor extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				Proveedor prov = new Proveedor(textIdProveedor.getText(), textNombreProveedor.getText(), textPaisProveedor.getText());
 				Tienda.getInstance().insertarProveedor(prov);
+				System.out.println("Cantidad componentes: "+agr.size());
 				for(Componente com : agr) {
 					prov.insertarcomponentes(com);
 				}

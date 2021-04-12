@@ -113,12 +113,12 @@ public class Tienda implements Serializable{
 
 	public void insertarPersona(Persona persona) {
 		this.personasTienda.add(persona);
-		System.out.println("Toy aqui linea 112");
 	}
 
 	public void insertarComponente(Componente componente) {
 		this.componentesTienda.add(componente); 
 		setCodigoCompo(getCodigoCompo() + 1);
+		System.out.println("Toy aqui linea 122");
 	}
 
 	public int getCodigoCompo() {

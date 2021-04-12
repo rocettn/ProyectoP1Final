@@ -98,8 +98,8 @@ public class Menu extends JFrame {
 		setTitle("R&M");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 564, 411);
-		din = getToolkit().getScreenSize();  
-		super.setSize(din.width,din.height-45);
+		//din = getToolkit().getScreenSize();  
+		super.setSize(1366,768);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -224,7 +224,7 @@ public class Menu extends JFrame {
 		JMenuItem mntmNewMenuItem_9 = new JMenuItem("Lista de componentes");
 		mntmNewMenuItem_9.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ListarComponente lc = new ListarComponente();
+				ListarComponente lc = new ListarComponente(null,0);
 				lc.setVisible(true);
 			}
 		});

@@ -179,6 +179,8 @@ public class Facturar extends JFrame {
 		panelInfoGeneral.add(lblId);
 
 		textIdFactura = new JTextField();
+		textIdFactura.setEditable(false);
+		textIdFactura.setText("R&M - " + Tienda.getInstance().getCodigoFactura());
 		textIdFactura.setColumns(10);
 		textIdFactura.setBounds(151, 69, 128, 20);
 		panelInfoGeneral.add(textIdFactura);
@@ -276,7 +278,7 @@ public class Facturar extends JFrame {
 		JButton buttonAgregarCompo = new JButton("Agregar Componente");
 		buttonAgregarCompo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ListarComponente lc = new ListarComponente();
+				ListarComponente lc = new ListarComponente(null,5);
 				lc.setVisible(true);
 			}
 		});
@@ -554,7 +556,7 @@ public class Facturar extends JFrame {
 
 	public static void loadTabla(Object[] fila) {
 
-		if('A'==fila[0].toString().charAt(0)) {
+		if('O'==fila[0].toString().charAt(0)) {
 			for(int i = 0;i<(int)fila[2];i++) {
 				Combo c = Tienda.getInstance().buscarComboTienda(fila[0].toString());
 				combo.add(c);
