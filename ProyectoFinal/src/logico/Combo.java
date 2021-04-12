@@ -14,7 +14,7 @@ public class Combo implements Serializable {
 	private float porcentajeDescuento;
 	private String codigoIdentCombo;
 	
-	public Combo(String nombreCombo, ArrayList<Componente> componenteCombo, float porcentajeDescuento, String codigoIdentCombo) {
+	public Combo(String nombreCombo, String codigoIdentCombo) {
 		super();
 		this.nombreCombo = nombreCombo;
 		this.componenteCombo = componenteCombo;
@@ -56,6 +56,9 @@ public class Combo implements Serializable {
 		this.codigoIdentCombo = codigoIdentCombo;
 	}
 	
+	public void insertarComponenteCombo(Componente c) {
+		componenteCombo.add(c);
+	}
 	//obtenerPrecioVentaCombo permite calcular el precio de venta del combo. 
 	 public float obtenerPrecioVentaCombo(){
 	        float total = 0;

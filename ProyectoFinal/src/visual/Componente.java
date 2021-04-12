@@ -348,13 +348,14 @@ public class Componente extends JFrame {
 				}
 				
 				if(rdbtnDiscoDuro.isSelected()) {
-					float capAlm = Float.parseFloat(textCapacidadAlmace.getText());
+					//float capAlm = Float.parseFloat(textCapacidadAlmace.getText());
 					String tipConexion = textTipoConexionDD.getText();
-					compTem = new DiscoDuro(idComponente, marcaCompo, modeloCompo, precioVentaCom, precioCompraCom, serie, cantMinComp, cantMaxComp, cantReal, capAlm, tipConexion);
+					compTem = new DiscoDuro(idComponente, marcaCompo, modeloCompo, precioVentaCom, precioCompraCom, serie, cantMinComp, cantMaxComp, cantReal, Float.parseFloat(textCapacidadAlmace.getText()), tipConexion);
 					Tienda.getInstance().insertarComponente(compTem);
-					limpiarCasilla();
 				}else {
+					limpiarCasilla();
 					JOptionPane.showMessageDialog(null,"Has agregado correctamente el componente","Información",JOptionPane.INFORMATION_MESSAGE);
+				    dispose();
 				}
 			  }
 			}

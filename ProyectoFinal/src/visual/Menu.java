@@ -1,6 +1,7 @@
 package visual;
 
 import java.awt.BorderLayout;
+
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -8,6 +9,9 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.SystemColor;
 import javax.swing.border.TitledBorder;
+
+import logico.Tienda;
+
 import java.awt.Color;
 import java.awt.Dimension;
 
@@ -24,6 +28,11 @@ import javax.swing.JMenuItem;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.ObjectOutputStream;
 import java.awt.event.ActionEvent;
 import java.awt.Toolkit;
 
@@ -32,20 +41,59 @@ public class Menu extends JFrame {
 	private JPanel contentPane;
 	private Dimension din;
 
-	/**
-	 * Launch the application.
-	 */
-	/*
-	 * public static void main(String[] args) { EventQueue.invokeLater(new
-	 * Runnable() { public void run() { try { Menu frame = new Menu();
-	 * frame.setVisible(true); } catch (Exception e) { e.printStackTrace(); } } });
-	 * }
-	 */
 
-	/**
-	 * Create the frame.
-	 */
+
 	public Menu() {
+			
+			this.addWindowListener(new WindowListener() {
+
+				 @Override
+				public void windowOpened(WindowEvent e) {
+					 
+					 
+				}
+
+				 @Override
+				public void windowClosing(WindowEvent e) {
+				try {
+				File f = new File("r&m.dat");
+				FileOutputStream fileOut = new FileOutputStream(f);
+				ObjectOutputStream objectOut = new ObjectOutputStream(fileOut);
+				objectOut.writeObject(Tienda.getInstance());
+				objectOut.close();
+				
+				} catch (Exception ex) {
+				ex.printStackTrace();
+				}
+
+				}
+				 
+				 @Override
+				public void windowClosed(WindowEvent e) {
+				// TODO Auto-generated method stub
+				}
+
+				 @Override
+				public void windowIconified(WindowEvent e) {
+				// TODO Auto-generated method stub
+				}
+
+				 @Override
+				public void windowDeiconified(WindowEvent e) {
+				// TODO Auto-generated method stub
+				}
+
+				 @Override
+				public void windowActivated(WindowEvent e) {
+				// TODO Auto-generated method stub
+				}
+
+				 @Override
+				public void windowDeactivated(WindowEvent e) {
+				// TODO Auto-generated method stub
+				}
+				});
+
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Menu.class.getResource("/imagenes/MicrosoftTeams-image.png")));
 		setTitle("R&M");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -117,6 +165,12 @@ public class Menu extends JFrame {
 		mnNewMenu.add(mntmNewMenuItem_1);
 		
 		JMenuItem mntmNewMenuItem_2 = new JMenuItem("Registro Proveedores");
+		mntmNewMenuItem_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				RegistroProveedor rp = new RegistroProveedor();
+				rp.setVisible(true);
+			}
+		});
 		mnNewMenu.add(mntmNewMenuItem_2);
 		
 		JMenuItem mntmNewMenuItem_3 = new JMenuItem("Registro Componentes");
@@ -134,10 +188,10 @@ public class Menu extends JFrame {
 		JMenu mnNewMenu_2 = new JMenu("Venta");
 		menuBar.add(mnNewMenu_2);
 		
-		JMenuItem mntmNewMenuItem_5 = new JMenuItem("Facturaci\u00F3n");
+		JMenuItem mntmNewMenuItem_5 = new JMenuItem("Facturar");
 		mntmNewMenuItem_5.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Facturar f = new Facturar();
+				Facturar f = new Facturar(null);
 				f.setVisible(true);
 			}
 		});
@@ -168,10 +222,25 @@ public class Menu extends JFrame {
 		mnNewMenu_1.add(mntmNewMenuItem_8);
 		
 		JMenuItem mntmNewMenuItem_9 = new JMenuItem("Lista de componentes");
+		mntmNewMenuItem_9.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ListarComponente lc = new ListarComponente();
+				lc.setVisible(true);
+			}
+		});
 		mnNewMenu_1.add(mntmNewMenuItem_9);
 		
 		JMenuItem mntmNewMenuItem_11 = new JMenuItem("Lista de combos");
 		mnNewMenu_1.add(mntmNewMenuItem_11);
+		
+		JMenuItem mntmListaDeProveedores = new JMenuItem("Lista de proveedores");
+		mntmListaDeProveedores.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ListarProveedor lp = new ListarProveedor();
+				lp.setVisible(true);
+			}
+		});
+		mnNewMenu_1.add(mntmListaDeProveedores);
 		
 		JPanel panelLogo = new JPanel();
 		panelLogo.setLayout(null);

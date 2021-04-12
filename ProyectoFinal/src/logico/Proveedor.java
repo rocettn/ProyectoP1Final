@@ -13,16 +13,14 @@ public class Proveedor implements Serializable{
 	private String nombreProveedor;
 	private String pais;
 	private ArrayList <Componente> componentesSuple;
-	private int tiempoDemEntrega;
 	
-	public Proveedor(String idProveedor, String nombreProveedor, String pais, ArrayList<Componente> componentesSuple,
-			int tiempoDemEntrega) {
+	public Proveedor(String idProveedor, String nombreProveedor, String pais) {
 		super();
 		this.idProveedor = idProveedor;
 		this.nombreProveedor = nombreProveedor;
 		this.pais = pais;
 		this.componentesSuple = componentesSuple;
-		this.tiempoDemEntrega = tiempoDemEntrega;
+
 	}
 
 	public String getIdProveedor() {
@@ -56,14 +54,10 @@ public class Proveedor implements Serializable{
 	public void setComponentesSuple(ArrayList<Componente> componentesSuple) {
 		this.componentesSuple = componentesSuple;
 	}
-
-	public int getTiempoDemEntrega() {
-		return tiempoDemEntrega;
-	}
-
-	public void setTiempoDemEntrega(int tiempoDemEntrega) {
-		this.tiempoDemEntrega = tiempoDemEntrega;
-	}
 	
+	public void insertarcomponentes(Componente cp) {
+		componentesSuple.add(cp);
+	}
+
 	
 }

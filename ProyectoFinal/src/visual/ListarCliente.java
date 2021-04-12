@@ -113,7 +113,6 @@ public class ListarCliente extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				int seleccionado = table.getSelectedRow();
 				int modelrow = table.convertRowIndexToModel(seleccionado);
-				//if(modelf==0) {
 				if(modelrow!=-1){
 					btnElegir.setEnabled(true);
 					btnPagarDeuda.setEnabled(true);

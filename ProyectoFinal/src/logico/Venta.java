@@ -23,9 +23,9 @@ public class Venta implements Serializable{
 	private float montoTotal;
 	private Object[][]filas;
 	public static Venta venta = null;
+	private int cantidadElegida = -1;
 
-	public Venta(Persona clienteVenta, Vendedor vendedorVenta, ArrayList<Componente> componentesVenta,
-			ArrayList<Combo> combosVenta, String idFactura, Date fecha, Calendar hora, float montoTotal) {
+	public Venta(Persona clienteVenta, Vendedor vendedorVenta, String idFactura,  float montoTotal, int cant) {
 		super();
 		this.clienteVenta = clienteVenta;
 		this.vendedorVenta = vendedorVenta;
@@ -34,6 +34,7 @@ public class Venta implements Serializable{
 		this.idFactura = idFactura;
 		this.fecha = new Date();//fecha;
 		this.hora = hora;
+		this.cantidadElegida = cant;
 		this.filas=new Object[100][5];
 	}
 
@@ -52,6 +53,16 @@ public class Venta implements Serializable{
 	public void setClienteVenta(Persona clienteVenta) {
 		this.clienteVenta = clienteVenta;
 	}
+	
+	public int getCantidadElegida() {
+		return cantidadElegida;
+	}
+
+
+	public void setCantidad(int cantidadElegida) {
+		this.cantidadElegida = cantidadElegida;
+	}
+
 
 	public Vendedor getVendedorVenta() {
 		return vendedorVenta;
@@ -171,9 +182,15 @@ public class Venta implements Serializable{
 		}
 		return total;
 	}
-	
+	public void insertarComponente(Componente c) {
+		componentesVenta.add(c);
+	}
 
-	public void InsertarFilas(int pos,Object[] o) {
+	public void insertarCombos(Combo c) {
+		combosVenta.add(c);
+	}
+	
+	public void insertarFilas(int pos,Object[] o) {
 		for(int i = 0; i<5;i++) {
 			filas[pos][i]=o[i];
 		}

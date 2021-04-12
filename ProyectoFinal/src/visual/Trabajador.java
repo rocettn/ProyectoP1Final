@@ -223,6 +223,7 @@ public class Trabajador extends JFrame {
 				}
 				limpiar();
 				JOptionPane.showMessageDialog(null, "Ingreso Correcto de Empleado a R&M-Arma tu Equipo", "Información", JOptionPane.INFORMATION_MESSAGE);
+				dispose();
 				}
 				
 			}

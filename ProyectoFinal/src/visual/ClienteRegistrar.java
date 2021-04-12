@@ -44,12 +44,6 @@ public class ClienteRegistrar extends JFrame {
 	 * Launch the application.
 	 */
 	
-	/*
-	 * public static void main(String[] args) { EventQueue.invokeLater(new
-	 * Runnable() { public void run() { try { Cliente frame = new Cliente();
-	 * frame.setVisible(true); } catch (Exception e) { e.printStackTrace(); } } });
-	 * }
-	 */
 
 	/**
 	 * Create the frame.
@@ -212,6 +206,7 @@ public class ClienteRegistrar extends JFrame {
 					Tienda.getInstance().insertarPersona(persTem);
 					
 				}
+				limpiar();
 				JOptionPane.showMessageDialog(null, "Se ha registrado satisfactoriamente el cliente");
 				dispose();
 			}
@@ -244,5 +239,15 @@ public class ClienteRegistrar extends JFrame {
 		labelLogoCliente.setIcon(new ImageIcon(ClienteRegistrar.class.getResource("/imagenes/Webp.net-resizeimage_logoLogIn.png")));
 		labelLogoCliente.setBounds(160, 11, 235, 100);
 		panelLogo.add(labelLogoCliente);
+	}
+	
+	public void limpiar () {
+		
+		textNombreCliente.setText("");
+		textCedulaCliente.setText("");
+		textTelCliente.setText("");
+		textDirecCliente.setText("");
+		textCredito.setText("");
+
 	}
 }

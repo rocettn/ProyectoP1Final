@@ -1,7 +1,9 @@
 package logico;
 
 import java.io.Serializable;
+
 import java.util.ArrayList;
+
 
 public class Tienda implements Serializable{
 
@@ -23,6 +25,8 @@ public class Tienda implements Serializable{
 	private int microT = 0;
 	private int discoDuroT = 0;
 	private float balanceTotalAc = 0;
+	private int codigoProveedores = 1;
+	private int codigoFactura = 1;
 
 	private Tienda() { //Por el patron Singleton se coloca privado.
 		super();
@@ -163,6 +167,34 @@ public class Tienda implements Serializable{
 
 	public void setDiscoDuroT(int discoDuroT) {
 		this.discoDuroT = discoDuroT;
+	}
+	
+	public int getCodigoProveedores() {
+		return codigoProveedores;
+	}
+
+	public void setCodigoProveedores(int codigoProveedores) {
+		this.codigoProveedores= codigoProveedores;
+	}
+	
+	public void insertarProveedor(Proveedor pro) {
+		proveedoresTienda.add(pro);
+		setCodigoProveedores(getCodigoProveedores() + 1);
+		
+	}
+	
+	public int getCodigoFactura() {
+		return codigoFactura;
+	}
+
+	public void setCodigoFactura(int codigoFactura) {
+		this.codigoFactura = codigoFactura;
+	}
+	
+	public void insertarFactura(Venta venta) {
+		this.ventasTienda.add(venta); 
+		setCodigoFactura(getCodigoFactura()+1);
+		
 	}
 
 	/*
