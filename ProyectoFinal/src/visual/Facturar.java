@@ -540,7 +540,7 @@ public class Facturar extends JFrame {
 	}
 
 	public static void loadCliente(Cliente c) {
-		System.out.println(""+c.getCedula());
+		//System.out.println(""+c.getCedula());
 		// clienteTienda = c;
 		textCedulaCliente.setText(c.getCedula());
 		textCedulaCliente.setEditable(false);
@@ -596,6 +596,7 @@ public class Facturar extends JFrame {
 			}
 
 			File fichero = new File("factura", "Factura-"+Tienda.getInstance().getCodigoFactura()+".txt");
+			//File fichero = new File("factura", "Factura-.txt");
 			FileOutputStream fos = new FileOutputStream(fichero);
 
 			BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(fos));
