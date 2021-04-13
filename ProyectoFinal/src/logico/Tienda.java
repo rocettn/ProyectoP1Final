@@ -28,6 +28,8 @@ public class Tienda implements Serializable{
 	private float balanceTotalAc = 0;
 	private int codigoProveedores = 1;
 	private int codigoFactura = 1;
+	private int codigoAdmin = 1;
+	private int codigoVend = 1;
 
 	private Tienda() { //Por el patron Singleton se coloca privado.
 		super();
@@ -119,7 +121,6 @@ public class Tienda implements Serializable{
 	public void insertarComponente(Componente componente) {
 		this.componentesTienda.add(componente); 
 		setCodigoCompo(getCodigoCompo() + 1);
-		System.out.println("Toy aqui linea 122");
 	}
 
 	public int getCodigoCompo() {
@@ -200,6 +201,22 @@ public class Tienda implements Serializable{
 		this.codigoFactura = codigoFactura;
 	}
 	
+	public int getCodigoAdmin() {
+		return codigoAdmin;
+	}
+
+	public void setCodigoAdmin(int codigoAdmin) {
+		this.codigoAdmin = codigoAdmin;
+	}
+	
+	public int getCodigoVend() {
+		return codigoVend;
+	}
+
+	public void setCodigoVend(int codigoVend) {
+		this.codigoVend = codigoVend;
+	}
+	
 	public void insertarFactura(Venta venta) {
 		this.ventasTienda.add(venta); 
 		setCodigoFactura(getCodigoFactura()+1);
@@ -264,7 +281,7 @@ public class Tienda implements Serializable{
 		boolean encontrado = false;
 		int i = 0;
 		while(!encontrado && i < componentesTienda.size()) {
-			if(componentesTienda.get(i).getId().equalsIgnoreCase(id)) {
+			if(componentesTienda.get(i).getNumeroSerie().equalsIgnoreCase(id)) {
 				aux = componentesTienda.get(i);
 				encontrado = true;
 			}

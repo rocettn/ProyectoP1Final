@@ -1,6 +1,7 @@
 package visual;
 
 import java.awt.BorderLayout;
+
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -202,8 +203,8 @@ public class RegistroProveedor extends JFrame {
 		btnRemover.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				contador--;
-				disp.remove(m);
-				agr.add(m);
+				disp.add(m);
+				agr.remove(m);
 				loadTablaDisp();
 				loadTablaAgr();
 				m = null;
@@ -260,11 +261,12 @@ public class RegistroProveedor extends JFrame {
 		JButton btnCancelar = new JButton("Cancelar");
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				disp.removeAll(disp);
-				agr.removeAll(agr);
+				//disp.removeAll(disp);
+				//agr.removeAll(agr);
+				limpiar();
 				dispose();
-				loadTablaDisp();
-				loadTablaAgr();
+				//loadTablaDisp();
+				//loadTablaAgr();
 			}
 
 		});
@@ -276,12 +278,13 @@ public class RegistroProveedor extends JFrame {
 		btnRegistrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Proveedor prov = new Proveedor(textIdProveedor.getText(), textNombreProveedor.getText(), textPaisProveedor.getText());
-				Tienda.getInstance().insertarProveedor(prov);
+				//Tienda.getInstance().insertarProveedor(prov);
 				System.out.println("Cantidad componentes: "+agr.size());
 				for(Componente com : agr) {
 					prov.insertarcomponentes(com);
 				}
 				JOptionPane.showMessageDialog(null, "Se ha añadido satisfactoriamente el proveedor");
+				Tienda.getInstance().insertarProveedor(prov);
 				limpiar();
 			}
 		});
@@ -290,7 +293,7 @@ public class RegistroProveedor extends JFrame {
 		contentPane.add(btnRegistrar);
 	}
 	private void limpiar() {
-		textIdProveedor.setText("Pr-"+Tienda.getInstance().getCodigoProveedores());
+		//textIdProveedor.setText("Pr-"+Tienda.getInstance().getCodigoProveedores());
 		textNombreProveedor.setText("");
 		textPaisProveedor.setText("");
 		modelDisp.setRowCount(0);

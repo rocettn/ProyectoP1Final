@@ -2,6 +2,7 @@ package visual;
 
 import java.awt.BorderLayout;
 
+
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -50,7 +51,7 @@ public class ListarProveedor extends JFrame {
 	public ListarProveedor() {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(ListarProveedor.class.getResource("/imagenes/MicrosoftTeams-image.png")));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 651, 382);
+		setBounds(100, 100, 651, 392);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(0, 153, 153));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -89,7 +90,7 @@ public class ListarProveedor extends JFrame {
 		panel.add(textBuscarProveedor);
 
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 63, 594, 193);
+		scrollPane.setBounds(10, 63, 594, 218);
 		panel.add(scrollPane);
 
 		modeloTabPro = new DefaultTableModel();
@@ -128,15 +129,18 @@ public class ListarProveedor extends JFrame {
 		});
 		button.setBounds(535, 316, 89, 23);
 		contentPane.add(button);
-		
+
 		buttonCompoTrae = new JButton("Componente que ofrece");
 		buttonCompoTrae.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Combo c = new Combo("Componentes que ofrece: "+proveedor.getNombreProveedor(),"compoAux");
+
+				Combo c = new Combo("Componentes que ofrece: " + proveedor.getNombreProveedor(),"compoAux");
+				System.out.println(proveedor.getComponentesSuple().size());
 				for(Componente a : proveedor.getComponentesSuple()) {
 					c.insertarComponenteCombo(a);
-				}
-				ListarComponente lc = new ListarComponente(c, 0);
+					}
+
+				ListarComponente lc = new ListarComponente(c, true);
 				lc.setVisible(true);
 			}
 		});
@@ -145,7 +149,7 @@ public class ListarProveedor extends JFrame {
 		contentPane.add(buttonCompoTrae);
 		loadTabla();
 	}
-	
+
 
 	private void loadTabla() {
 		modeloTabPro.setRowCount(0); 

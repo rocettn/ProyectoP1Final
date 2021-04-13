@@ -278,7 +278,7 @@ public class Facturar extends JFrame {
 		JButton buttonAgregarCompo = new JButton("Agregar Componente");
 		buttonAgregarCompo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ListarComponente lc = new ListarComponente(null,5);
+				ListarComponente lc = new ListarComponente(null,false);
 				lc.setVisible(true);
 			}
 		});

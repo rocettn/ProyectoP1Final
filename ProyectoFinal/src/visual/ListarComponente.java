@@ -52,9 +52,10 @@ public class ListarComponente extends JFrame {
 	private Combo comb = null;
 	private JButton btnInformacinComponente;
 	private JButton btnAgregar;
-	
+	private static boolean modo = false;
 
-	public ListarComponente(Combo a,int b) {
+
+	public ListarComponente(Combo a, boolean b) {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(ListarComponente.class.getResource("/imagenes/MicrosoftTeams-image.png")));
 		setTitle("R&M");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -71,7 +72,8 @@ public class ListarComponente extends JFrame {
 		panel.setBackground(SystemColor.menu);
 		panel.setBounds(10, 11, 614, 294);
 		contentPane.add(panel);
-
+		this.modo = b;
+		this.load = a;
 		JLabel lblBuscarComponente = new JLabel("Buscar Componente:");
 		lblBuscarComponente.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblBuscarComponente.setBounds(55, 21, 122, 22);
@@ -125,7 +127,7 @@ public class ListarComponente extends JFrame {
 				}else {
 					btnAgregar.setEnabled(false);
 					btnInformacinComponente.setEnabled(false);
-					
+
 				}
 			}
 		});
@@ -150,14 +152,14 @@ public class ListarComponente extends JFrame {
 		btnInformacinComponente = new JButton("Informaci\u00F3n Componente");
 		btnInformacinComponente.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ListarComponente lc = new ListarComponente(a, 0);
-				lc.setVisible(true);
+				//ListarComponente lc = new ListarComponente(b, false);
+				//lc.setVisible(true);
 			}
 		});
 		btnInformacinComponente.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		btnInformacinComponente.setBounds(341, 317, 184, 23);
 		contentPane.add(btnInformacinComponente);
-		
+
 		btnAgregar = new JButton("Agregar");
 		btnAgregar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -235,8 +237,66 @@ public class ListarComponente extends JFrame {
 		fil = new Object [model.getColumnCount()];
 
 
-		if(load == null) {
-			for(Componente componenteTemp : Tienda.getInstance().getComponentesTienda()){
+		if(!modo) {
+
+			if(load == null) {
+				for(Componente componenteTemp : Tienda.getInstance().getComponentesTienda()){
+					fil[0] = componenteTemp.getId();
+					if(componenteTemp instanceof TarjetaMadre) {
+						fil[1] = "Tarjeta Madre";
+					}
+					if(componenteTemp instanceof MemoriaRam) {
+						fil[1] = "Memoria RAM";
+					}
+					if(componenteTemp instanceof Microprocesador) {
+						fil[1] = "Microprocesador";
+					}
+					if(componenteTemp instanceof DiscoDuro) {
+						fil[1] = "Disco Duro";
+					}
+
+					fil[2] = componenteTemp.getcantActualComp();
+					fil[3] = componenteTemp.getPrecioVentaComponente();
+					fil[4] = componenteTemp.getModelo();
+					fil[5] = componenteTemp.getMarca();
+					fil[6] = componenteTemp.getNumeroSerie();
+					model.addRow(fil);
+				}
+				for(Combo c : Tienda.getInstance().getCombosTienda()) {
+					fil[0] = c.getCodigoIdentCombo();
+					fil[1] = "Combo";
+					fil[2] = 1;
+					fil[3] = c.obtenerPrecioVentaCombo();
+					fil[4] = c.getNombreCombo();
+					fil[5] = "Unbranded";
+					model.addRow(fil);
+				}
+			}else {
+				for(Componente comp : load.getComponenteCombo()){
+					fil[0] = comp.getNumeroSerie();
+					if(comp instanceof TarjetaMadre) {
+						fil[1] = "Tarjeta Madre";
+					}
+					if(comp instanceof MemoriaRam) {
+						fil[1] = "Memoria RAM";
+					}
+					if(comp instanceof Microprocesador) {
+						fil[1] = "Microprocesador";
+					}
+					if(comp instanceof DiscoDuro) {
+						fil[1] = "Disco Duro";
+					}
+
+					fil[2] = comp.getcantActualComp();
+					fil[3] = comp.getPrecioVentaComponente();
+					fil[4] = comp.getModelo();
+					fil[5] = comp.getMarca();
+					model.addRow(fil);
+				}
+			}
+
+		}else {
+			for(Componente componenteTemp : load.getComponenteCombo()){
 				fil[0] = componenteTemp.getId();
 				if(componenteTemp instanceof TarjetaMadre) {
 					fil[1] = "Tarjeta Madre";
@@ -258,37 +318,7 @@ public class ListarComponente extends JFrame {
 				fil[6] = componenteTemp.getNumeroSerie();
 				model.addRow(fil);
 			}
-			for(Combo c : Tienda.getInstance().getCombosTienda()) {
-				fil[0] = c.getCodigoIdentCombo();
-				fil[1] = "Combo";
-				fil[2] = 1;
-				fil[3] = c.obtenerPrecioVentaCombo();
-				fil[4] = c.getNombreCombo();
-				fil[5] = "Unbranded";
-				model.addRow(fil);
-			}
-		}else {
-			for(Componente comp : load.getComponenteCombo()){
-				fil[0] = comp.getNumeroSerie();
-				if(comp instanceof TarjetaMadre) {
-					fil[1] = "Tarjeta Madre";
-				}
-				if(comp instanceof MemoriaRam) {
-					fil[1] = "Memoria RAM";
-				}
-				if(comp instanceof Microprocesador) {
-					fil[1] = "Microprocesador";
-				}
-				if(comp instanceof DiscoDuro) {
-					fil[1] = "Disco Duro";
-				}
-
-				fil[2] = comp.getcantActualComp();
-				fil[3] = comp.getPrecioVentaComponente();
-				fil[4] = comp.getModelo();
-				fil[5] = comp.getMarca();
-				model.addRow(fil);
-			}
 		}
 	}
 }
+

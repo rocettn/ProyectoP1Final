@@ -84,7 +84,7 @@ public class RegistrarCombo extends JFrame {
 		panelInfGen.setBackground(SystemColor.menu);
 		panelInfGen.setBounds(10, 11, 580, 124);
 		contentPane.add(panelInfGen);
-
+	
 		JLabel lblIdCombo = new JLabel("ID Combo:");
 		lblIdCombo.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblIdCombo.setBounds(42, 37, 87, 14);
@@ -232,7 +232,11 @@ public class RegistrarCombo extends JFrame {
 					buttonRemove.setEnabled(false);
 
 					cm = Tienda.getInstance().buscarComponenteTienda((String)model.getValueAt(modelrow, 0));
-
+					if(cm==null) {
+						System.out.println("Houston tenemos un bobaso");
+						System.out.println("La serie del componente es: "+(String)model.getValueAt(modelrow, 0));
+						System.out.println("La serie del componente 0 es : "+Tienda.getInstance().getComponentesTienda().get(0).getNumeroSerie());
+					}
 				}else{
 					buttonAnadir.setEnabled(false);
 					buttonRemove.setEnabled(false);
@@ -309,10 +313,11 @@ public class RegistrarCombo extends JFrame {
 				int seleccion = tableAgregado.getSelectedRow();
 				int modelrow = tableAgregado.convertRowIndexToModel(seleccion);
 				if(seleccion!=-1){
+					
 					buttonAnadir.setEnabled(false);
 					buttonRemove.setEnabled(true);
 
-					cm = Tienda.getInstance().buscarComponenteTienda((String)model.getValueAt(modelrow, 0));
+					cm = Tienda.getInstance().buscarComponenteTienda((String)model1.getValueAt(modelrow, 0));
 				}else{
 					buttonAnadir.setEnabled(false);
 					buttonRemove.setEnabled(false);
@@ -320,6 +325,9 @@ public class RegistrarCombo extends JFrame {
 				}
 			}
 		});
+		
+		tableAgregado.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		tableAgregado.setModel(model1);
 		scrollPaneAgre.setViewportView(tableAgregado);
 
 		btnRegistrar = new JButton("Registrar");
@@ -349,6 +357,7 @@ public class RegistrarCombo extends JFrame {
 		JButton button_3 = new JButton("Cancelar");
 		button_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				clear();
 				dispose();
 			}
 		});

@@ -163,7 +163,7 @@ public class SelecCantidad extends JFrame {
 						JOptionPane.showMessageDialog(null, "No se encuentran las componentes necesarias para el combo."+c.getNombreCombo()
 						, "Error", JOptionPane.WARNING_MESSAGE);
 						dispose();
-						ListarComponente lista = new ListarComponente(null, 0);
+						ListarComponente lista = new ListarComponente(null, false);
 						lista.setVisible(true);
 					}
 

@@ -17,7 +17,7 @@ public class Combo implements Serializable {
 	public Combo(String nombreCombo, String codigoIdentCombo) {
 		super();
 		this.nombreCombo = nombreCombo;
-		this.componenteCombo = componenteCombo;
+		this.componenteCombo = new ArrayList<Componente>();
 		this.porcentajeDescuento = porcentajeDescuento;
 		this.codigoIdentCombo = codigoIdentCombo;
 	}

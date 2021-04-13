@@ -181,6 +181,8 @@ public class Trabajador extends JFrame {
 		panelVendedor.add(lblContraV);
 		
 		textIDVend = new JTextField();
+		textIDVend.setEditable(false);
+		textIDVend.setText("VE - " + Tienda.getInstance().getCodigoVend());
 		textIDVend.setColumns(10);
 		textIDVend.setBounds(131, 43, 290, 20);
 		panelVendedor.add(textIDVend);
@@ -214,15 +216,16 @@ public class Trabajador extends JFrame {
 					String idVend = textIDVend.getText();
 					auxiliar = new Vendedor(nombre, telefono,cedula, direccion, idVend, textUsuarioV.getText(), textContraV.getText());
 					Tienda.getInstance().insertarPersona(auxiliar);
-					System.out.println("El empleado es: "+Tienda.getInstance().getPersonasTienda().get(1).getNombre() + "LA clase es " + auxiliar.getClass().toString());
+					
 				}
 				
 				if(rdbtnAdministrador.isSelected()) {
 					auxiliar = new Administrador(nombre, cedula, telefono, direccion, textIdAdminis.getText(), textUsuarioAdm.getText(), textContraAdmin.getText());
 					Tienda.getInstance().insertarPersona(auxiliar);
 				}
-				limpiar();
+				
 				JOptionPane.showMessageDialog(null, "Ingreso Correcto de Empleado a R&M-Arma tu Equipo", "Información", JOptionPane.INFORMATION_MESSAGE);
+				limpiar();
 				dispose();
 				}
 				
@@ -267,6 +270,8 @@ public class Trabajador extends JFrame {
 		panelAdministrador.add(lblContraAdm);
 		
 		textIdAdminis = new JTextField();
+		textIdAdminis.setEditable(false);
+		textIdAdminis.setText("AD - " + Tienda.getInstance().getCodigoAdmin());
 		textIdAdminis.setColumns(10);
 		textIdAdminis.setBounds(131, 43, 290, 20);
 		panelAdministrador.add(textIdAdminis);
