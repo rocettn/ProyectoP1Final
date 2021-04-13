@@ -33,7 +33,7 @@ public class SelecCantidad extends JFrame {
 	private JPanel contentPane;
 	private JTextField textCantCompra;
 	public static Object[] fila = new Object [5];
-	private int disponibles = 1;
+	//private int disponibles = 1;
 	private String nombreSelec ="";
 	private float precioSelec = 0.0f;
 	private float montoTotalSelec = 0.0f;
@@ -48,7 +48,7 @@ public class SelecCantidad extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public SelecCantidad(String codigo, String cadena, float flo, int ent) {
+	public SelecCantidad(String codigoComp, String cadena, float flo/* , int ent */) {
 		setTitle("R&M");
 		setIconImage(Toolkit.getDefaultToolkit().getImage(SelecCantidad.class.getResource("/imagenes/MicrosoftTeams-image.png")));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -60,6 +60,11 @@ public class SelecCantidad extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		setLocationRelativeTo(null);
+
+		//this.disponibles=ent;
+		this.nombreSelec=cadena;
+		this.precioSelec=flo;
+		this.codigoSelec = codigoComp;
 
 		JPanel panel = new JPanel();
 		panel.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Indicar cantidad a comprar:", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
@@ -75,7 +80,7 @@ public class SelecCantidad extends JFrame {
 		textCantCompra.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				montoTotalSelec = (precioSelec*Integer.parseInt(textCantCompra.getText().toString()));
+				montoTotalSelec = (precioSelec*Float.parseFloat(textCantCompra.getText().toString()));
 				labelMontoTotaltext.setText("RD$"+ montoTotalSelec);
 			}
 		});
@@ -126,7 +131,13 @@ public class SelecCantidad extends JFrame {
 		lblMontoTotalComp.setBounds(12, 191, 197, 16);
 		panel_1.add(lblMontoTotalComp);
 
-		montoTotalSelec = (precioSelec*Integer.parseInt(textCantCompra.getText().toString()));
+		/*
+		 * subtotal = (precio*Integer.parseInt(spnCantidad.getValue().toString()));
+		 * lblSubTotal = new
+		 * JLabel("SubTotal: "+(subtotal-(subtotal*(Integer.parseInt(spnDescuento.
+		 * getValue().toString())/100.0f))));
+		 */
+		montoTotalSelec = (precioSelec * Integer.parseInt(textCantCompra.getText().toString()));
 		labelMontoTotaltext = new JLabel("");
 		labelMontoTotaltext.setBounds(213, 191, 197, 16);
 		panel_1.add(labelMontoTotaltext);
@@ -148,12 +159,12 @@ public class SelecCantidad extends JFrame {
 		JButton btnSeleccionar = new JButton("Seleccionar");
 		btnSeleccionar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if('O'==codigo.charAt(0)) {
-					Combo c = Tienda.getInstance().buscarComboTienda(codigo);
+				if('O'==codigoSelec.charAt(0)) {
+					Combo c = Tienda.getInstance().buscarComboTienda(codigoSelec);
 					if(Tienda.getInstance().verificarCombo(c)) {
-						fila[0]=codigo;
+						fila[0]=codigoSelec;
 						fila[1]=nombreSelec;
-						fila[2]=textCantCompra.getText();
+						fila[2]= Integer.parseInt(textCantCompra.getText().toString());//textCantCompra.getText();
 						fila[3]=precioSelec;
 						fila[4]=montoTotalSelec;
 						Tienda.getInstance().agregarComboTienda(c);
@@ -168,10 +179,10 @@ public class SelecCantidad extends JFrame {
 					}
 
 				}else {
-					Componente c = Tienda.getInstance().buscarComponenteTienda(codigo);
-					fila[0]=codigo;
+					Componente c = Tienda.getInstance().buscarComponenteTienda(codigoSelec);
+					fila[0]=codigoSelec;
 					fila[1]=nombreSelec;
-					fila[2]=textCantCompra.getText();
+					fila[2]= Integer.parseInt(textCantCompra.getText().toString());//textCantCompra.getText();
 					fila[3]=precioSelec;
 					fila[4]=montoTotalSelec;
 					int cantidadDeCompra = Integer.parseInt(textCantCompra.getText().toString());

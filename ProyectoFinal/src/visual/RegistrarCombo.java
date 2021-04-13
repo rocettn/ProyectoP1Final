@@ -217,7 +217,7 @@ public class RegistrarCombo extends JFrame {
 		panelDispo.add(scrollPaneDisp);
 
 		model = new DefaultTableModel();
-		String columns[] = {"Serie","Marca","Modelo","Precio"};
+		String columns[] = {"Id Componente","Marca","Modelo","Precio"};
 		model.setColumnIdentifiers(columns);
 		tableDisponible = new JTable();
 		tableDisponible.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -303,7 +303,7 @@ public class RegistrarCombo extends JFrame {
 		panelAgregar.add(scrollPaneAgre);
 
 		model1 = new DefaultTableModel();
-		String []columns2 = {"Serie","Marca","Modelo","Precio"};
+		String []columns2 = {"Id Componente","Marca","Modelo","Precio"};
 		model1.setColumnIdentifiers(columns2);
 		tableAgregado = new JTable();
 		tableAgregado.addMouseListener(new MouseAdapter() {
@@ -377,7 +377,7 @@ public class RegistrarCombo extends JFrame {
 		fil = new Object [model.getColumnCount()];
 
 		for(Componente comp : Tienda.getInstance().getComponentesTienda()){
-			fil[0] = comp.getNumeroSerie();
+			fil[0] = comp.getId();
 			fil[1] = comp.getMarca();
 			fil[2] = comp.getModelo();
 			fil[3] = comp.getPrecioVentaComponente();
@@ -390,7 +390,7 @@ public class RegistrarCombo extends JFrame {
 		model1.setRowCount(0);
 		fil = new Object[model1.getColumnCount()];
 		for(Componente comp: comboAgregado) {
-			fil[0] = comp.getNumeroSerie();
+			fil[0] = comp.getId();
 			fil[1] = comp.getMarca();
 			fil[2] = comp.getModelo();
 			fil[3] = comp.getPrecioVentaComponente();
@@ -400,12 +400,13 @@ public class RegistrarCombo extends JFrame {
 	}
 	
 	private void clear() {
-		textIdCombo.setText("O-"+Tienda.getInstance().getCodigoCombo());
+		//textIdCombo.setText("O-"+Tienda.getInstance().getCodigoCombo());
 		textNombreCombo.setText("");
-		
+		textPorcentajeDescuento.setText("");
 		comboAgregado.removeAll(comboAgregado);
-		cargarTabla();
+		
 		model1.setRowCount(0);
+		cargarTabla();
 		
 	}
 }

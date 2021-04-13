@@ -161,18 +161,32 @@ public class ListarComponente extends JFrame {
 		contentPane.add(btnInformacinComponente);
 
 		btnAgregar = new JButton("Agregar");
+		btnAgregar.setEnabled(false);
+		
+		if(b == false) {
+			btnAgregar.setVisible(true);
+		}else {
+			btnAgregar.setVisible(false);
+		}
+		
 		btnAgregar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if('O'==((String)model.getValueAt(modelFil, 0)).charAt(0)) {
 					comb = Tienda.getInstance().buscarComboTienda((String)model.getValueAt(modelFil, 0));
-					SelecCantidad seleccionCantidad = new SelecCantidad(comb.getCodigoIdentCombo(),comb.getNombreCombo(),comb.obtenerPrecioVentaCombo(), 1);
+					SelecCantidad seleccionCantidad = new SelecCantidad(comb.getCodigoIdentCombo(),
+							comb.getNombreCombo(), comb.obtenerPrecioVentaCombo()/* , 1 */);
 					dispose();
+					System.out.println("SelecCantidad 177");
 					seleccionCantidad.setVisible(true);
+					
 				}else {
 					Componente c = Tienda.getInstance().buscarComponenteTienda((String)model.getValueAt(modelFil, 0));
-					SelecCantidad seleccionCantidadComp = new SelecCantidad(c.getNumeroSerie(),c.getMarca()+" "+c.getModelo(),c.getPrecioVentaComponente(),c.getCantActualComp());
+					//SelecCantidad seleccionCantidadComp = new SelecCantidad(c.getId(),c.getMarca()+" "+c.getModelo(),c.getPrecioVentaComponente(),c.getCantActualComp());
+					SelecCantidad seleccionCantidadComp = new SelecCantidad(c.getId(), c.getMarca(),
+							c.getPrecioVentaComponente()/* ,c.getCantActualComp() */);
 					dispose();
 					seleccionCantidadComp.setVisible(true);
+					
 				}
 			}
 		});
@@ -268,12 +282,12 @@ public class ListarComponente extends JFrame {
 					fil[2] = 1;
 					fil[3] = c.obtenerPrecioVentaCombo();
 					fil[4] = c.getNombreCombo();
-					fil[5] = "Unbranded";
+					fil[5] = "No aplica";
 					model.addRow(fil);
 				}
 			}else {
 				for(Componente comp : load.getComponenteCombo()){
-					fil[0] = comp.getNumeroSerie();
+					fil[0] = comp.getId();
 					if(comp instanceof TarjetaMadre) {
 						fil[1] = "Tarjeta Madre";
 					}

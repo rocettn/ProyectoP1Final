@@ -178,7 +178,7 @@ public class Tienda implements Serializable{
 	public void setDiscoDuroT(int discoDuroT) {
 		this.discoDuroT = discoDuroT;
 	}
-	
+
 	public int getCodigoProveedores() {
 		return codigoProveedores;
 	}
@@ -186,13 +186,13 @@ public class Tienda implements Serializable{
 	public void setCodigoProveedores(int codigoProveedores) {
 		this.codigoProveedores= codigoProveedores;
 	}
-	
+
 	public void insertarProveedor(Proveedor pro) {
 		proveedoresTienda.add(pro);
 		setCodigoProveedores(getCodigoProveedores() + 1);
-		
+
 	}
-	
+
 	public int getCodigoFactura() {
 		return codigoFactura;
 	}
@@ -200,7 +200,7 @@ public class Tienda implements Serializable{
 	public void setCodigoFactura(int codigoFactura) {
 		this.codigoFactura = codigoFactura;
 	}
-	
+
 	public int getCodigoAdmin() {
 		return codigoAdmin;
 	}
@@ -208,7 +208,7 @@ public class Tienda implements Serializable{
 	public void setCodigoAdmin(int codigoAdmin) {
 		this.codigoAdmin = codigoAdmin;
 	}
-	
+
 	public int getCodigoVend() {
 		return codigoVend;
 	}
@@ -216,13 +216,13 @@ public class Tienda implements Serializable{
 	public void setCodigoVend(int codigoVend) {
 		this.codigoVend = codigoVend;
 	}
-	
+
 	public void insertarFactura(Venta venta) {
 		this.ventasTienda.add(venta); 
 		setCodigoFactura(getCodigoFactura()+1);
-		
+
 	}
-	
+
 	public void insertarCombo(Combo combo) {
 		combosTienda.add(combo);
 		setCodigoCombo (getCodigoCombo ()+1);
@@ -281,7 +281,8 @@ public class Tienda implements Serializable{
 		boolean encontrado = false;
 		int i = 0;
 		while(!encontrado && i < componentesTienda.size()) {
-			if(componentesTienda.get(i).getNumeroSerie().equalsIgnoreCase(id)) {
+			//if(componentesTienda.get(i).getNumeroSerie().equalsIgnoreCase(id)) {
+			if(componentesTienda.get(i).getId().equalsIgnoreCase(id)) {
 				aux = componentesTienda.get(i);
 				encontrado = true;
 			}
