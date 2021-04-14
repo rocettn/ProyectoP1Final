@@ -256,6 +256,12 @@ public class Menu extends JFrame {
 		mnNewMenu_1.add(mntmListaDeProveedores);
 		
 		JMenuItem mntmNewMenuItem_10 = new JMenuItem("Lista de Orden de Compra");
+		mntmNewMenuItem_10.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ListarOrdenCompra loc = new ListarOrdenCompra();
+				loc.setVisible(true);
+			}
+		});
 		mntmNewMenuItem_10.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		mnNewMenu_1.add(mntmNewMenuItem_10);
 		

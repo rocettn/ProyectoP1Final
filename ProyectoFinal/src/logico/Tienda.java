@@ -30,6 +30,7 @@ public class Tienda implements Serializable{
 	private int codigoFactura = 1;
 	private int codigoAdmin = 1;
 	private int codigoVend = 1;
+	private int codigoOrden = 1;
 
 	private Tienda() { //Por el patron Singleton se coloca privado.
 		super();
@@ -90,6 +91,13 @@ public class Tienda implements Serializable{
 	public void setCombosTienda(ArrayList<Combo> combosTienda) {
 		this.combosTienda = combosTienda;
 	}
+	public int getCodigoOrden() {
+		return codigoOrden;
+	}
+
+	public void setCodigoOrden(int codigoOrden) {
+		this.codigoOrden = codigoOrden;
+	}
 
 	public ArrayList<OrdenCompra> getOrdenesComprasTienda() {
 		return OrdenesComprasTienda;
@@ -97,6 +105,7 @@ public class Tienda implements Serializable{
 
 	public void setOrdenesComprasTienda(ArrayList<OrdenCompra> ordenesComprasTienda) {
 		OrdenesComprasTienda = ordenesComprasTienda;
+		setCodigoOrden(getCodigoOrden() + 1);
 	}
 
 	public static Tienda getInstance() {
@@ -579,6 +588,7 @@ public class Tienda implements Serializable{
 		setBalanceTotalAc(getBalanceTotalAc()+total);
 
 	}
+
 }
 
 

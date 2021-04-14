@@ -345,6 +345,7 @@ public class RegistrarCombo extends JFrame {
 					btnRegistrar.setEnabled(false);
 					contadorCo  =0;
 					JOptionPane.showMessageDialog(null, "Se ha registrado satisfactoriamente el combo.");
+					dispose();
 
 				}else {
 					JOptionPane.showMessageDialog(null, "Debo colocar obligatoriamente nombre de combo","Error",JOptionPane.ERROR_MESSAGE);
@@ -408,6 +409,5 @@ public class RegistrarCombo extends JFrame {
 		
 		model1.setRowCount(0);
 		cargarTabla();
-		dispose();
 	}
 }
