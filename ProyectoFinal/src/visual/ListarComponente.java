@@ -50,12 +50,11 @@ public class ListarComponente extends JFrame {
 	private int modelFil = -1;
 	private static Combo load = null;
 	private Combo comb = null;
-	private JButton btnInformacinComponente;
 	private JButton btnAgregar;
-	private static boolean modo = false;
+	private static int modo = -1;
 
 
-	public ListarComponente(Combo a, boolean b) {
+	public ListarComponente(Combo a, int b) {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(ListarComponente.class.getResource("/imagenes/MicrosoftTeams-image.png")));
 		setTitle("R&M");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -114,21 +113,22 @@ public class ListarComponente extends JFrame {
 				if(load == null) {
 					if(sel!=-1 && (int)model.getValueAt(modelFil, 2)>0) {
 						btnAgregar.setEnabled(true);
-						if('C'==((String)model.getValueAt(modelFil, 0)).charAt(0)) {
-							btnInformacinComponente.setEnabled(true);
+						if('O'==((String)model.getValueAt(modelFil, 0)).charAt(0)) {
+							//btnInformacinComponente.setEnabled(true);
 							comb = Tienda.getInstance().buscarComboTienda((String)model.getValueAt(modelFil, 0));
-						}else {
-							btnInformacinComponente.setEnabled(false);
-						}
+						//}else {
+							//btnInformacinComponente.setEnabled(false);
+						//}
 					}else {
-						btnInformacinComponente.setEnabled(false);
+						//btnInformacinComponente.setEnabled(false);
 						btnAgregar.setEnabled(false);
 					}
 				}else {
 					btnAgregar.setEnabled(false);
-					btnInformacinComponente.setEnabled(false);
+					//btnInformacinComponente.setEnabled(false);
 
 				}
+			}
 			}
 		});
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -148,26 +148,13 @@ public class ListarComponente extends JFrame {
 		btnCancelar.setBounds(535, 316, 89, 23);
 		contentPane.add(btnCancelar);
 
-
-		btnInformacinComponente = new JButton("Informaci\u00F3n Componente");
-		btnInformacinComponente.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				//ListarComponente lc = new ListarComponente(b, false);
-				//lc.setVisible(true);
-			}
-		});
-		btnInformacinComponente.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		btnInformacinComponente.setBounds(341, 317, 184, 23);
-		contentPane.add(btnInformacinComponente);
-
 		btnAgregar = new JButton("Agregar");
 		btnAgregar.setEnabled(false);
 		
-		if(b == false) {
-			btnAgregar.setVisible(true);
-		}else {
-			btnAgregar.setVisible(false);
-		}
+		/*
+		 * if(b == 0) { btnAgregar.setVisible(true); }else {
+		 * btnAgregar.setVisible(false); }
+		 */
 		
 		btnAgregar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -179,11 +166,13 @@ public class ListarComponente extends JFrame {
 					System.out.println("SelecCantidad 177");
 					seleccionCantidad.setVisible(true);
 					
-				}else {
+				}else if('C'==((String)model.getValueAt(modelFil, 0)).charAt(0)){
 					Componente c = Tienda.getInstance().buscarComponenteTienda((String)model.getValueAt(modelFil, 0));
-					//SelecCantidad seleccionCantidadComp = new SelecCantidad(c.getId(),c.getMarca()+" "+c.getModelo(),c.getPrecioVentaComponente(),c.getCantActualComp());
-					SelecCantidad seleccionCantidadComp = new SelecCantidad(c.getId(), c.getMarca(),
+					SelecCantidad seleccionCantidadComp = new SelecCantidad(c.getId(),
+							c.getMarca() + " " + c.getModelo(),
 							c.getPrecioVentaComponente()/* ,c.getCantActualComp() */);
+					//SelecCantidad seleccionCantidadComp = new SelecCantidad(c.getId(), c.getMarca(),
+							//c.getPrecioVentaComponente()/* ,c.getCantActualComp() */);
 					dispose();
 					seleccionCantidadComp.setVisible(true);
 					
@@ -191,7 +180,7 @@ public class ListarComponente extends JFrame {
 			}
 		});
 		btnAgregar.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		btnAgregar.setBounds(232, 315, 97, 25);
+		btnAgregar.setBounds(426, 315, 97, 25);
 		contentPane.add(btnAgregar);
 		cargarTablaCompo();
 	}
@@ -251,7 +240,8 @@ public class ListarComponente extends JFrame {
 		fil = new Object [model.getColumnCount()];
 
 
-		if(!modo) {
+		//if(!modo) {
+		//if(modo == null) {
 
 			if(load == null) {
 				for(Componente componenteTemp : Tienda.getInstance().getComponentesTienda()){
@@ -309,30 +299,19 @@ public class ListarComponente extends JFrame {
 				}
 			}
 
-		}else {
-			for(Componente componenteTemp : load.getComponenteCombo()){
-				fil[0] = componenteTemp.getId();
-				if(componenteTemp instanceof TarjetaMadre) {
-					fil[1] = "Tarjeta Madre";
-				}
-				if(componenteTemp instanceof MemoriaRam) {
-					fil[1] = "Memoria RAM";
-				}
-				if(componenteTemp instanceof Microprocesador) {
-					fil[1] = "Microprocesador";
-				}
-				if(componenteTemp instanceof DiscoDuro) {
-					fil[1] = "Disco Duro";
-				}
-
-				fil[2] = componenteTemp.getcantActualComp();
-				fil[3] = componenteTemp.getPrecioVentaComponente();
-				fil[4] = componenteTemp.getModelo();
-				fil[5] = componenteTemp.getMarca();
-				fil[6] = componenteTemp.getNumeroSerie();
-				model.addRow(fil);
-			}
-		}
+			/*
+			 * }else { for(Componente componenteTemp : load.getComponenteCombo()){ fil[0] =
+			 * componenteTemp.getId(); if(componenteTemp instanceof TarjetaMadre) { fil[1] =
+			 * "Tarjeta Madre"; } if(componenteTemp instanceof MemoriaRam) { fil[1] =
+			 * "Memoria RAM"; } if(componenteTemp instanceof Microprocesador) { fil[1] =
+			 * "Microprocesador"; } if(componenteTemp instanceof DiscoDuro) { fil[1] =
+			 * "Disco Duro"; }
+			 * 
+			 * fil[2] = componenteTemp.getcantActualComp(); fil[3] =
+			 * componenteTemp.getPrecioVentaComponente(); fil[4] =
+			 * componenteTemp.getModelo(); fil[5] = componenteTemp.getMarca(); fil[6] =
+			 * componenteTemp.getNumeroSerie(); model.addRow(fil); } }
+			 */
 	}
 }
 

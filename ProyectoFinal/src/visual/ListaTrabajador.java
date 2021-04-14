@@ -145,7 +145,7 @@ public class ListaTrabajador extends JFrame {
 		btnVenta.setEnabled(false);
 		btnVenta.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//ListadoFacturas a = new ListadoFacturas(aux);
+				//ListarFactura a = new ListarFactura (vend);
 				//a.setVisible(true);
 			}
 		});

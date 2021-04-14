@@ -239,7 +239,7 @@ public class Menu extends JFrame {
 		mntmNewMenuItem_9.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		mntmNewMenuItem_9.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ListarComponente lc = new ListarComponente(null, false);
+				ListarComponente lc = new ListarComponente(null, 0);
 				lc.setVisible(true);
 			}
 		});

@@ -140,7 +140,7 @@ public class ListarProveedor extends JFrame {
 					c.insertarComponenteCombo(a);
 					}
 
-				ListarComponente lc = new ListarComponente(c, true);
+				ListarComponente lc = new ListarComponente(c, 0);
 				lc.setVisible(true);
 			}
 		});

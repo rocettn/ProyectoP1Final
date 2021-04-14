@@ -278,7 +278,7 @@ public class Facturar extends JFrame {
 		JButton buttonAgregarCompo = new JButton("Agregar Componente");
 		buttonAgregarCompo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ListarComponente lc = new ListarComponente(null,false);
+				ListarComponente lc = new ListarComponente(null,5);
 				lc.setVisible(true);
 			}
 		});
@@ -318,7 +318,7 @@ public class Facturar extends JFrame {
 				seleccionado = tablaEspComp.getSelectedRow();
 				int modelrow = tablaEspComp.convertRowIndexToModel(seleccionado);
 				if(seleccionado!=-1){
-					if('C'==((String)model.getValueAt(modelrow, 0)).charAt(0)) {
+					if('O'==((String)model.getValueAt(modelrow, 0)).charAt(0)) {
 						btnEliminar.setEnabled(true);
 					
 						compon = null;
@@ -356,9 +356,9 @@ public class Facturar extends JFrame {
 		lblMontoTotal.setBounds(35, 26, 87, 14);
 		panelCalculoVenta.add(lblMontoTotal);
 
-		JLabel lblImpuesto = new JLabel("Impuesto:");
+		JLabel lblImpuesto = new JLabel("Impuesto (ITBIS 18%):");
 		lblImpuesto.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblImpuesto.setBounds(35, 51, 87, 14);
+		lblImpuesto.setBounds(35, 51, 138, 14);
 		panelCalculoVenta.add(lblImpuesto);
 
 		JLabel lblTotalVenta = new JLabel("Total Venta:");
@@ -368,17 +368,17 @@ public class Facturar extends JFrame {
 
 		labelEscMontoTotal = new JLabel("");
 		labelEscMontoTotal.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		labelEscMontoTotal.setBounds(134, 26, 152, 14);
+		labelEscMontoTotal.setBounds(171, 26, 115, 14);
 		panelCalculoVenta.add(labelEscMontoTotal);
 
 		labelEscImpuesto = new JLabel("");
 		labelEscImpuesto.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		labelEscImpuesto.setBounds(134, 51, 152, 14);
+		labelEscImpuesto.setBounds(171, 51, 115, 14);
 		panelCalculoVenta.add(labelEscImpuesto);
 
 		labelEscTotalVenta = new JLabel("");
 		labelEscTotalVenta.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		labelEscTotalVenta.setBounds(134, 76, 152, 14);
+		labelEscTotalVenta.setBounds(171, 76, 115, 14);
 		panelCalculoVenta.add(labelEscTotalVenta);
 
 		JLabel lblNewLabel = new JLabel("");
@@ -390,7 +390,7 @@ public class Facturar extends JFrame {
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				for(int i=0;i<model.getRowCount();i++) {
-					if('C'==((String)model.getValueAt(i, 0)).charAt(0)) {
+					if('O'==((String)model.getValueAt(i, 0)).charAt(0)) {
 						Combo c = Tienda.getInstance().buscarComboTienda((String)model.getValueAt(i, 0));
 						Tienda.getInstance().restarComponenteCombo(c);
 					}else {
@@ -418,7 +418,7 @@ public class Facturar extends JFrame {
 						int end =labelVendedorGe.getText().toString().indexOf("|");
 						Vendedor v = Tienda.getInstance().buscarVendedorTienda(labelVendedorGe.getText().toString().substring(0, end));
 						//Persona clienteVenta, Vendedor vendedorVenta, String idFactura,  float montoTotal, int can
-						Venta f = new Venta(clienteTienda, v, "F-"+Tienda.getInstance().getCodigoFactura(), montoTotal + (montoTotal * 0.18f), model.getRowCount());
+						Venta f = new Venta(clienteTienda, v, "R&M -"+Tienda.getInstance().getCodigoFactura(), montoTotal + (montoTotal * 0.18f), model.getRowCount());
 
 						for(int i= 0; i< model.getRowCount(); i++) {
 							fil[0]=model.getValueAt(i, 0).toString();
@@ -545,12 +545,12 @@ public class Facturar extends JFrame {
 	private static void loadTotal() {
 		montoTotal = 0;
 		for(int i = 0;i<tablaEspComp.getRowCount();i++) {
-			montoTotal+=(float)model.getValueAt(i, 4);
+			montoTotal+=(float)model.getValueAt(i, 3);
 		}
 		DecimalFormat formato1 = new DecimalFormat("#.00");
-		labelEscMontoTotal.setText("Monto Total: "+formato1.format(montoTotal));
-		labelEscImpuesto.setText("ITBIS (18%): "+formato1.format((montoTotal*0.18f)));
-		labelEscTotalVenta.setText("Total: "+formato1.format((montoTotal+(montoTotal*0.18f))));
+		labelEscMontoTotal.setText("" + formato1.format(montoTotal));
+		labelEscImpuesto.setText("" + formato1.format((montoTotal*0.18f)));
+		labelEscTotalVenta.setText("" + formato1.format((montoTotal+(montoTotal*0.18f))));
 
 	}
 

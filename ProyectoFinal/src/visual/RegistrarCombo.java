@@ -251,8 +251,9 @@ public class RegistrarCombo extends JFrame {
 		buttonAnadir = new JButton("A\u00F1adir");
 		buttonAnadir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				comboAgregado.add(cm);
+				
 				contadorC++;
+				comboAgregado.add(cm);
 				loadTablaAnadido();
 				buttonAnadir.setEnabled(false);
 				if(contadorC>=2) {
@@ -407,6 +408,6 @@ public class RegistrarCombo extends JFrame {
 		
 		model1.setRowCount(0);
 		cargarTabla();
-		
+		dispose();
 	}
 }
