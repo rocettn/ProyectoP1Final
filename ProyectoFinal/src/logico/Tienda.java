@@ -103,11 +103,11 @@ public class Tienda implements Serializable{
 		return OrdenesComprasTienda;
 	}
 
-	public void setOrdenesComprasTienda(ArrayList<OrdenCompra> ordenesComprasTienda) {
-		OrdenesComprasTienda = ordenesComprasTienda;
-		setCodigoOrden(getCodigoOrden() + 1);
-	}
-
+	/*
+	 * public void setOrdenesComprasTienda(ArrayList<OrdenCompra>
+	 * ordenesComprasTienda) { OrdenesComprasTienda = ordenesComprasTienda;
+	 * setCodigoOrden(getCodigoOrden() + 1); }
+	 */
 	public static Tienda getInstance() {
 		if(tienda == null) {
 			tienda = new Tienda();
@@ -125,6 +125,11 @@ public class Tienda implements Serializable{
 
 	public void insertarPersona(Persona persona) {
 		this.personasTienda.add(persona);
+	}
+	
+	public void insertarOrdenCompra(OrdenCompra orden) {
+		this.OrdenesComprasTienda.add(orden);
+		setCodigoOrden(getCodigoOrden()+1);
 	}
 
 	public void insertarComponente(Componente componente) {

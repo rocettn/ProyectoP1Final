@@ -34,6 +34,7 @@ public class Venta implements Serializable{
 		this.idFactura = idFactura;
 		this.fecha = new Date();//fecha;
 		this.hora = hora;
+		this.montoTotal = montoTotal;
 		this.cantidadElegida = cant;
 		this.filas=new Object[100][5];
 	}

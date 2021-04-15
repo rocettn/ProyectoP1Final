@@ -187,6 +187,16 @@ public class Menu extends JFrame {
 		});
 		mnNewMenu.add(mntmNewMenuItem_4);
 		
+		JMenuItem mntmNewMenuItem_11 = new JMenuItem("Generar Orden Compra");
+		mntmNewMenuItem_11.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		mntmNewMenuItem_11.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ListarGenerarOrden go = new ListarGenerarOrden();
+				go.setVisible(true);
+			}
+		});
+		mnNewMenu.add(mntmNewMenuItem_11);
+		
 		JMenu mnNewMenu_2 = new JMenu("Venta");
 		mnNewMenu_2.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		menuBar.add(mnNewMenu_2);

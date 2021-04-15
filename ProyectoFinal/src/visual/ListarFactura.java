@@ -214,24 +214,9 @@ public class ListarFactura extends JFrame {
 			fil[0] = f.getIdFactura();
 			fil[1] = f.getClienteVenta().getNombre();
 			fil[2] = f.getVendedorVenta().getNombre();
-			/*
-			 * ArrayList<String> arraylist = new ArrayList<String>();
-			 * 
-			 * for (Componente tm : f.getComponentesVenta()) { if(tm instanceof
-			 * TarjetaMadre) { arraylist.add("Tarjeta Madre");
-			 * 
-			 * } if(tm instanceof MemoriaRam) { arraylist.add("Memoria RAM");
-			 * 
-			 * } if(tm instanceof Microprocesador) { arraylist.add("Microprocesador"); }
-			 * if(tm instanceof DiscoDuro) { arraylist.add("DiscoDuro");
-			 * 
-			 * } }
-			 */
-			//fil[3] = arraylist;
 			fil[3] = f.getMontoTotal();
 			fil[4] = f.getFecha();
 			fil[5] = f.getComponentesVenta().size()+f.getCombosVenta().size();
-			//fil[3] = f.calcularFactura();
 			model.addRow(fil);
 		
 			

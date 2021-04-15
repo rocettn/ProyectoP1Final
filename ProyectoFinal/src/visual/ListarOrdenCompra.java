@@ -46,7 +46,7 @@ public class ListarOrdenCompra extends JFrame {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(ListarOrdenCompra.class.getResource("/imagenes/MicrosoftTeams-image.png")));
 		setTitle("R&M");
 		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 728, 449);
+		setBounds(100, 100, 728, 463);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(0, 153, 153));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -61,7 +61,7 @@ public class ListarOrdenCompra extends JFrame {
 		contentPane.add(panelOrdenCompra);
 
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 11, 668, 205);
+		scrollPane.setBounds(10, 11, 668, 216);
 		panelOrdenCompra.add(scrollPane);
 
 		model = new DefaultTableModel();
@@ -91,7 +91,7 @@ public class ListarOrdenCompra extends JFrame {
 
 		JLabel lblNewLabel_1 = new JLabel("");
 		lblNewLabel_1.setIcon(new ImageIcon(ListarOrdenCompra.class.getResource("/imagenes/MicrosoftTeams-image (3).png")));
-		lblNewLabel_1.setBounds(288, 0, 149, 119);
+		lblNewLabel_1.setBounds(301, 0, 149, 119);
 		contentPane.add(lblNewLabel_1);
 		setLocationRelativeTo(null);
 	}

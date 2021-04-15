@@ -113,7 +113,7 @@ public class RegistrarCombo extends JFrame {
 		textNombreCombo.setBounds(131, 59, 290, 20);
 		panelInfGen.add(textNombreCombo);
 
-		textPorcentajeDescuento = new JTextField();
+		textPorcentajeDescuento = new JTextField("20");
 		textPorcentajeDescuento.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {

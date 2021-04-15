@@ -50,6 +50,7 @@ public class ListarComponente extends JFrame {
 	private int modelFil = -1;
 	private static Combo load = null;
 	private Combo comb = null;
+	private Componente componenteSelec = null;
 	private JButton btnAgregar;
 	private static int modo = -1;
 
@@ -114,18 +115,15 @@ public class ListarComponente extends JFrame {
 					if(sel!=-1 && (int)model.getValueAt(modelFil, 2)>0) {
 						btnAgregar.setEnabled(true);
 						if('O'==((String)model.getValueAt(modelFil, 0)).charAt(0)) {
-							//btnInformacinComponente.setEnabled(true);
 							comb = Tienda.getInstance().buscarComboTienda((String)model.getValueAt(modelFil, 0));
-						//}else {
-							//btnInformacinComponente.setEnabled(false);
-						//}
+			
 					}else {
-						//btnInformacinComponente.setEnabled(false);
-						btnAgregar.setEnabled(false);
+						
+						btnAgregar.setEnabled(true);
+						componenteSelec = Tienda.getInstance().buscarComponenteTienda((String)model.getValueAt(modelFil, 0));
 					}
 				}else {
 					btnAgregar.setEnabled(false);
-					//btnInformacinComponente.setEnabled(false);
 
 				}
 			}
@@ -151,28 +149,21 @@ public class ListarComponente extends JFrame {
 		btnAgregar = new JButton("Agregar");
 		btnAgregar.setEnabled(false);
 		
-		/*
-		 * if(b == 0) { btnAgregar.setVisible(true); }else {
-		 * btnAgregar.setVisible(false); }
-		 */
-		
 		btnAgregar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if('O'==((String)model.getValueAt(modelFil, 0)).charAt(0)) {
 					comb = Tienda.getInstance().buscarComboTienda((String)model.getValueAt(modelFil, 0));
 					SelecCantidad seleccionCantidad = new SelecCantidad(comb.getCodigoIdentCombo(),
-							comb.getNombreCombo(), comb.obtenerPrecioVentaCombo()/* , 1 */);
+							comb.getNombreCombo(), comb.obtenerPrecioVentaCombo());
 					dispose();
-					System.out.println("SelecCantidad 177");
 					seleccionCantidad.setVisible(true);
 					
-				}else if('C'==((String)model.getValueAt(modelFil, 0)).charAt(0)){
+				} else {
 					Componente c = Tienda.getInstance().buscarComponenteTienda((String)model.getValueAt(modelFil, 0));
 					SelecCantidad seleccionCantidadComp = new SelecCantidad(c.getId(),
 							c.getMarca() + " " + c.getModelo(),
-							c.getPrecioVentaComponente()/* ,c.getCantActualComp() */);
-					//SelecCantidad seleccionCantidadComp = new SelecCantidad(c.getId(), c.getMarca(),
-							//c.getPrecioVentaComponente()/* ,c.getCantActualComp() */);
+							c.getPrecioVentaComponente());
+					
 					dispose();
 					seleccionCantidadComp.setVisible(true);
 					
@@ -184,56 +175,6 @@ public class ListarComponente extends JFrame {
 		contentPane.add(btnAgregar);
 		cargarTablaCompo();
 	}
-
-	/*
-	 * private void loadTable(int seleccionado) {
-	 * 
-	 * model.setRowCount(0);
-	 * 
-	 * fil = new Object[model.getColumnCount()];
-	 * 
-	 * if(seleccionado == 0) { cargarTablaCompo(); }
-	 * 
-	 * if(seleccionado == 1) { for (Componente comp :
-	 * Tienda.getInstance().getComponentesTienda()) {
-	 * 
-	 * if(comp instanceof TarjetaMadre) {
-	 * 
-	 * fil[0] = comp.getNumeroSerie(); fil[1] = "Tarjeta Madre"; fil[2] =
-	 * comp.getCantActualComp(); fil[3] = comp.getPrecioVentaComponente(); fil[4] =
-	 * comp.getModelo(); fil[5] = comp.getMarca();
-	 * 
-	 * model.addRow(fil); } } }else if(seleccionado == 2) { for (Componente comp :
-	 * Tienda.getInstance().getComponentesTienda()) { if(comp instanceof MemoriaRam)
-	 * {
-	 * 
-	 * fil[0] = comp.getNumeroSerie(); fil[1] = "Memoria RAM"; fil[2] =
-	 * comp.getCantActualComp(); fil[3] = comp.getPrecioVentaComponente(); fil[4] =
-	 * comp.getModelo(); fil[5] = comp.getMarca();
-	 * 
-	 * model.addRow(fil);
-	 * 
-	 * } } } else if(seleccionado == 3) { for (Componente comp :
-	 * Tienda.getInstance().getComponentesTienda()) { if(comp instanceof
-	 * Microprocesador){ fil[0] = comp.getNumeroSerie(); fil[1] = "Microprocesador";
-	 * fil[2] = comp.getCantActualComp(); fil[3] = comp.getPrecioVentaComponente();
-	 * fil[4] = comp.getModelo(); fil[5] = comp.getMarca();
-	 * 
-	 * model.addRow(fil); } } } else if(seleccionado == 4) { for (Componente comp :
-	 * Tienda.getInstance().getComponentesTienda()) { if(comp instanceof DiscoDuro)
-	 * { fil[0] = comp.getNumeroSerie();
-	 * 
-	 * fil[1] = "Disco Duro";
-	 * 
-	 * fil[2] = comp.getCantActualComp(); fil[3] = comp.getPrecioVentaComponente();
-	 * fil[4] = comp.getModelo(); fil[5] = comp.getMarca();
-	 * 
-	 * model.addRow(fil); } } } else if(seleccionado == 5 ) { for(Combo c :
-	 * Tienda.getInstance().getCombosTienda()) { fil[0] = c.getCodigoIdentCombo();
-	 * fil[1] = "Combo"; fil[2] = 1; fil[3] = c.obtenerPrecioVentaCombo(); fil[4] =
-	 * c.getNombreCombo(); fil[5] = "Unbranded"; model.addRow(fil); } } }
-	 */
-
 
 	private void cargarTablaCompo() {
 		model.setRowCount(0); 

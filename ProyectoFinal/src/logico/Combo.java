@@ -11,14 +11,12 @@ public class Combo implements Serializable {
 	private static final long serialVersionUID = 955197359938136313L;
 	private String nombreCombo;
 	private ArrayList <Componente> componenteCombo;
-	private float porcentajeDescuento;
 	private String codigoIdentCombo;
 	
 	public Combo(String nombreCombo, String codigoIdentCombo) {
 		super();
 		this.nombreCombo = nombreCombo;
 		this.componenteCombo = new ArrayList<Componente>();
-		this.porcentajeDescuento = porcentajeDescuento;
 		this.codigoIdentCombo = codigoIdentCombo;
 	}
 	
@@ -37,14 +35,6 @@ public class Combo implements Serializable {
 
 	public void setComponenteCombo(ArrayList<Componente> componenteCombo) {
 		this.componenteCombo = componenteCombo;
-	}
-
-	public float getPorcentajeDescuento() {
-		return porcentajeDescuento;
-	}
-
-	public void setPorcentajeDescuento(float porcentajeDescuento) {
-		this.porcentajeDescuento = porcentajeDescuento;
 	}
 	
 	public String getCodigoIdentCombo() {
@@ -66,7 +56,7 @@ public class Combo implements Serializable {
 	        for (Componente compTemp : this.componenteCombo) {
 	            total += compTemp.getPrecioVentaComponente();
 	        }
-	        precioVentaCombo = total - (total * (this.porcentajeDescuento/100));
+	        precioVentaCombo = total - (total * (0.20f));
 	        return precioVentaCombo;
 	    }
 	 

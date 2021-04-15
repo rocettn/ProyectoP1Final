@@ -174,6 +174,7 @@ public class ListarCliente extends JFrame {
 		btnElegir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Facturar.loadCliente(auxiliar);
+				System.out.println("" + auxiliar.getNombre());
 				dispose();
 			}
 		});
