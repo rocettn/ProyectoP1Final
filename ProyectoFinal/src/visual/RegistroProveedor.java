@@ -151,7 +151,7 @@ public class RegistroProveedor extends JFrame {
 		panelCompoDisponible.add(scrollPaneDispo);
 
 		modelDisp = new DefaultTableModel();
-		String []columns = {"Codigo", "Tipo", "Marca", "Modelo"};
+		String []columns = {"No. Serie", "Tipo", "Marca", "Modelo"};
 		modelDisp.setColumnIdentifiers(columns);
 		tableDisponible = new JTable();
 		tableDisponible.addMouseListener(new MouseAdapter() {
@@ -232,7 +232,7 @@ public class RegistroProveedor extends JFrame {
 		panelCompoAgregado.add(scrollPaneAgregado);
 
 		modelAgr = new DefaultTableModel();
-		String []columns2 = {"Codigo","Tipo","Marca","Modelo"};
+		String []columns2 = {"No. Serie","Tipo","Marca","Modelo"};
 		modelAgr.setColumnIdentifiers(columns2);
 		tableAgregado = new JTable();
 		tableAgregado.addMouseListener(new MouseAdapter() {

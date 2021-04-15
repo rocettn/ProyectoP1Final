@@ -117,7 +117,6 @@ public class RegistrarCombo extends JFrame {
 		textPorcentajeDescuento.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				//Combo.getInstace().obtenerPrecioVentaCombo();
 			}
 		});
 		textPorcentajeDescuento.setColumns(10);
