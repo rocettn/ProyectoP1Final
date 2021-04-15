@@ -103,11 +103,7 @@ public class Tienda implements Serializable{
 		return OrdenesComprasTienda;
 	}
 
-	/*
-	 * public void setOrdenesComprasTienda(ArrayList<OrdenCompra>
-	 * ordenesComprasTienda) { OrdenesComprasTienda = ordenesComprasTienda;
-	 * setCodigoOrden(getCodigoOrden() + 1); }
-	 */
+
 	public static Tienda getInstance() {
 		if(tienda == null) {
 			tienda = new Tienda();
@@ -242,22 +238,7 @@ public class Tienda implements Serializable{
 		setCodigoCombo (getCodigoCombo ()+1);
 	}
 
-	/*
-	 * //chequeoCantMinComp determina si un componente se encuentra en su cantidad
-	 * minima. 
-	 * public OrdenCompra chequeoCantMinComp (int cantMinimaComp) {
-	 * Componente auxiliar = null; OrdenCompra ordenCompraGenerada = null; boolean
-	 * buscar = false;
-	 * 
-	 * for(int k=0 ; k < componentesTienda.size() ; k++) {
-	 * if(componentesTienda.get(k).getcantActualComp() <=
-	 * componentesTienda.get(k).getCantMinimaComp()) { auxiliar =
-	 * componentesTienda.get(k); buscar = true; } k++; }
-	 * 
-	 * if(buscar == true) { auxiliar = ordenCompraGenerada.getComponentesAPedir(); }
-	 * return ordenCompraGenerada.getComponentesAPedir(); }
-	 */
-
+	
 	//buscarClienteTienda permite buscar un cliente por su cedula.
 	public Cliente buscarClienteTienda (String cedula) {
 		Cliente aux = null;
@@ -461,14 +442,12 @@ public class Tienda implements Serializable{
 			}
 		}
 
-		//return client.getCreditoCliente() - auxCliente;
 		return auxCliente;
 	}
 
 	public void restarCantidadComponente(Componente compoT, int cantidadCompo) {
 		for(Componente ct : componentesTienda) {
 			if(ct.equals(compoT)) {
-				ct.cantActualComp += cantidadCompo;
 
 				if( ct instanceof TarjetaMadre) {
 					setTajetaMadreT(getTajetaMadreT() - cantidadCompo);
@@ -476,6 +455,8 @@ public class Tienda implements Serializable{
 
 				if( ct instanceof MemoriaRam) {
 					setMemoriaRamT(getMemoriaRamT() - cantidadCompo);
+					System.out.println("459 La Actual es: "+cantidadCompo);
+					System.out.println("460 La Actual es: "+getMemoriaRamT());
 				}
 				if( ct instanceof Microprocesador) {
 					setMicroT(getMicroT() - cantidadCompo);

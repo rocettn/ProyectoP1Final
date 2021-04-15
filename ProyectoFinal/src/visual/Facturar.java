@@ -2,6 +2,7 @@ package visual;
 
 import java.awt.BorderLayout;
 
+
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -104,16 +105,15 @@ public class Facturar extends JFrame {
 						if ('O' == ((String) model.getValueAt(i, 0)).charAt(0)) {
 							Combo c = Tienda.getInstance().buscarComboTienda((String) model.getValueAt(i, 0));
 							Tienda.getInstance().restarComponenteCombo(c);
-							System.out.println(c);
 							
 						} else {
 							Componente c = Tienda.getInstance().buscarComponenteTienda((String) model.getValueAt(i, 0));
 							Tienda.getInstance().restarCantidadComponente(c, (int) model.getValueAt(i, 2));
-							System.out.println(c);
+
 						}
 					}
 				}
-				// clear();
+				clear();
 				clienteTienda = null;
 				dispose();
 			}
@@ -222,7 +222,6 @@ public class Facturar extends JFrame {
 					textIdVendedor.setEditable(false);
 					labelVendedorGe.setText(mVendedor.getNombre());
 					labelVendedorGe.setVisible(true);
-					System.out.println("toyaqui");
 				}
 
 				else {
@@ -403,11 +402,10 @@ public class Facturar extends JFrame {
 					if ('O' == ((String) model.getValueAt(i, 0)).charAt(0)) {
 						Combo c = Tienda.getInstance().buscarComboTienda((String) model.getValueAt(i, 0));
 						Tienda.getInstance().restarComponenteCombo(c);
-						System.out.println(c);
 					} else {
 						Componente c = Tienda.getInstance().buscarComponenteTienda((String) model.getValueAt(i, 0));
 						Tienda.getInstance().restarCantidadComponente(c, (int) model.getValueAt(i, 2));
-						System.out.println(c);
+
 					}
 				}
 				clienteTienda = null;
@@ -425,7 +423,6 @@ public class Facturar extends JFrame {
 				int Aceptar = JOptionPane.showConfirmDialog(null, "¿Está seguro que desea realizar la factura?");
 
 				if (clienteTienda != null && Aceptar == JOptionPane.OK_OPTION) {
-					System.out.println("linea 416 despues de si" + clienteTienda);
 					float facturar = Float.parseFloat(JOptionPane.showInputDialog("Indique monto de pago: "));
 					if (facturar >= (montoTotal + (montoTotal * 0.18f))) {
 						int end = labelVendedorGe.getText().toString().indexOf("|");
@@ -461,12 +458,11 @@ public class Facturar extends JFrame {
 						Tienda.getInstance().insertarFactura(f);
 						Tienda.getInstance().setBalanceTotalAc(
 								Tienda.getInstance().getBalanceTotalAc() + f.calcularSumaBeneficio());
-
 						JOptionPane.showMessageDialog(null,
 								"Su devuelta será: " + (facturar - (montoTotal + (montoTotal * 0.18f))));
 						btnFacturar.setEnabled(false);
 
-						// clear();
+						clear();
 					} else {
 						JOptionPane.showMessageDialog(null,
 								"La cantidad dada es menor al monto total, debe ser mayor a: "
@@ -586,7 +582,7 @@ public class Facturar extends JFrame {
 						JOptionPane.showMessageDialog(null, "El credito restante para el cliente es de: "+(facturar-(montoTotal+(montoTotal*0.18f))));
 						buttonFacturarACredito.setEnabled(false);
 
-						// clear();
+						clear();
 					} else {
 						JOptionPane.showMessageDialog(null, "Su credito disponible no es suficiente para pagar el total de: "+(montoTotal+(montoTotal*0.18f)));
 						buttonFacturarACredito.setEnabled(true);
@@ -750,4 +746,31 @@ public class Facturar extends JFrame {
 			labelEscTotalVenta.setText("Total: " + formato1.format(aux.getMontoTotal()));
 		}
 	}
+	
+	private void clear() {
+		buttonBuscarCliente.setVisible(true);
+		textCedulaCliente.setText("");
+		labelNombreCliente_1.setText("");
+		labelTelefonoCliente_1.setText("");
+		labelDireccionCliente_1.setText("");
+		textIdVendedor.setText("");
+		labelVendedorGe.setText("");
+		model.setRowCount(0);
+		clienteTienda = null;
+		combo.clear();
+		buttonFacturarACredito.setEnabled(false);
+		btnFacturar.setEnabled(false);
+		mComponente.clear();//
+		compon=null;
+		comb=null;
+		textIdFactura.setText("R&M - "+Tienda.getInstance().getCodigoFactura());	
+		Calendar inicio=new GregorianCalendar();
+		inicio.setTime(new Date());
+		lblFechaGenerada.setText(""+inicio.get(Calendar.DAY_OF_MONTH)+"-"+(1+(inicio.get(Calendar.MONTH)))+"-"+inicio.get(Calendar.YEAR));
+		lblHoraGenerada.setText("" + inicio.get(Calendar.HOUR_OF_DAY) + ":" + (1 + (inicio.get(Calendar.MINUTE))) + ":"+ inicio.get(Calendar.SECOND));
+		labelEscMontoTotal.setText("0");
+		labelEscImpuesto.setText("0");
+		labelEscTotalVenta.setText("0");
+		
+	}	
 }

@@ -233,9 +233,7 @@ public class RegistrarCombo extends JFrame {
 
 					cm = Tienda.getInstance().buscarComponenteTienda((String)model.getValueAt(modelrow, 0));
 					if(cm==null) {
-						System.out.println("Houston tenemos un bobaso");
-						System.out.println("La serie del componente es: "+(String)model.getValueAt(modelrow, 0));
-						System.out.println("La serie del componente 0 es : "+Tienda.getInstance().getComponentesTienda().get(0).getNumeroSerie());
+						
 					}
 				}else{
 					buttonAnadir.setEnabled(false);
@@ -402,7 +400,6 @@ public class RegistrarCombo extends JFrame {
 	}
 	
 	private void clear() {
-		//textIdCombo.setText("O-"+Tienda.getInstance().getCodigoCombo());
 		textNombreCombo.setText("");
 		textPorcentajeDescuento.setText("");
 		comboAgregado.removeAll(comboAgregado);

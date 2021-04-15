@@ -50,7 +50,6 @@ public class ListarProveedor extends JFrame {
 
 	public ListarProveedor() {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(ListarProveedor.class.getResource("/imagenes/MicrosoftTeams-image.png")));
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 651, 392);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(0, 153, 153));
@@ -105,12 +104,10 @@ public class ListarProveedor extends JFrame {
 				if(sel!=-1) {
 
 					buttonCompoTrae.setEnabled(true);
-					//btnPagar.setEnabled(true);
 					proveedor = Tienda.getInstance().buscarProveedorTienda((String)modeloTabPro.getValueAt(modelFil, 0));
 
 				}else {
 					buttonCompoTrae.setEnabled(false);
-					//btnPagar.setEnabled(false);
 
 				}
 			}
@@ -135,7 +132,6 @@ public class ListarProveedor extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 
 				Combo c = new Combo("Componentes que ofrece: " + proveedor.getNombreProveedor(),"compoAux");
-				System.out.println(proveedor.getComponentesSuple().size());
 				for(Componente a : proveedor.getComponentesSuple()) {
 					c.insertarComponenteCombo(a);
 					}

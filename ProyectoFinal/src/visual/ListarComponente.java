@@ -138,7 +138,6 @@ public class ListarComponente extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
 				cargarTablaCompo();
-				//loadTable(5);
 			}
 
 		});
@@ -154,7 +153,7 @@ public class ListarComponente extends JFrame {
 				if('O'==((String)model.getValueAt(modelFil, 0)).charAt(0)) {
 					comb = Tienda.getInstance().buscarComboTienda((String)model.getValueAt(modelFil, 0));
 					SelecCantidad seleccionCantidad = new SelecCantidad(comb.getCodigoIdentCombo(),
-							comb.getNombreCombo(), comb.obtenerPrecioVentaCombo());
+							comb.getNombreCombo(), comb.obtenerPrecioVentaCombo(), 1);
 					dispose();
 					seleccionCantidad.setVisible(true);
 					
@@ -162,7 +161,7 @@ public class ListarComponente extends JFrame {
 					Componente c = Tienda.getInstance().buscarComponenteTienda((String)model.getValueAt(modelFil, 0));
 					SelecCantidad seleccionCantidadComp = new SelecCantidad(c.getId(),
 							c.getMarca() + " " + c.getModelo(),
-							c.getPrecioVentaComponente());
+							c.getPrecioVentaComponente(), c.getCantActualComp());
 					
 					dispose();
 					seleccionCantidadComp.setVisible(true);
@@ -180,9 +179,6 @@ public class ListarComponente extends JFrame {
 		model.setRowCount(0); 
 		fil = new Object [model.getColumnCount()];
 
-
-		//if(!modo) {
-		//if(modo == null) {
 
 			if(load == null) {
 				for(Componente componenteTemp : Tienda.getInstance().getComponentesTienda()){
@@ -240,19 +236,6 @@ public class ListarComponente extends JFrame {
 				}
 			}
 
-			/*
-			 * }else { for(Componente componenteTemp : load.getComponenteCombo()){ fil[0] =
-			 * componenteTemp.getId(); if(componenteTemp instanceof TarjetaMadre) { fil[1] =
-			 * "Tarjeta Madre"; } if(componenteTemp instanceof MemoriaRam) { fil[1] =
-			 * "Memoria RAM"; } if(componenteTemp instanceof Microprocesador) { fil[1] =
-			 * "Microprocesador"; } if(componenteTemp instanceof DiscoDuro) { fil[1] =
-			 * "Disco Duro"; }
-			 * 
-			 * fil[2] = componenteTemp.getcantActualComp(); fil[3] =
-			 * componenteTemp.getPrecioVentaComponente(); fil[4] =
-			 * componenteTemp.getModelo(); fil[5] = componenteTemp.getMarca(); fil[6] =
-			 * componenteTemp.getNumeroSerie(); model.addRow(fil); } }
-			 */
 	}
 }
 

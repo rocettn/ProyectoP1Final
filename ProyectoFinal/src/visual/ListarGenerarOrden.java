@@ -55,7 +55,6 @@ public class ListarGenerarOrden extends JFrame {
 	public ListarGenerarOrden() {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(ListarOrdenCompra.class.getResource("/imagenes/MicrosoftTeams-image.png")));
 		setTitle("R&M");
-		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 728, 463);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(0, 153, 153));
@@ -75,7 +74,7 @@ public class ListarGenerarOrden extends JFrame {
 		panelOrdenCompra.add(scrollPane);
 
 		model = new DefaultTableModel();
-		String columns[] = {"Tipo","Cant.Mínima","Cant. Real","Cant. Máxima","Id componente","Modelo","Marca"};
+		String columns[] = {"Tipo","Cant.Mínima","Cant. Actual","Cant. Máxima","Id componente","Modelo","Marca"};
 		model.setColumnIdentifiers(columns);
 		tablaListarGeOrden = new JTable();
 		tablaListarGeOrden.addMouseListener(new MouseAdapter() {
@@ -127,6 +126,15 @@ public class ListarGenerarOrden extends JFrame {
 		});
 		btnElegir.setBounds(504, 380, 97, 25);
 		contentPane.add(btnElegir);
+		
+		JButton btnGenerar = new JButton("Generar");
+		btnGenerar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				loadTabla();
+			}
+		});
+		btnGenerar.setBounds(397, 381, 97, 25);
+		contentPane.add(btnGenerar);
 		setLocationRelativeTo(null);
 	}
 
@@ -135,7 +143,6 @@ public class ListarGenerarOrden extends JFrame {
 		fil = new Object[model.getColumnCount()];
 		for(Componente comp : Tienda.getInstance().getComponentesTienda()){
 			if(comp.chequeoCantMinComp()) {
-				
 				if(comp instanceof TarjetaMadre) {
 					fil[0] = "Tarjeta Madre";
 				}

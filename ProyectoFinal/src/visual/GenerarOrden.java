@@ -180,17 +180,13 @@ public class GenerarOrden extends JFrame {
 		JButton btnOrdenar = new JButton("Ordenar");
 		btnOrdenar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//if(totalOrden <= proveedorOrden.getLimCredito()) {
 				
 				OrdenCompra ordenGenerada = new OrdenCompra(comp, Integer.parseInt(spinnerCantOrdenar.getValue().toString()), prov, totalOrden, (Administrador)Tienda.getInstance().getUsuario(),new Date());
 						Tienda.getInstance().insertarOrdenCompra(ordenGenerada);
-						//Proveedor.setLimCredito(proveedor.getLimCredito()-total);
 						comp.setCantActualComp(comp.getCantActualComp()+Integer.parseInt(spinnerCantOrdenar.getValue().toString()));
 						JOptionPane.showMessageDialog(null, "Se creo satisfactoriamente la orden de compra");
 						dispose();
-						//}else {
-						//	JOptionPane.showMessageDialog(null, "La compañia no cuenta con sufienciente Credito con el proveedor: "+proveedor.getNombre());
-						//}
+
 						}
 			});
 				btnOrdenar.setBounds(216, 394, 97, 25);

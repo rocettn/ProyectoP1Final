@@ -63,7 +63,6 @@ public class RegistroProveedor extends JFrame {
 	public RegistroProveedor() {
 		setTitle("R&M");
 		setIconImage(Toolkit.getDefaultToolkit().getImage(RegistroProveedor.class.getResource("/imagenes/MicrosoftTeams-image.png")));
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 616, 583);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(0, 153, 153));
@@ -261,12 +260,9 @@ public class RegistroProveedor extends JFrame {
 		JButton btnCancelar = new JButton("Cancelar");
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//disp.removeAll(disp);
-				//agr.removeAll(agr);
+
 				limpiar();
 				dispose();
-				//loadTablaDisp();
-				//loadTablaAgr();
 			}
 
 		});
@@ -278,8 +274,6 @@ public class RegistroProveedor extends JFrame {
 		btnRegistrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Proveedor prov = new Proveedor(textIdProveedor.getText(), textNombreProveedor.getText(), textPaisProveedor.getText());
-				//Tienda.getInstance().insertarProveedor(prov);
-				System.out.println("Cantidad componentes: "+agr.size());
 				for(Componente com : agr) {
 					prov.insertarcomponentes(com);
 				}
@@ -293,7 +287,6 @@ public class RegistroProveedor extends JFrame {
 		contentPane.add(btnRegistrar);
 	}
 	private void limpiar() {
-		//textIdProveedor.setText("Pr-"+Tienda.getInstance().getCodigoProveedores());
 		textNombreProveedor.setText("");
 		textPaisProveedor.setText("");
 		modelDisp.setRowCount(0);

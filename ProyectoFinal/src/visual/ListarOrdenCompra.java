@@ -45,8 +45,7 @@ public class ListarOrdenCompra extends JFrame {
 	public ListarOrdenCompra() {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(ListarOrdenCompra.class.getResource("/imagenes/MicrosoftTeams-image.png")));
 		setTitle("R&M");
-		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 728, 463);
+		setBounds(100, 100, 850, 463);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(0, 153, 153));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -57,11 +56,11 @@ public class ListarOrdenCompra extends JFrame {
 		panelOrdenCompra.setLayout(null);
 		panelOrdenCompra.setForeground(new Color(204, 204, 204));
 		panelOrdenCompra.setBackground(SystemColor.menu);
-		panelOrdenCompra.setBounds(10, 130, 692, 240);
+		panelOrdenCompra.setBounds(10, 130, 814, 240);
 		contentPane.add(panelOrdenCompra);
 
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 11, 668, 216);
+		scrollPane.setBounds(10, 11, 794, 216);
 		panelOrdenCompra.add(scrollPane);
 
 		model = new DefaultTableModel();
@@ -86,13 +85,23 @@ public class ListarOrdenCompra extends JFrame {
 			}
 		});
 		buttonCancelar.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		buttonCancelar.setBounds(613, 381, 89, 23);
+		buttonCancelar.setBounds(735, 381, 89, 23);
 		contentPane.add(buttonCancelar);
 
 		JLabel lblNewLabel_1 = new JLabel("");
 		lblNewLabel_1.setIcon(new ImageIcon(ListarOrdenCompra.class.getResource("/imagenes/MicrosoftTeams-image (3).png")));
-		lblNewLabel_1.setBounds(301, 0, 149, 119);
+		lblNewLabel_1.setBounds(378, 11, 149, 119);
 		contentPane.add(lblNewLabel_1);
+		
+		JButton btnActualizar = new JButton("Actualizar");
+		btnActualizar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				loadTabla();
+			}
+		});
+		btnActualizar.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		btnActualizar.setBounds(636, 381, 89, 23);
+		contentPane.add(btnActualizar);
 		setLocationRelativeTo(null);
 	}
 

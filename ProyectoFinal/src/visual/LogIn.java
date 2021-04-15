@@ -75,7 +75,6 @@ public class LogIn extends JFrame {
 					fileIn = new FileInputStream(f);
 					objectIn = new ObjectInputStream(fileIn);
 					Tienda.tienda=(Tienda)objectIn.readObject();
-//					Tienda.getInstance()=(Tienda)objectIn.readObject();
 					fileIn.close();
 					objectIn.close();
 				}catch(FileNotFoundException e) {

@@ -54,7 +54,6 @@ public class ListaTrabajador extends JFrame {
 	public ListaTrabajador() {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(ListaTrabajador.class.getResource("/imagenes/MicrosoftTeams-image.png")));
 		setTitle("R&M");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 650, 391);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(0, 153, 153));
@@ -145,8 +144,8 @@ public class ListaTrabajador extends JFrame {
 		btnVenta.setEnabled(false);
 		btnVenta.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//ListarFactura a = new ListarFactura (vend);
-				//a.setVisible(true);
+				ListarFactura a = new ListarFactura ();
+				a.setVisible(true);
 			}
 		});
 		btnVenta.setBounds(436, 316, 89, 23);
@@ -156,10 +155,7 @@ public class ListaTrabajador extends JFrame {
 	}
 	
 	private void loadTabla() {
-		//Persona m = new Vendedor("a", "a", "b", "c", "c","c", "c");
-		//Tienda.getInstance().insertarPersona(m);
 		model.setRowCount(0);
-		//System.out.println("klk");
 		row = new Object [model.getColumnCount()];
 		for(Persona t : Tienda.getInstance().getPersonasTienda()) {
 			if((t instanceof Vendedor) || (t instanceof Administrador)) {

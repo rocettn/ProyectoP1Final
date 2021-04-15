@@ -51,7 +51,6 @@ public class Trabajador extends JFrame {
 	public Trabajador() {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Trabajador.class.getResource("/imagenes/MicrosoftTeams-image.png")));
 		setTitle("R&M");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 616, 505);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(0, 153, 153));

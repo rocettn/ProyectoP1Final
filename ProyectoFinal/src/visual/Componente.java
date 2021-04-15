@@ -65,13 +65,6 @@ public class Componente extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	/*
-	 * public static void main(String[] args) { EventQueue.invokeLater(new
-	 * Runnable() { public void run() { try { Componente frame = new Componente();
-	 * frame.setVisible(true); } catch (Exception e) { e.printStackTrace(); } } });
-	 * }
-	 */
-
 	/**
 	 * Create the frame.
 	 */

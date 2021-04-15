@@ -19,6 +19,7 @@ import java.awt.Color;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import javax.swing.SpinnerNumberModel;
 import javax.swing.JButton;
 import javax.swing.ImageIcon;
 import java.awt.Font;
@@ -34,7 +35,7 @@ public class SelecCantidad extends JFrame {
 
 	private JPanel contentPane;
 	public static Object[] fila = new Object [5];
-	//private int disponibles = 1;
+	private int disponibles = 1;
 	private String nombreSelec ="";
 	private float precioSelec = 0.0f;
 	private float montoTotalSelec = 0.0f;
@@ -49,10 +50,9 @@ public class SelecCantidad extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public SelecCantidad(String codigoComp, String cadena, float flo/* , int ent */) {
+	public SelecCantidad(String codigoComp, String cadena, float flo ,int ent) {
 		setTitle("R&M");
 		setIconImage(Toolkit.getDefaultToolkit().getImage(SelecCantidad.class.getResource("/imagenes/MicrosoftTeams-image.png")));
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 599, 388);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(0, 153, 153));
@@ -62,7 +62,7 @@ public class SelecCantidad extends JFrame {
 		contentPane.setLayout(null);
 		setLocationRelativeTo(null);
 
-		//this.disponibles=ent;
+		this.disponibles=ent;
 		this.nombreSelec=cadena;
 		this.precioSelec=flo;
 		this.codigoSelec = codigoComp;
@@ -81,11 +81,10 @@ public class SelecCantidad extends JFrame {
 		spinCantidad.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent e) {
 				montoTotalSelec = (precioSelec*Integer.parseInt(spinCantidad.getValue().toString()));
-				  // float desc = Integer.parseInt(spnDescuento.getValue().toString())/100.0f;
-				   //subtotal = subtotal-(subtotal*desc);
 				labelMontoTotaltext.setText("" + montoTotalSelec);
 			}
 		});
+		spinCantidad.setModel(new SpinnerNumberModel(1, 1, disponibles, 1));
 		spinCantidad.setBounds(298, 41, 117, 22);
 		panel.add(spinCantidad);
 
@@ -116,12 +115,6 @@ public class SelecCantidad extends JFrame {
 		lblMontoTotalComp.setBounds(12, 131, 197, 16);
 		panel_1.add(lblMontoTotalComp);
 
-		/*
-		 * subtotal = (precio*Integer.parseInt(spnCantidad.getValue().toString()));
-		 * lblSubTotal = new
-		 * JLabel("SubTotal: "+(subtotal-(subtotal*(Integer.parseInt(spnDescuento.
-		 * getValue().toString())/100.0f))));
-		 */
 		montoTotalSelec = (precioSelec * Integer.parseInt(spinCantidad.getValue().toString()));
 		labelMontoTotaltext = new JLabel("");
 		labelMontoTotaltext.setBounds(205, 131, 197, 16);
@@ -149,7 +142,7 @@ public class SelecCantidad extends JFrame {
 					if(Tienda.getInstance().verificarCombo(c)) {
 						fila[0]=codigoSelec;
 						fila[1]=nombreSelec;
-						fila[2]= Integer.parseInt(spinCantidad.getValue().toString());//textCantCompra.getText();
+						fila[2]= Integer.parseInt(spinCantidad.getValue().toString());
 						fila[3]=precioSelec;
 						fila[4]=montoTotalSelec;
 						Tienda.getInstance().agregarComboTienda(c);
@@ -167,7 +160,7 @@ public class SelecCantidad extends JFrame {
 					Componente c = Tienda.getInstance().buscarComponenteTienda(codigoSelec);
 					fila[0]=codigoSelec;
 					fila[1]=nombreSelec;
-					fila[2]= Integer.parseInt(spinCantidad.getValue().toString());//textCantCompra.getText();
+					fila[2]= Integer.parseInt(spinCantidad.getValue().toString());
 					fila[3]=precioSelec;
 					fila[4]=montoTotalSelec;
 					int cantidadDeCompra = Integer.parseInt(spinCantidad.getValue().toString());

@@ -116,7 +116,6 @@ public class ListarCliente extends JFrame {
 				if(modelrow!=-1){
 					btnElegir.setEnabled(true);
 					btnPagarDeuda.setEnabled(true);
-					System.out.println(modelrow);
 					auxiliar = Tienda.getInstance().buscarClienteTienda((String)modelCliente.getValueAt(modelrow, 0));
 					
 					
@@ -124,12 +123,7 @@ public class ListarCliente extends JFrame {
 					btnElegir.setEnabled(false);
 					btnPagarDeuda.setEnabled(false);
 					}
-				}/*else 
-					btnElegir.setEnabled(false);
-					btnPagarDeuda.setEnabled(true);
-				}*/
-				
-			//}
+				}
 		});
 				
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -174,7 +168,6 @@ public class ListarCliente extends JFrame {
 		btnElegir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Facturar.loadCliente(auxiliar);
-				System.out.println("" + auxiliar.getNombre());
 				dispose();
 			}
 		});
